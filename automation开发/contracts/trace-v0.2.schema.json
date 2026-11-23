@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/harness-eval/trace-v0.2.schema.json",
+  "title": "Harness evaluation observable trace v0.2",
+  "type": "object",
+  "required": ["trace_version", "run_id", "product", "adapter", "task", "execution", "observations", "artifacts", "evidence", "missing", "verification", "scoring_gate"],
+  "properties": {
+    "trace_version": { "const": "0.2" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "product": { "type": "object" },
+    "adapter": { "type": "object" },
+    "task": { "type": "object" },
+    "execution": { "type": "object" },
+    "model_condition": {
+      "type": ["object", "null"],
+      "properties": {
+        "provider_id": { "type": ["string", "null"] },
+        "endpoint_ref": { "type": ["string", "null"] },
+        "default_endpoint_path": { "type": ["string", "null"] },
+        "effective_endpoint_ref": { "type": ["string", "null"] },
+        "wire_api": { "type": ["string", "null"] },
+        "requested_model": { "type": ["string", "null"] },
+        "effective_model": { "type": ["string", "null"] },
+        "requested_reasoning_effort": { "type": ["string", "null"] },
+        "effective_reasoning_effort": { "type": ["string", "null"] },
+        "credential_source": { "type": ["string", "null"] },
+        "credential_present": { "type": ["boolean", "null"] },
+        "process_environment_present": { "type": ["boolean", "null"] },
+        "sampling": { "type": ["object", "null"] },
+        "match_status": { "enum": ["matched", "mismatched", "unknown"] },
+        "evidence_refs": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "observations": { "type": "array" },
+    "artifacts": { "type": "array" },
+    "evidence": { "type": "array" },
+    "missing": { "type": "array" },
+    "verification": { "type": "object" },
+    "scoring_gate": {
+      "type": "object",
+      "required": ["artifact_status", "benchmark_status", "benchmark_reason"],
+      "properties": {
+        "artifact_status": { "enum": ["ready", "blocked", "not_applicable"] },
+        "benchmark_status": { "enum": ["oracle_configured", "blocked"] },
+        "benchmark_reason": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

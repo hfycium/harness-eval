@@ -1,0 +1,12 @@
+{
+  "name": "HarnessEval Task Queue",
+  "name_zh": "HarnessEval 任务队列",
+  "name_en": "HarnessEval Task Queue",
+  "description": "Claims one local evaluation task and submits its result metadata.",
+  "description_zh": "领取一个本地评测任务并提交结果元数据。",
+  "description_en": "Claims one local evaluation task and submits its result metadata.",
+  "source": "harness-eval-task-queue",
+  "version": "0.1.0",
+  "examples_zh": ["领取下一项待处理任务并提交产物路径"],
+  "examples_en": ["Claim the next queued task and submit artifact paths"]
+}

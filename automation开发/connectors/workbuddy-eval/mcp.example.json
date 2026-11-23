@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "harness-eval-task-queue": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["<ABSOLUTE_PATH_TO_CONNECTOR>/server.mjs"],
+      "cwd": "<ABSOLUTE_PATH_TO_CONNECTOR>",
+      "runtime": { "type": "node", "version": ">=18.0.0" },
+      "env": {
+        "HARNESS_EVAL_WORKBUDDY_QUEUE_ROOT": "<ABSOLUTE_PATH_TO_QUEUE_ROOT>",
+        "HARNESS_EVAL_WORKBUDDY_ROOT": "<ABSOLUTE_PATH_TO_AUTHORIZED_WORKSPACE_ROOT>"
+      },
+      "timeout": 30000
+    }
+  }
+}

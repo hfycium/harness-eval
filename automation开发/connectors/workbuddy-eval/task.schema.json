@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/harness-eval/workbuddy-queue-task.schema.json",
+  "title": "HarnessEval WorkBuddy queue task",
+  "type": "object",
+  "required": ["run_id", "case_id", "prompt", "workspace_dir", "inputs", "expected_artifacts", "timeout_seconds"],
+  "properties": {
+    "run_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$" },
+    "case_id": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "prompt": { "type": "string", "minLength": 1, "maxLength": 100000 },
+    "prompt_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "workspace_dir": { "type": "string", "minLength": 1 },
+    "inputs": {
+      "type": "array", "items": {
+        "type": "object", "required": ["path", "sha256"], "additionalProperties": false,
+        "properties": { "path": { "type": "string", "minLength": 1 }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" } }
+      }
+    },
+    "expected_artifacts": {
+      "type": "array", "items": {
+        "oneOf": [
+          { "type": "string", "minLength": 1 },
+          { "type": "object", "required": ["path"], "additionalProperties": false, "properties": { "path": { "type": "string", "minLength": 1 }, "required": { "type": "boolean", "default": true } } }
+        ]
+      }
+    },
+    "timeout_seconds": { "type": "integer", "minimum": 1, "maximum": 86400 },
+    "task_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}

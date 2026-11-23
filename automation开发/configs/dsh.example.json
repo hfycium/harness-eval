@@ -1,0 +1,12 @@
+{
+  "product_id": "dsh",
+  "entry_id": "dsh-headless",
+  "executable": "dsh.cmd",
+  "home": "runs/自动化/.dsh",
+  "profile": "spreadsheetbench-headless",
+  "model_patch": "automation开发/configs/dsh.deepseek-flash-high.patch.yml",
+  "temp_workspace": true,
+  "timeout_seconds": null,
+  "automation_mode": "automatic",
+  "notes": "Candidate controlled-model profile overlay: DeepSeek deepseek-flash with reasoningEffort high. DSH CLI 0.2.2-rc.5 documents --patch and these profile fields, but this overlay has not been exercised because the isolated DSH_HOME currently lacks credentials. Set a positive timeout locally. Supply DEEPSEEK_API_KEY through the approved credentials service or launching process environment; never put credentials in this file."
+}

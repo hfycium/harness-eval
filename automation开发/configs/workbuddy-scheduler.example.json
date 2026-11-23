@@ -1,0 +1,19 @@
+{
+  "product_id": "workbuddy",
+  "entry_id": "workbuddy-local-scheduler-uia",
+  "automation_mode": "interactive_automatic",
+  "workspace_root_env": "HARNESS_EVAL_WORKBUDDY_ROOT",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "poll_interval_seconds": 2,
+  "allow_clipboard_fallback": false,
+  "ui_selector_map_verified": false,
+  "ui_selector_map_revision": null,
+  "status_scoped_to_run_id": false,
+  "selectors": {},
+  "workflow": [],
+  "success_patterns": [],
+  "failure_patterns": [],
+  "running_patterns": [],
+  "notes": "WorkBuddy local scheduled-task UIA adapter. This template is intentionally not admitted until selectors and status text are inspected in the same interactive Windows session as WorkBuddy. Never guess selectors or enable full-access permission automatically."
+}

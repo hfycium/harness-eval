@@ -1,0 +1,10 @@
+{
+  "product_id": "workbuddy",
+  "entry_id": "workbuddy-localassistant-openapi",
+  "automation_mode": "automatic",
+  "workspace_root_env": "HARNESS_EVAL_WORKBUDDY_ROOT",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "poll_interval_seconds": 2,
+  "notes": "Direct official local-assistant Open API adapter. Requires user.localassistant.readable and user.localassistant.invokable OAuth scopes. Token comes from WORKBUDDY_ACCESS_TOKEN or the per-user Windows DPAPI credential store. The workspace defaults to Documents/HarnessEval-WorkBuddy; authorize that folder in WorkBuddy. Override HARNESS_EVAL_WORKBUDDY_ROOT only when needed. Each run gets an isolated child directory. File tasks use local path references, not API attachment upload. Never put machine-specific paths or access tokens in this shared file."
+}
