@@ -4,7 +4,7 @@ import path from 'node:path';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 export async function captureCodexPromptEvidence({home, runDir, prompt, stdoutPath}) {
-  const evidence = { version:'0.1', status:'unknown', reason:'session_not_found', prompt_sha256:sha(Buffer.from(prompt)), thread_id:null, source_file_sha256:null, source_event_line:null, initial_user_text:null, scope:'codex_local_session_record_not_provider_receipt' };
+  const evidence = { version:'0.2', status:'unknown', reason:'session_not_found', prompt_sha256:sha(Buffer.from(prompt)), thread_id:null, source_file_sha256:null, source_event_line:null, initial_user_text:null, local_context_models:[], effective_model:null, scope:'codex_local_session_record_not_provider_receipt' };
   try {
     const stdout = (await readFile(stdoutPath, 'utf8')).split(/\r?\n/).filter(Boolean).map(s=>JSON.parse(s));
     const threads = stdout.filter(e=>e.type==='thread.started' && typeof e.thread_id==='string').map(e=>e.thread_id);
@@ -31,6 +31,7 @@ export async function captureCodexPromptEvidence({home, runDir, prompt, stdoutPa
     for (const [i,line] of lines.entries()) {
       if (!line.trim()) continue;
       const e=JSON.parse(line), p=e.payload;
+      if (e.type==='turn_context' && typeof p?.model==='string') evidence.local_context_models.push({line:i+1,model:p.model,source:'local_turn_context_not_provider_receipt'});
       if (e.type==='response_item' && p?.type==='message' && p.role==='user' && Array.isArray(p.content)) {
         const text=p.content.filter(x=>x.type==='input_text' && typeof x.text==='string').map(x=>x.text).join('');
         if (text===prompt) matches.push({line:i+1,text});

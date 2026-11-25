@@ -26,9 +26,12 @@ export class CodexAdapter extends HarnessAdapter {
       timeout_seconds: config.timeout_seconds ?? null,
       sandbox: 'workspace-write',
       windows_sandbox_implementation: process.platform === 'win32' ? 'mxc' : null,
-      ephemeral: config.capture_prompt_evidence !== true,
+      ephemeral: config.capture_prompt_evidence !== true && config.account_session_diagnostic !== true,
       capture_prompt_evidence: config.capture_prompt_evidence === true,
+      account_session_diagnostic: config.account_session_diagnostic === true,
+      workspace_snapshot: config.workspace_snapshot === true,
       provider_mode: providerMode,
+      ...(providerMode === 'chatgpt_account' ? { requested_model: config.model ?? null, effective_model: null } : {}),
       ...(providerMode === 'deepseek_api' ? {
         provider_id: 'deepseek',
         base_url: DEEPSEEK_BASE_URL,
@@ -43,7 +46,11 @@ export class CodexAdapter extends HarnessAdapter {
   }
 
   modelCondition(config, context = {}) {
-    if ((config.provider_mode ?? 'chatgpt_account') !== 'deepseek_api') return null;
+    if ((config.provider_mode ?? 'chatgpt_account') !== 'deepseek_api') return {
+      provider_id: null, requested_model: config.model ?? null, effective_model: null,
+      requested_reasoning_effort: null, effective_reasoning_effort: null,
+      match_status: 'unknown', evidence_refs: [],
+    };
     const apiKeyEnv = config.api_key_env ?? 'DEEPSEEK_API_KEY';
     const env = context.environment ?? process.env;
     return {
@@ -71,7 +78,9 @@ export class CodexAdapter extends HarnessAdapter {
     if (!Number.isFinite(timeoutSeconds) || timeoutSeconds <= 0) missing.push('timeout_seconds');
     const providerMode = config.provider_mode ?? 'chatgpt_account';
     if (!['chatgpt_account', 'deepseek_api'].includes(providerMode)) missing.push('provider_mode');
+    if (providerMode === 'chatgpt_account' && config.model !== undefined && (typeof config.model !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(config.model))) missing.push('model');
     if (config.capture_prompt_evidence === true && providerMode !== 'deepseek_api') missing.push('capture_prompt_evidence_requires_isolated_deepseek_home');
+    if (config.account_session_diagnostic === true && providerMode !== 'chatgpt_account') missing.push('account_session_diagnostic_requires_chatgpt_account');
     if (providerMode === 'deepseek_api') {
       const model = config.model ?? 'deepseek-flash';
       const effort = config.reasoning_effort ?? 'high';
@@ -92,6 +101,10 @@ export class CodexAdapter extends HarnessAdapter {
     if (!config.executable) throw new Error('Codex executable is not configured.');
     const args = ['exec'];
     const env = {};
+    if ((config.provider_mode ?? 'chatgpt_account') === 'chatgpt_account' && config.model !== undefined) {
+      if (typeof config.model !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(config.model)) throw new Error('Invalid Codex model name.');
+      args.push('--model', config.model);
+    }
     if ((config.provider_mode ?? 'chatgpt_account') === 'deepseek_api') {
       if (!codexHomeDir) throw new Error('An isolated CODEX_HOME is required for Codex DeepSeek mode.');
       const model = config.model ?? 'deepseek-flash';
@@ -108,13 +121,11 @@ export class CodexAdapter extends HarnessAdapter {
         '-c', quotedConfig('model_providers.deepseek.env_key', apiKeyEnv),
         '-c', 'model_providers.deepseek.requires_openai_auth=false',
       );
-      if (process.platform === 'win32') {
-        args.push('-c', quotedConfig('windows.sandbox', 'mxc'));
-      }
       env.CODEX_HOME = codexHomeDir;
     }
+    if (process.platform === 'win32') args.push('-c', quotedConfig('windows.sandbox', 'mxc'));
     args.push('--cd', workspaceDir, '--sandbox', 'workspace-write', '--ignore-rules', '--skip-git-repo-check');
-    if (config.capture_prompt_evidence !== true) args.push('--ephemeral');
+    if (config.capture_prompt_evidence !== true && config.account_session_diagnostic !== true) args.push('--ephemeral');
     args.push('--json', '-');
     return {
       executable: config.executable,

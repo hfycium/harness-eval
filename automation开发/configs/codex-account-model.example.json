@@ -1,0 +1,11 @@
+{
+  "product_id": "codex",
+  "entry_id": "codex-cli-exec",
+  "executable": "codex.cmd",
+  "provider_mode": "chatgpt_account",
+  "model": "gpt-6-luna",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "automation_mode": "automatic",
+  "notes": "Example model taken from the local Codex configuration; availability must be verified in the launching user's account."
+}

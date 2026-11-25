@@ -1,0 +1,13 @@
+{
+  "product_id": "codex",
+  "entry_id": "codex-cli-exec",
+  "executable": "codex.cmd",
+  "provider_mode": "chatgpt_account",
+  "model": "gpt-6-luna",
+  "account_session_diagnostic": true,
+  "workspace_snapshot": true,
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "automation_mode": "automatic",
+  "notes": "Diagnostic mode persists a local Codex session in the launching user's CODEX_HOME and extracts only matching prompt and local context metadata; not a provider model receipt."
+}

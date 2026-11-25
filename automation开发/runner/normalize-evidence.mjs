@@ -56,7 +56,8 @@ export async function normalize({runDir, source, outputDir}) {
   const target=path.join(parent,path.basename(output)), relative=path.relative(runRoot,target);
   if(!relative || (!relative.startsWith('..'+path.sep) && relative!=='..' && !path.isAbsolute(relative))) throw Error('output must not be inside original run');
   const payload=Buffer.from(events.map(e=>JSON.stringify(e)).join('\n')+'\n');
-  const manifest={schema_version:'0.1',converter:'normalize-evidence-0.1',run_id:run.run_id,product_id:product,case_id:task.case_id,source_file:sourcePath,source_sha256:sha,source_run_association:['codex','dsh'].includes(product)?'archived_stdout_hash':'unique_claim_in_session',coverage:'unknown',event_count:events.length,events_sha256:digest(payload),missing:['complete_operation_coverage','network_observation'],created_at:new Date().toISOString()};
+  const finalCount=events.filter(e=>e.event_type==='final_response').length;
+  const manifest={schema_version:'0.1',converter:'normalize-evidence-0.2',run_id:run.run_id,product_id:product,case_id:task.case_id,source_file:sourcePath,source_sha256:sha,source_run_association:['codex','dsh'].includes(product)?'archived_stdout_hash':'unique_claim_in_session',coverage:'unknown',collection_checks:{jsonl_parse:'passed',tool_call_result_pairing:'passed',tool_calls:ids.size,final_responses:finalCount,final_response_visibility:finalCount?'observed':'unknown',source_capture_completeness:'unknown'},event_count:events.length,events_sha256:digest(payload),missing:['complete_operation_coverage','network_observation',...(finalCount?[]:['final_response_not_observed'])],created_at:new Date().toISOString()};
   await mkdir(target); await writeFile(path.join(target,'evidence-events.jsonl'),payload,{flag:'wx'}); await writeFile(path.join(target,'manifest.json'),JSON.stringify(manifest,null,2)+'\n',{flag:'wx'});
   return manifest;
 }

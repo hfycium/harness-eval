@@ -10,6 +10,7 @@ import { HarnessAdapter } from '../adapters/base.mjs';
 import { getAdapter } from '../adapters/registry.mjs';
 import { resolveWorkBuddyWorkspaceRoot } from '../adapters/workbuddy.mjs';
 import { captureCodexPromptEvidence } from './codex-prompt-evidence.mjs';
+import { workspaceSnapshot, compareSnapshots } from './workspace-snapshot.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKBUDDY_WORKSPACE_ROOT_ENV = 'HARNESS_EVAL_WORKBUDDY_ROOT';
@@ -495,6 +496,12 @@ export async function main(argv = process.argv.slice(2)) {
   }
 
   const prompt = await readFile(path.join(runDir, promptRel), 'utf8');
+  let workspaceBefore = null;
+  if (adapterConfig.workspace_snapshot === true) {
+    workspaceBefore = await workspaceSnapshot(productWorkspace);
+    const file=path.join(runDir,'workspace-before.json'); await writeFile(file,JSON.stringify(workspaceBefore,null,2)+'\n');
+    run.evidence.push({kind:'workspace_snapshot',path:'workspace-before.json',sha256:(await digest(file)).sha256,source:'runner_workspace_snapshot'});
+  }
   run.timing.started_at = now();
   run.execution.status = 'running';
   run.submission.status = 'unconfirmed';
@@ -691,8 +698,9 @@ export async function main(argv = process.argv.slice(2)) {
     out.end(); err.end();
     await Promise.all([finished(out), finished(err)]);
     try {
-      if (productId === 'codex' && adapterConfig.capture_prompt_evidence === true && codexHomeDir && !timedOut) {
-        run.evidence.push(await captureCodexPromptEvidence({ home:codexHomeDir, runDir, prompt, stdoutPath }));
+      if (productId === 'codex' && !timedOut && ((adapterConfig.capture_prompt_evidence === true && codexHomeDir) || adapterConfig.account_session_diagnostic === true)) {
+        const home=codexHomeDir ?? process.env.CODEX_HOME ?? path.join(os.homedir(),'.codex');
+        run.evidence.push(await captureCodexPromptEvidence({ home, runDir, prompt, stdoutPath }));
       }
     } finally {
       await codexHomeCleanup({ processTreeSafe: !timedOut || timeoutTermination?.process_tree_state === 'confirmed_terminated' });
@@ -736,6 +744,16 @@ export async function main(argv = process.argv.slice(2)) {
   run.timing.ended_at = now();
   const expected = task.expected_artifacts ?? [];
   const productWorkspaceRealPath = await realpath(productWorkspace);
+  if (workspaceBefore) {
+    if (run.execution.status === 'completed') {
+      const after=await workspaceSnapshot(productWorkspace), comparison=compareSnapshots(workspaceBefore,after);
+      for (const [name,value] of [['workspace-after.json',after],['workspace-changes.json',comparison]]) {
+        const file=path.join(runDir,name); await writeFile(file,JSON.stringify(value,null,2)+'\n');
+        run.evidence.push({kind:'workspace_snapshot',path:name,sha256:(await digest(file)).sha256,source:'runner_workspace_snapshot'});
+      }
+      run.observations.push({source:'runner_workspace_snapshot',status:comparison.status,scope:comparison.scope,changes_ref:'workspace-changes.json'});
+    } else run.missing.push({field:'workspace_after_snapshot',reason:'unknown',detail:'Execution not completed; product may still be active.'});
+  }
   if (run.execution.status === 'completed') {
     try {
       const inputInfo = await lstat(runInput);

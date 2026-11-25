@@ -13,10 +13,11 @@ test('captures only exact user message and reports mismatches as unknown', async
     const stdoutPath=path.join(base,'stdout.log');
     await writeFile(stdoutPath, JSON.stringify({type:'thread.started',thread_id:'abcd-12345678'})+'\n');
     const event={type:'response_item',payload:{type:'message',role:'user',content:[{type:'input_text',text:'first\nsecond'}]}};
-    await writeFile(path.join(home,'sessions','rollout-abcd-12345678.jsonl'),JSON.stringify(event)+'\n');
+    await writeFile(path.join(home,'sessions','rollout-abcd-12345678.jsonl'),JSON.stringify({type:'turn_context',payload:{model:'model-example'}})+'\n'+JSON.stringify(event)+'\n');
     await captureCodexPromptEvidence({home,runDir:run,prompt:'first\nsecond',stdoutPath});
     const found=JSON.parse(await readFile(path.join(run,'codex-prompt-evidence.json'),'utf8'));
     assert.equal(found.status,'matched'); assert.equal(found.initial_user_text,'first\nsecond');
+    assert.equal(found.local_context_models[0].model,'model-example'); assert.equal(found.effective_model,null);
     await captureCodexPromptEvidence({home,runDir:other,prompt:'different',stdoutPath});
     const missing=JSON.parse(await readFile(path.join(other,'codex-prompt-evidence.json'),'utf8'));
     assert.equal(missing.status,'unknown'); assert.equal(missing.initial_user_text,null);

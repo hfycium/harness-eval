@@ -2,12 +2,9 @@
   "product_id": "codex",
   "entry_id": "codex-cli-exec",
   "executable": "codex.cmd",
-  "provider_mode": "deepseek_api",
-  "model": "deepseek-flash",
-  "reasoning_effort": "high",
-  "api_key_env": "DEEPSEEK_API_KEY",
+  "provider_mode": "chatgpt_account",
   "temp_workspace": true,
   "timeout_seconds": 900,
   "automation_mode": "automatic",
-  "notes": "Example only. DeepSeek mode uses the official Responses endpoint, an isolated per-run CODEX_HOME, and DEEPSEEK_API_KEY from the launching process environment. One Windows command probe and one SpreadsheetBench 59196 task completed with windows.sandbox=mxc and workspace-write. Codex logged a model-metadata fallback warning; the effective model and reasoning effort remain unverified. Do not store API keys in this file. For the default ChatGPT account mode, set provider_mode to chatgpt_account. Keep the task workspace in system temp and do not add danger-full-access."
+  "notes": "ChatGPT account mode uses the launching user's Codex login and configuration. Model selection follows that configuration. This mode requires an authenticated account in the launching environment."
 }

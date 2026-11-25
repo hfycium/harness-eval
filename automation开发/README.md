@@ -104,6 +104,10 @@ node automation开发/connectors/workbuddy-eval/queue-manage.mjs expire --run-id
 
 通过 `--harness` 选择产品；可用 `--config` 指定本机非敏感配置。DSH 需要 profile，可用 `model_patch` 通过 `--patch` 显式请求模型条件；Codex 可选择 `chatgpt_account` 或 `deepseek_api`。DeepSeek 模式使用每次运行隔离的 `CODEX_HOME`，需要启动环境提供 `DEEPSEEK_API_KEY`，不要求 ChatGPT CLI 登录；默认账号模式继续使用本机登录状态和默认 `CODEX_HOME`。API Key 不写入配置模板、运行记录、日志或仓库。
 
+调试默认模板 `configs/codex.example.json` 使用 ChatGPT 账号；DeepSeek 模板为 `configs/codex-deepseek.example.json`，现有批次如果明确引用其他配置仍按其指定模式运行。Windows 下两种模式均显式请求 MXC。
+
+账号模式可通过配置中的 `model` 指定 CLI 模型，示例为 `configs/codex-account-model.example.json`；不设置时沿用用户 Codex 配置。示例模型来自当前本机配置，并不保证其他账号可用。运行快照记录请求模型，实际生效模型仍需证据。已在用户终端以未显式指定模型的账号配置完成一次文件探针，指定模型的运行尚待验证。
+
 ### DeepSeek API Key 一次配置
 
 Windows 下可把密钥一次性保存到当前用户的 DPAPI 加密凭据文件；此文件位于 `%LOCALAPPDATA%\HarnessEval\deepseek-api-key.xml`，不能直接复制到另一台电脑或另一 Windows 用户使用。设置和状态检查：
