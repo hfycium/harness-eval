@@ -26,7 +26,8 @@ export class CodexAdapter extends HarnessAdapter {
       timeout_seconds: config.timeout_seconds ?? null,
       sandbox: 'workspace-write',
       windows_sandbox_implementation: process.platform === 'win32' ? 'mxc' : null,
-      ephemeral: true,
+      ephemeral: config.capture_prompt_evidence !== true,
+      capture_prompt_evidence: config.capture_prompt_evidence === true,
       provider_mode: providerMode,
       ...(providerMode === 'deepseek_api' ? {
         provider_id: 'deepseek',
@@ -70,6 +71,7 @@ export class CodexAdapter extends HarnessAdapter {
     if (!Number.isFinite(timeoutSeconds) || timeoutSeconds <= 0) missing.push('timeout_seconds');
     const providerMode = config.provider_mode ?? 'chatgpt_account';
     if (!['chatgpt_account', 'deepseek_api'].includes(providerMode)) missing.push('provider_mode');
+    if (config.capture_prompt_evidence === true && providerMode !== 'deepseek_api') missing.push('capture_prompt_evidence_requires_isolated_deepseek_home');
     if (providerMode === 'deepseek_api') {
       const model = config.model ?? 'deepseek-flash';
       const effort = config.reasoning_effort ?? 'high';
@@ -111,13 +113,13 @@ export class CodexAdapter extends HarnessAdapter {
       }
       env.CODEX_HOME = codexHomeDir;
     }
-    args.push(
-      '--cd', workspaceDir, '--sandbox', 'workspace-write', '--ignore-rules',
-      '--skip-git-repo-check', '--ephemeral', '--json', prompt,
-    );
+    args.push('--cd', workspaceDir, '--sandbox', 'workspace-write', '--ignore-rules', '--skip-git-repo-check');
+    if (config.capture_prompt_evidence !== true) args.push('--ephemeral');
+    args.push('--json', '-');
     return {
       executable: config.executable,
       args,
+      stdin: prompt,
       cwd: workspaceDir,
       env,
     };

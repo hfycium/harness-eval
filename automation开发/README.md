@@ -2,6 +2,8 @@
 
 统一入口按 `prepare`、`run` 两个阶段工作：通过注册表选择产品适配器，准备隔离任务副本和运行记录，再调用产品并收回产物。评分是单独步骤，只读取已归档运行记录和产物。
 
+已增加选择性串行批次入口：`node automation开发/run-eval.mjs batch run --plan <计划.json>`；结果保存在 `runs/批次/`，可用 `node automation开发/run-eval.mjs batch summary --batch <批次目录>` 查看。可在计划中指定文本精确验收或 TraceTrial E8 适配题验收；结果区分运行状态与验收状态。计划、人工交互、失败策略与已验证范围见[批量运行与结果汇总](docs/批量运行与结果汇总.md)。
+
 需要由评测侧 Agent 协助启动时，可按路径加载 [Harness 评测启动 Skill](skills/harness-eval-launch/SKILL.md)。它指导 Agent 调用统一入口并在 WorkBuddy 队列任务发布后提供具体操作和提示词；该 Skill 尚未安装到全局，也尚未通过实机端到端验证。
 
 ## 目录与命名
@@ -10,13 +12,19 @@
 automation开发/
 ├── run-eval.mjs                 # CLI 薄入口
 ├── runner/
-│   └── main.mjs                 # 统一运行编排
+│   ├── main.mjs                 # 单次运行编排
+│   └── batch.mjs                # 批次串行调度与汇总
 ├── adapters/
 │   ├── base.mjs                 # 适配器共同接口，支持 CLI 与会话生命周期
 │   ├── registry.mjs             # 产品 ID 路由
 │   ├── codex.mjs                # Codex CLI 接入逻辑
 │   ├── dsh.mjs                  # DSH CLI 接入逻辑
+│   ├── doubao-work.mjs          # 豆包工作本地 STDIO MCP 队列入口
+│   ├── doubao-work/             # 豆包工作操作员证据导入与说明
+│   ├── yuanbao-web.mjs          # 元宝网页实验性适配器
 │   ├── workbuddy.mjs            # WorkBuddy 本地助理 Open API 接入
+│   ├── workbuddy-connector-queue.mjs # WorkBuddy 队列入口
+│   ├── workbuddy-scheduler-uia.mjs # WorkBuddy 定时任务 UIA 候选
 │   └── workbuddy/               # WorkBuddy operator Skill、队列执行 Skill 与说明
 ├── connectors/
 │   └── workbuddy-eval/           # 本地队列与 stdio MCP Connector 开发候选
@@ -29,7 +37,9 @@ automation开发/
 │   └── score-v0.2.proposed.schema.json # 待迁移的评分结果契约
 ├── docs/                        # 产品 API/GUI 准入记录与接入设计
 └── scorers/
-    └── score-spreadsheetbench.py # 数据集评分器包装
+    ├── verify-run.py             # 归档检查与文本、表格验收入口
+    ├── score-spreadsheetbench.py # 数据集单题评分器包装
+    └── score-tracetrial-e8.mjs   # E8 Windows 适配题独立验收
 
 cases/public/<dataset>-<task>/case.json
 runs/自动化/<timestamp>-<case>-<product>-<id>/
@@ -76,7 +86,7 @@ node automation开发/connectors/workbuddy-eval/queue-manage.mjs expire --run-id
 2. 按[安装与首轮试验指南](connectors/workbuddy-eval/install.md)创建两个独立的仓库外目录，填好 [`mcp.example.json`](connectors/workbuddy-eval/mcp.example.json)，再在 WorkBuddy 自定义连接器页面添加。
 3. `node automation开发/connectors/workbuddy-eval/selfcheck.mjs` 是本地合成协议自检，不启动 WorkBuddy；2026-11-22 通过，见[自检记录](connectors/workbuddy-eval/selfcheck-result-2026-11-22.md)。
 4. WorkBuddy 实机在 2026-11-23 完成一次合成文本文件任务：MCP `claim_next_task` 返回预期 run，WorkBuddy 写出 `probe.txt` 并提交；独立核对内容、大小和 SHA-256 与 Connector 摘要一致。首次尝试因发布端和活动 Connector 使用不同队列根而返回 `empty`，对齐后完成。详见[实机烟测记录](docs/workbuddy-connector-smoke-2026-11-23.md)。
-5. 该次仅为单任务 smoke：未创建定时任务，未运行公开 benchmark case，未接通 Runner enqueue/reconcile；Open API 分支、模型配置、内部 Trace 和跨次可靠性仍未验证。版本 `5.9.2.0` 来自执行报告，版本页截图未归档。
+5. 上述单任务 smoke 当时未创建定时任务，也未接通 Runner；后续已完成 Runner 队列发布与回收，并有 SpreadsheetBench 单题自动评分记录，见上文。Open API 分支、模型配置、内部 Trace 和跨次可靠性仍未验证。版本 `5.9.2.0` 来自执行报告，版本页截图未归档。
 
 如需让 Agent 执行安装流程，按路径加载 [`workbuddy-connector-setup Skill`](adapters/workbuddy/skills/workbuddy-connector-setup/SKILL.md)。如果它无法访问 WorkBuddy 窗口，应停止并报告，不要去改 WorkBuddy 私有配置文件或把 MCP 安装到 CodeBuddy 自己的设置里。
 
@@ -132,7 +142,13 @@ Codex 示例：
 node automation开发/run-eval.mjs run --case cases/public/spreadsheetbench-59196/case.json --harness codex --timeout 900
 ```
 
-WorkBuddy 的自动化候选仍是“本地定时任务 + MCP 队列 Connector”。桌面端自定义 Connector 已完成单任务 smoke；Runner 到队列的合成任务发布、回收和独立验收已观察通过一次。另有一次任务在约定的定时周期后被领取、提交，但尚未取得 WorkBuddy 调度执行历史，触发来源仍待确认；重复稳定性、公开任务和运行记录对照尚未验证。WorkBuddy Open API 适配器保留为独立备选，尚未真实调用。
+WorkBuddy 当前采用 MCP 队列 Connector，任务可通过人工启动 WorkBuddy 领取；定时任务是可选触发方式。Runner 到队列的合成任务发布、回收和独立验收已观察通过一次，SpreadsheetBench 单题也已完成一次自动评分。另有一次任务在约定的定时周期后被领取、提交，但尚未取得 WorkBuddy 调度执行历史，触发来源仍待确认；重复稳定性仍待验证。WorkBuddy Open API 适配器保留为独立备选，尚未真实调用。
+
+豆包工作已新增独立的本地 STDIO Connector 队列适配器，并于 2026-11-23 完成一次 Runner 发布、客户端人工启动、Connector 领取/提交、Runner 回收和精确文本验收的合成烟测。单题文本验收通过；不产生 Benchmark 分数。定时触发、重复稳定性、产品版本、模型/模式、原生 Skill 与内部 Trace 仍未验证。配置和任务见 [doubao-work-connector.example.json](configs/doubao-work-connector.example.json)、[合成烟测 case](../cases/smoke/doubao-work-connector/)；记录见[端到端烟测](docs/doubao-work-connector-smoke-2026-11-23.md)。
+
+豆包工作原对话里能看到的工具输出可通过[操作员证据导入工具](adapters/doubao-work/README.md)归档到独立复核目录；来源标为 `operator_exported`，不自动更改评分，也不表示 Connector 已采集内部 Trace。
+
+WorkBuddy 可试用[本机会话证据采集器](adapters/workbuddy/会话证据采集.md)，按 run ID 查找并提取一次 Bash 命令及返回；可选 Runner 自动采集已通过一次实测。
 
 ### WorkBuddy 队列 Connector 原型
 
@@ -165,9 +181,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File automation开发/tools/workb
 
 获取 access token 需要已启用的 WorkBuddy 第三方应用和安全的服务端 token 交换；官方资料没有明确要求另租独立服务器，也未明确本地服务是否符合部署要求。个人学生的申请资格未从公开文档确认；token 有效期文档存在差异。当前 Runner 不实现 OAuth 授权、交换或刷新。完整说明见[WorkBuddy 手动准入及烟测手册](docs/workbuddy-api-admission.md#首次手动准备与运行步骤)。
 
-Codex 使用 `codex exec --json --sandbox workspace-write`、临时会话和独立临时目录。`chatgpt_account` 模式需本机 CLI 登录；`deepseek_api` 模式通过 `DEEPSEEK_API_KEY` 调 DeepSeek Responses API，Runner 为其创建/清理运行级 `CODEX_HOME`。DSH 使用 profile 和可选 `--patch` 条件覆盖；候选 patch 设置 `deepseek-flash` + `high`，但尚未发出认证 API 请求，实际生效模型/推理强度仍为 unknown。当前 DSH 使用 Messages transport，Codex 使用 Responses transport，协议差异单独记录。两者都不启用完全权限。产品进程退出码为 0 不自动等于任务完成；需检查运行记录、日志和产物，并另行做独立验收。
+Codex 使用 `codex exec --json --sandbox workspace-write`、临时会话和独立临时目录。`chatgpt_account` 模式需本机 CLI 登录；`deepseek_api` 模式通过 `DEEPSEEK_API_KEY` 调 DeepSeek Responses API，Runner 为其创建/清理运行级 `CODEX_HOME`。DSH 使用 profile 和可选 `--patch` 条件覆盖；候选 patch 请求 `deepseek-flash` + `high`。两者已各自执行实际任务，但实际生效模型和推理强度仍为 unknown。当前 DSH 使用 Messages transport，Codex 使用 Responses transport，协议差异单独记录。产品进程退出码为 0 不自动等于任务完成；需检查运行记录、日志和产物，并另行做独立验收。
 
 ## 评分
+
+### TraceTrial E8 Windows 适配题验收
+
+[`scorers/score-tracetrial-e8.mjs`](scorers/score-tracetrial-e8.mjs) 读取既有运行、产物和可用日志，分别检查归档、JSON 格式、可见工具返回、已观察到的过程约束与最终回复。结果写入独立目录的 `verification.json`、`score.json`，不修改原 run；无法可靠判断的检查标记 `unknown`。
+
+```powershell
+node .\automation开发\scorers\score-tracetrial-e8.mjs --run-dir '<已有运行目录>' --output-dir '<尚不存在的复核目录>'
+node .\automation开发\run-eval.mjs batch run --plan .\automation开发\configs\batch-tracetrial-e8-cmd.example.json
+```
+
+离线验收已用于 Codex、DSH 的历史运行；DSH 可通过 `configs/dsh-json-events.example.json` 启用 `--json`，真实运行已采集到工具调用、返回和最终回复。两产品批次已各自自动调用 E8 验收器一次，结果待复核；批次待复核标签的修正尚待下次运行验证。命令、结果解释与范围见 [E8 验收使用说明](docs/TraceTrial-E8验收使用.md)。这是 Windows 适配题的验收，不输出原基准官方得分。
 
 ### 独立归档验收入口（首版）
 
@@ -211,13 +238,14 @@ python automation开发/scorers/score-spreadsheetbench.py --case <case.json> --a
 
 此前 WorkBuddy 的 Runner 真实 59196 run 已通过归档检查和独立评分；后续自动评分路由也在新 run `2026-11-23T072508-103Z-spreadsheetbench-59196-workbuddy-48610536` 中对有效产物验证通过一次。该新 run 由 WorkBuddy 提交 6,651 字节工作簿，哈希 `738af730f856b2d01324e3fcd03bd5e94cdb6cf5fec2f882fb744f714e177d2f`；Runner 自动归档和官方单题评分均通过。评分读取产品缓存值，没有再次独立 Excel 重算，`benchmark_score=null`。此前只领取未执行的失败 run 及后续阻塞状态仍保留，详见[首次尝试记录](../runs/复核/2026-11-23-workbuddy-auto-score-01/尝试记录.md)。
 
-## 当前状态（2026-11-23）
+## 当前状态（2026-11-24）
 
-- DSH 59196 已生成并回收工作簿；CLI 在时限内未正常结束。其原始工作簿缓存值经固定版本官方单题比较通过，但 Excel/LibreOffice 独立重算和 UI 复核未做，不能据此证明重算后正确。此前一次 DSH 诊断在模型响应前因隔离 home 缺凭据退出，不能解释先前超时。
-- Codex CLI `0.171.0` 经 DeepSeek Responses Provider 完成一次 59196 任务，Runner 自动归档且固定版本官方单题比较通过。Windows 适配器明确指定 MXC、仍使用 `workspace-write`；此前未指定 Windows 后端时的命令探针被策略拒绝。该结果限一次单题 smoke，不是 benchmark 分数；详见[Codex MXC 与单题运行记录](docs/codex-smoke-2026-11-23.md)。
-- DSH/Codex 共同模型候选为 `deepseek-flash` + reasoning effort `high`。DSH 静态 profile patch 请求 `https://api.deepseek.com/anthropic` Messages endpoint，Codex 使用 DeepSeek Responses endpoint。Codex API 请求已成功完成一次任务，但实际模型/推理强度生效情况仍 unknown，不能称为已匹配模型的受控比较；DSH 认证请求仍未验证。
-- Codex DeepSeek 配置使用官方 Responses endpoint、Provider、`env_key`、请求模型和推理强度；尚未生成官方 `models.json` 模型目录。此次运行日志提示模型元数据 fallback，实际模型和推理行为仍需核实；若需要目录，须单独冻结其版本和提示模板处理，避免静默改变 Codex Harness 提示。
-- DSH、Codex 的 `prepare` 路由验收已通过，生成了匹配的运行记录和 trace，输入副本哈希一致；该验收未启动产品。WorkBuddy Runner 队列路径已完成合成任务发布、回收、独立验收一次；另观察到一轮符合定时周期的领取与提交，但尚无 WorkBuddy 执行历史能独立确认触发来源。SpreadsheetBench 单题包装器为 v0.2，已独立比较旧手动产物；Runner 工作簿评分门控仍未端到端验证。Open API、定时触发归因仍未验证。元宝、豆包适配器未实现。
-- Runner 已增加可选 `runSession` 生命周期分支。该分支要求适配器显式提供提示词提交和输入哈希证据；否则不标记为已提交。会话接口当前没有产品实现，也没有 API/GUI 运行验证；超时后不收集工作区产物，避免与仍在运行的适配器发生写入竞态。
-- 2026-11-22 在系统临时目录的隔离项目副本中，Codex `prepare` 成功；一个临时 mock session 适配器也完成了执行、状态记录及预期产物归档，输入 SHA-256 匹配、run/trace ID 匹配。mock 产物是文本占位内容，`task_success_verified=false`；这只验证 Runner 分支，不是产品运行或工作簿验收。临时副本的绝对路径未纳入仓库。
-- 详细 DSH/Codex 原始 run JSON 未包含在本交付副本中；此处是状态摘要。产品准入记录：[豆包 OpenAPI](docs/doubao-openapi-admission.md)、[WorkBuddy Connector 与其他接入候选](docs/workbuddy-api-admission.md)、[元宝 GUI](docs/yuanbao-gui-admission.md)、[WorkBuddy Connector 实机 smoke](docs/workbuddy-connector-smoke-2026-11-23.md)。WorkBuddy 单任务路径已验证；定时调度、内部 Trace 与 Open API 仍未验证。豆包具体会话提交及 xlsx 文件往返接口、元宝自动化入口仍未知。
+| 产品 | 已有接入与观察 | 仍需核实 |
+| --- | --- | --- |
+| Codex | CLI 适配器已执行 SpreadsheetBench 单题及 E8 Windows 适配题；另一次启用会话摘录的 E8 运行核对了本地用户消息全文。 | 默认临时会话条件的全文送达证据、实际模型和推理强度、跨次稳定性；早期 E8 提示词送达待核实。 |
+| DSH | CLI 适配器已执行 E8 适配题并归档产物；启用 `--json` 后一次运行采集到结构化工具调用与返回。 | 提示词传递时序、有效模型和推理强度、跨次稳定性；旧文本运行的过程仍为 unknown。 |
+| WorkBuddy | MCP 队列曾完成合成任务端到端验收；一次 SpreadsheetBench 单题自动评分通过。 | 需要人工启动领取或另行验证触发来源；重复稳定性、Open API 仍待核实。 |
+| 豆包工作 | MCP 队列完成一次人工启动的合成文本任务及独立验收。 | 公开任务、其他文件类型及跨次稳定性。 |
+| 元宝专家模式 | 实验性网页适配器已实现并进行文本任务尝试；支持人工确认和文件交互。 | 自动状态判断、产物内容验收与稳定性；不能称为完全自动接通。 |
+
+2026-11-24 的 E8 适配题批次已串行运行 Codex 和 DSH 并自动调用验收。此前 DSH 一次运行的首轮用户消息未包含题目正文；Codex、DSH 现改用标准输入，DSH 新运行的持久会话已核对题目完整到达。Codex 的随机标记探针已通过，另一个单独启用会话摘录的 E8 运行记录到本机初始消息与题目逐字符一致；默认 ephemeral 条件和历史运行不能由此追认。详见[提示词传递与工作区核验](docs/2026-11-24-提示词传递与工作区核验.md)。产品内部轨迹并不一定可见，已归档日志、产物及来源应按各次运行核对。

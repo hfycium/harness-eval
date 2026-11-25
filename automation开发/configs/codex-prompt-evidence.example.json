@@ -1,0 +1,14 @@
+{
+  "product_id": "codex",
+  "entry_id": "codex-cli-exec",
+  "executable": "codex.cmd",
+  "provider_mode": "deepseek_api",
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "api_key_env": "DEEPSEEK_API_KEY",
+  "capture_prompt_evidence": true,
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "automation_mode": "automatic",
+  "notes": "Opt-in prompt evidence probe, per-run isolated home. Not equivalent to ephemeral baseline. No credentials in config."
+}

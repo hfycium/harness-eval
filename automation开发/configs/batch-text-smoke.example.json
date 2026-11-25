@@ -1,0 +1,16 @@
+{
+  "on_failure": "stop",
+  "jobs": [
+    {
+      "case": "cases/smoke/codex-command-probe/case.json",
+      "harness": "codex",
+      "config": "automation开发/configs/codex.example.json",
+      "timeout": 180,
+      "verification": {
+        "type": "text_exact",
+        "artifact": "outputs/probe.txt",
+        "expected": "cases/smoke/codex-command-probe/inputs/input.txt"
+      }
+    }
+  ]
+}

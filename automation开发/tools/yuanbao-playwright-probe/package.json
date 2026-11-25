@@ -1,0 +1,8 @@
+{
+  "name": "yuanbao-playwright-probe",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "open": "node open.mjs" },
+  "dependencies": { "playwright": "1.56.1" }
+}

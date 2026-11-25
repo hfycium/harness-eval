@@ -21,6 +21,7 @@ export class DshAdapter extends HarnessAdapter {
       model_patch: config.model_patch ?? null,
       temp_workspace: config.temp_workspace === true,
       timeout_seconds: config.timeout_seconds ?? null,
+      json_events: config.json_events === true,
       home_source: environment.DSH_HOME ? 'process_environment' : config.home ? 'adapter_config' : 'default',
     };
   }
@@ -65,10 +66,12 @@ export class DshAdapter extends HarnessAdapter {
     if (config.model_patch) {
       args.push('--patch', path.resolve(context.rootDir, config.model_patch));
     }
-    args.push(context.prompt);
+    if (config.json_events === true) args.push('--json');
+    args.push('-');
     return {
       executable: config.executable,
       args: args.map(value => expand(value, context)),
+      stdin: context.prompt,
       cwd: config.working_directory === '{{workspace_dir}}'
         ? context.workspaceDir
         : path.resolve(context.rootDir, expand(config.working_directory ?? '{{workspace_dir}}', context)),

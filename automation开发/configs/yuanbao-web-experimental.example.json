@@ -1,0 +1,8 @@
+{
+  "product_id": "yuanbao-web",
+  "entry_id": "yuanbao-web-playwright",
+  "automation_mode": "assisted",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "experimental_auto_checks": true
+}

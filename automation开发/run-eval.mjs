@@ -1,12 +1,19 @@
 #!/usr/bin/env node
 import { main } from './runner/main.mjs';
 import { clearLoadedDeepSeekCredential, loadDeepSeekCredentialForRun, manageDeepSeekCredential } from './runner/deepseek-credential.mjs';
+import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
 let credentialContext = { loaded: false, source: process.env.DEEPSEEK_API_KEY ? 'process_environment' : 'none' };
 
 try {
-  if (args[0] === 'credential' && args[1] === 'deepseek') {
+  if (args[0] === 'batch') {
+    process.on('SIGINT', () => {});
+    const child = spawn(process.execPath, [fileURLToPath(new URL('./runner/batch.mjs', import.meta.url)), ...args.slice(1)], { stdio: 'inherit', shell: false });
+    const code = await new Promise((resolve, reject) => { child.once('error', reject); child.once('close', (status, signal) => resolve(signal ? 1 : status)); });
+    process.exitCode = code ?? 1;
+  } else if (args[0] === 'credential' && args[1] === 'deepseek') {
     await manageDeepSeekCredential(args[2] ?? 'status');
   } else {
     credentialContext = await loadDeepSeekCredentialForRun(args);

@@ -9,9 +9,15 @@ import { fileURLToPath } from 'node:url';
 import { HarnessAdapter } from '../adapters/base.mjs';
 import { getAdapter } from '../adapters/registry.mjs';
 import { resolveWorkBuddyWorkspaceRoot } from '../adapters/workbuddy.mjs';
+import { captureCodexPromptEvidence } from './codex-prompt-evidence.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKBUDDY_WORKSPACE_ROOT_ENV = 'HARNESS_EVAL_WORKBUDDY_ROOT';
+
+function isConnectorQueueMode(productId, config) {
+  return (productId === 'workbuddy' && config?.entry_id === 'workbuddy-connector-queue')
+    || (productId === 'doubao-work' && config?.entry_id === 'doubao-work-connector-queue');
+}
 
 function usage() {
   console.log('Usage:\n  node automation开发/run-eval.mjs credential deepseek set|status|remove\n  node automation开发/run-eval.mjs prepare --case <case.json> --harness <product_id> [--config <config.json>]\n  node automation开发/run-eval.mjs run --case <case.json> --harness <product_id> [--config <config.json>] [--score-spreadsheetbench-answer <answer.xlsx> --score-spreadsheetbench-evaluator <evaluation.py> --score-spreadsheetbench-revision <commit> --score-spreadsheetbench-output <new-dir>]\n  node automation开发/run-eval.mjs verify --run-dir <archived-run> --output-dir <new-dir> [--artifact <path>] [--answer <answer.xlsx> --recalculated-output <file.xlsx> --recalculated-from-sha256 <sha256> --recalculation-method <description> --evaluator <evaluation.py> --evaluator-revision <commit>]');
@@ -255,9 +261,9 @@ export async function main(argv = process.argv.slice(2)) {
       insideRoot(path.join('automation开发', 'tools', 'workbuddy-scheduler-uia.ps1')),
     );
   }
-  if (productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-connector-queue') {
+  if (isConnectorQueueMode(productId, adapterConfig)) {
     adapterImplementationPaths.push(insideRoot(path.join('automation开发', 'adapters', 'workbuddy-connector-queue.mjs')), insideRoot(path.join('automation开发', 'connectors', 'workbuddy-eval', 'publish-task.mjs')), insideRoot(path.join('automation开发', 'connectors', 'workbuddy-eval', 'server.mjs')), insideRoot(path.join('automation开发', 'connectors', 'workbuddy-eval', 'queue-lifecycle.mjs')));
-    if (command === 'run') adapterImplementationPaths.push(insideRoot(path.join('automation开发', 'adapters', 'workbuddy', 'skills', 'workbuddy-eval-execution', 'SKILL.md')));
+    if (command === 'run' && productId === 'workbuddy') adapterImplementationPaths.push(insideRoot(path.join('automation开发', 'adapters', 'workbuddy', 'skills', 'workbuddy-eval-execution', 'SKILL.md')));
   }
   const adapterImplementationFiles = await Promise.all(adapterImplementationPaths.map(async implementationPath => ({
     ref: path.relative(root, implementationPath).replaceAll('\\', '/'),
@@ -289,13 +295,18 @@ export async function main(argv = process.argv.slice(2)) {
   if (!promptStat.isFile()) throw new Error('Prompt source must be a file.');
   if (adapter.productId !== productId || !adapterConfig.entry_id) throw new Error('Selected adapter and config must define matching product_id and entry_id.');
 
-  const runId = `${new Date().toISOString().replaceAll(':', '').replaceAll('.', '-')}-${task.case_id}-${productId}-${randomUUID().slice(0, 8)}`;
+  const requestedRunId = option(args, '--run-id');
+  if (requestedRunId !== null && !/^[A-Za-z0-9][A-Za-z0-9_-]{0,159}$/.test(requestedRunId)) throw new Error('Invalid --run-id; use at most 160 ASCII letters, digits, underscores or hyphens.');
+  const runId = requestedRunId ?? `${new Date().toISOString().replaceAll(':', '').replaceAll('.', '-')}-${task.case_id}-${productId}-${randomUUID().slice(0, 8)}`;
   const runArchiveRoot = await ensureProjectDirectory(path.join('runs', '自动化'));
   const runDir = path.join(runArchiveRoot, runId);
   const useTempWorkspace = args.includes('--temp-workspace') || adapterConfig.temp_workspace === true;
-  const workspaceRootEnvName = productId === 'workbuddy' ? adapterConfig.workspace_root_env : null;
-  if (workspaceRootEnvName && workspaceRootEnvName !== WORKBUDDY_WORKSPACE_ROOT_ENV) throw new Error(`WorkBuddy workspace_root_env must be ${WORKBUDDY_WORKSPACE_ROOT_ENV}.`);
-  const configuredWorkspaceRoot = productId === 'workbuddy' ? resolveWorkBuddyWorkspaceRoot() : null;
+  const connectorQueueMode = isConnectorQueueMode(productId, adapterConfig);
+  const workspaceRootEnvName = connectorQueueMode || productId === 'workbuddy' ? adapterConfig.workspace_root_env : null;
+  if (workspaceRootEnvName && workspaceRootEnvName !== WORKBUDDY_WORKSPACE_ROOT_ENV) throw new Error('Connector workspace_root_env must be ' + WORKBUDDY_WORKSPACE_ROOT_ENV + '.');
+  const configuredWorkspaceRoot = connectorQueueMode
+    ? process.env[workspaceRootEnvName]
+    : productId === 'workbuddy' ? resolveWorkBuddyWorkspaceRoot() : null;
   let workspaceRef = `system-temp/HarnessEval/${runId}`;
   let productWorkspace;
   if (configuredWorkspaceRoot) {
@@ -303,7 +314,7 @@ export async function main(argv = process.argv.slice(2)) {
     const workspaceRoot = path.resolve(configuredWorkspaceRoot);
     if (path.parse(workspaceRoot).root === workspaceRoot || isWithinPath(root, workspaceRoot) || isWithinPath(workspaceRoot, root)) throw new Error('WorkBuddy workspace root must be a dedicated directory outside the project repository and filesystem root.');
     productWorkspace = path.join(workspaceRoot, runId);
-    workspaceRef = `workbuddy-authorized-root/${runId}`;
+    workspaceRef = (productId === 'workbuddy' ? 'workbuddy' : 'doubao-work') + '-authorized-root/' + runId;
   } else {
     if (!useTempWorkspace) throw new Error('Product workspace isolation is required. Set temp_workspace=true or configure a dedicated workspace root.');
     productWorkspace = path.join(os.tmpdir(), 'HarnessEval', runId);
@@ -505,7 +516,7 @@ export async function main(argv = process.argv.slice(2)) {
           timedOut = true;
           sessionTimedOut = true;
           controller.abort();
-          if (productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-connector-queue') {
+          if (connectorQueueMode) {
             Promise.race([execution.catch(() => null), new Promise(done => setTimeout(() => done(null), 5000))]).then(() => resolve(null));
           } else resolve(null);
         }, timeoutSeconds * 1000);
@@ -519,14 +530,14 @@ export async function main(argv = process.argv.slice(2)) {
     } catch (error) {
       result = {
         submission_status: 'unconfirmed', submission_evidence: { prompt_submitted: false, inputs: [] },
-        execution_status: timedOut ? 'timed_out' : productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-connector-queue' ? 'requires_action' : 'failed',
+        execution_status: timedOut ? 'timed_out' : connectorQueueMode ? 'requires_action' : 'failed',
         completion_evidence: { task_success_verified: false },
         observations: [], missing: [],
         error: { code: timedOut ? 'session_timeout' : 'session_adapter_error', phase: 'execute' },
       };
     } finally { clearTimeout(timer); }
-    if (productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-connector-queue' && !result.evidence_refs) {
-      const ref = 'workbuddy-queue/queue-events.jsonl';
+    if (connectorQueueMode && !result.evidence_refs) {
+      const ref = productId === 'workbuddy' ? 'workbuddy-queue/queue-events.jsonl' : 'doubao-work-queue/queue-events.jsonl';
       try {
         if ((await stat(path.join(runDir, ref))).isFile()) result.evidence_refs = [ref];
       } catch (error) { if (error.code !== 'ENOENT') throw error; }
@@ -571,10 +582,10 @@ export async function main(argv = process.argv.slice(2)) {
       const info = await lstat(evidenceFile);
       const realEvidenceFile = await realpath(evidenceFile);
       if (info.isSymbolicLink() || !info.isFile() || !realEvidenceFile.startsWith(sessionEvidenceRoot + path.sep)) throw new Error('Session evidence must be a regular file inside the run archive.');
-      const sessionSource = productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-connector-queue' ? (ref.endsWith('connector-events.jsonl') ? 'mcp_connector_server' : 'runner_queue_adapter') : productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-local-scheduler-uia'
+      const sessionSource = connectorQueueMode ? (ref.endsWith('connector-events.jsonl') ? 'mcp_connector_server' : 'runner_queue_adapter') : productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-local-scheduler-uia'
         ? 'workbuddy_scheduler_uia'
         : productId === 'workbuddy' ? 'workbuddy_openapi' : 'adapter_session';
-      run.evidence.push({ kind: productId === 'workbuddy' ? 'product_session' : 'api_session', path: ref.replaceAll('\\', '/'), sha256: (await digest(evidenceFile)).sha256, source: sessionSource });
+      run.evidence.push({ kind: productId === 'workbuddy' || productId === 'doubao-work' ? 'product_session' : 'api_session', path: ref.replaceAll('\\', '/'), sha256: (await digest(evidenceFile)).sha256, source: sessionSource });
       run.submission.evidence_refs.push(ref.replaceAll('\\', '/'));
     }
     for (const field of result.missing) run.missing.push({ field: `adapter.${field}`, reason: 'unknown', detail: 'Session adapter reported this field as unavailable.' });
@@ -628,7 +639,7 @@ export async function main(argv = process.argv.slice(2)) {
       child = spawn(commandLine[0], commandLine[1], {
         cwd: invocation.cwd ?? productWorkspace,
         env: { ...process.env, ...invocation.env, ...(codexHomeDir ? { CODEX_HOME: codexHomeDir } : {}), ADAPTER_EXE: executable, ADAPTER_ARGS_JSON: JSON.stringify(renderedArgs) },
-        windowsHide: true, shell: false, stdio: ['ignore', 'pipe', 'pipe']
+        windowsHide: true, shell: false, stdio: [typeof invocation.stdin === 'string' ? 'pipe' : 'ignore', 'pipe', 'pipe']
       });
     } catch (error) {
       await codexHomeCleanup();
@@ -638,6 +649,12 @@ export async function main(argv = process.argv.slice(2)) {
     let processExitAt = null;
     let processCloseAt = null;
     let spawnErrorCode = null;
+    let stdinErrorCode = null;
+    if (child.stdin) {
+      child.stdin.on('error', error => { stdinErrorCode = error.code ?? 'stdin_error'; });
+      child.stdin.end(invocation.stdin, 'utf8');
+      run.submission.transformations.push({ type: 'prompt_stdin', prompt_sha256: promptHash.sha256, delivery: 'attempted' });
+    }
     let stdoutLastOutputAt = null;
     let stdoutClosedAt = null;
     let stderrLastOutputAt = null;
@@ -671,10 +688,17 @@ export async function main(argv = process.argv.slice(2)) {
     processCloseAt = now();
     clearTimeout(timer);
     if (timeoutTask) await timeoutTask;
-    await codexHomeCleanup({ processTreeSafe: !timedOut || timeoutTermination?.process_tree_state === 'confirmed_terminated' });
     out.end(); err.end();
     await Promise.all([finished(out), finished(err)]);
+    try {
+      if (productId === 'codex' && adapterConfig.capture_prompt_evidence === true && codexHomeDir && !timedOut) {
+        run.evidence.push(await captureCodexPromptEvidence({ home:codexHomeDir, runDir, prompt, stdoutPath }));
+      }
+    } finally {
+      await codexHomeCleanup({ processTreeSafe: !timedOut || timeoutTermination?.process_tree_state === 'confirmed_terminated' });
+    }
     run.submission.status = 'unconfirmed';
+    if (stdinErrorCode) run.submission.transformations.push({ type: 'prompt_stdin_error', code: stdinErrorCode });
     run.submission.actual_prompt_ref = promptRel;
     run.submission.actual_inputs = [{ path: inputRel.replaceAll('\\', '/'), sha256: inputHash.sha256 }];
     run.execution.status = timedOut ? 'timed_out' : result.signal ? 'interrupted' : result.code === 0 ? 'completed' : 'failed';
@@ -712,6 +736,17 @@ export async function main(argv = process.argv.slice(2)) {
   run.timing.ended_at = now();
   const expected = task.expected_artifacts ?? [];
   const productWorkspaceRealPath = await realpath(productWorkspace);
+  if (run.execution.status === 'completed') {
+    try {
+      const inputInfo = await lstat(runInput);
+      const actualPath = await realpath(runInput);
+      if (!inputInfo.isFile() || inputInfo.isSymbolicLink() || !actualPath.startsWith(productWorkspaceRealPath + path.sep)) throw new Error('input_not_regular_workspace_file');
+      const currentHash = await digest(actualPath);
+      run.observations.push({ source: 'workspace_input_integrity', path: inputRel.replaceAll('\\', '/'), initial_sha256: inputHash.sha256, final_sha256: currentHash.sha256, status: currentHash.sha256 === inputHash.sha256 ? 'unchanged' : 'changed', scope: 'post_run_snapshot_only' });
+    } catch (error) {
+      run.observations.push({ source: 'workspace_input_integrity', path: inputRel.replaceAll('\\', '/'), initial_sha256: inputHash.sha256, final_sha256: null, status: 'unknown', reason: error.code ?? 'input_not_regular_workspace_file', scope: 'post_run_snapshot_only' });
+    }
+  }
   const artifactArchiveRoot = path.resolve(runDir, 'artifacts');
   const runDirRealPath = await realpath(runDir);
   if (expected.length > 0) {

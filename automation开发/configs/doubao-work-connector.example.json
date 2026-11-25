@@ -1,0 +1,10 @@
+{
+  "product_id": "doubao-work",
+  "entry_id": "doubao-work-connector-queue",
+  "automation_mode": "assisted",
+  "workspace_root_env": "HARNESS_EVAL_WORKBUDDY_ROOT",
+  "trigger_source": "manual",
+  "coordinated_expiry": false,
+  "timeout_seconds": 300,
+  "poll_interval_seconds": 2
+}

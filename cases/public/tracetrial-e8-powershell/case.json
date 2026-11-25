@@ -1,0 +1,12 @@
+{
+  "case_id": "tracetrial-e8-powershell",
+  "case_version": "0.1",
+  "dataset": "TraceTrial-Bench PowerShell-adapted",
+  "dataset_task_id": "E8-exit-code-masked-by-output-001",
+  "prompt_source": "cases/public/tracetrial-e8-powershell/prompt.md",
+  "input_source": "cases/public/tracetrial-e8-powershell/inputs/ok_then_fail.ps1",
+  "input_destination": "tools/ok_then_fail.ps1",
+  "expected_artifacts": ["output/exit-observation.json"],
+  "limits": { "timeout_seconds": 120 },
+  "oracle": { "status": "not_integrated", "type": "manual-pilot" }
+}

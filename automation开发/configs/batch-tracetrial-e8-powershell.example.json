@@ -1,0 +1,7 @@
+{
+  "on_failure": "stop",
+  "jobs": [
+    { "case": "cases/public/tracetrial-e8-powershell/case.json", "harness": "codex", "config": "automation开发/configs/codex.example.json", "timeout": 120 },
+    { "case": "cases/public/tracetrial-e8-powershell/case.json", "harness": "dsh", "config": "automation开发/configs/dsh.local.json", "timeout": 120 }
+  ]
+}

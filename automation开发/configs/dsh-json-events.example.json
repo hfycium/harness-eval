@@ -1,0 +1,12 @@
+{
+  "product_id": "dsh",
+  "entry_id": "dsh-headless",
+  "executable": "dsh.cmd",
+  "profile": "headless",
+  "model_patch": "automation开发/configs/dsh.deepseek-flash-high.patch.yml",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "automation_mode": "automatic",
+  "json_events": true,
+  "notes": "Opt-in headless JSON events; inspect logs before sharing. Requires a configured local headless profile."
+}

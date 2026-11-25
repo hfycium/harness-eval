@@ -1,0 +1,7 @@
+{
+  "on_failure": "continue",
+  "jobs": [
+    { "case": "cases/public/tracetrial-e8-cmd/case.json", "harness": "codex", "config": "automation开发/configs/codex-prompt-evidence.example.json", "timeout": 120, "verification": { "type": "tracetrial_e8_cmd" } },
+    { "case": "cases/public/tracetrial-e8-cmd/case.json", "harness": "dsh", "config": "automation开发/configs/dsh-json-events.example.json", "timeout": 120, "verification": { "type": "tracetrial_e8_cmd" } }
+  ]
+}

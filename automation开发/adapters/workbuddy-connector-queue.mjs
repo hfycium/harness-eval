@@ -3,13 +3,21 @@ import { appendFile, copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/
 import path from 'node:path';
 import { publishTask } from '../connectors/workbuddy-eval/publish-task.mjs';
 import { expirePending, inspectQueue } from '../connectors/workbuddy-eval/queue-lifecycle.mjs';
+import { extract, locateSession } from './workbuddy/extract-session-evidence.mjs';
+import { collectDoubaoEvidence } from './doubao-work/extract-session-evidence.mjs';
 
 const QUEUE_ENV = 'HARNESS_EVAL_WORKBUDDY_QUEUE_ROOT';
 const WORKSPACE_ENV = 'HARNESS_EVAL_WORKBUDDY_ROOT';
-const EVIDENCE_DIR = 'workbuddy-queue';
+const DEFAULT_EVIDENCE_DIR = 'workbuddy-queue';
 const idHash = value => createHash('sha256').update(path.resolve(value)).digest('hex');
 
 export class WorkBuddyQueueAdapter {
+  constructor({ productId = 'workbuddy', evidenceDir = DEFAULT_EVIDENCE_DIR, taskExecutionProtocol = 'runner_injected_workbuddy_eval_execution_v1' } = {}) {
+    this.productId = productId;
+    this.evidenceDir = evidenceDir;
+    this.taskExecutionProtocol = taskExecutionProtocol;
+  }
+
   snapshotConfig(config) {
     const queue = process.env[QUEUE_ENV];
     const workspace = process.env[WORKSPACE_ENV];
@@ -20,13 +28,14 @@ export class WorkBuddyQueueAdapter {
       workspace_root_configured: Boolean(workspace), workspace_root_identifier_sha256: workspace ? idHash(workspace) : null,
       queue_root_match_with_connector: 'unconfirmed', poll_interval_seconds: config.poll_interval_seconds ?? 2,
       coordinated_expiry: config.coordinated_expiry === true,
-      task_execution_protocol: 'runner_injected_workbuddy_eval_execution_v1',
-      workbuddy_native_skill_installation: 'unknown',
+      task_execution_protocol: this.taskExecutionProtocol,
+      native_skill_installation: 'unknown',
+      session_evidence_requested: config.session_evidence === true,
       internal_trace: 'unavailable',
     };
   }
 
-  permissionDescription() { return { requested_workspace: 'dedicated_workbuddy_root', runtime_scope_confirmation: 'unknown', automatic_permission_response: false }; }
+  permissionDescription() { return { requested_workspace: 'dedicated_' + this.productId.replaceAll('-', '_') + '_root', runtime_scope_confirmation: 'unknown', automatic_permission_response: false }; }
 
   preflight(config, { timeoutSeconds }) {
     const missing = [];
@@ -38,8 +47,8 @@ export class WorkBuddyQueueAdapter {
   }
 
   async runSession(context) {
-    const evidenceDir = path.join(context.runDir, EVIDENCE_DIR);
-    const journalRef = `${EVIDENCE_DIR}/queue-events.jsonl`;
+    const evidenceDir = path.join(context.runDir, this.evidenceDir);
+    const journalRef = this.evidenceDir + '/queue-events.jsonl';
     const journal = path.join(context.runDir, journalRef);
     await mkdir(evidenceDir, { recursive: true });
     const observe = async (event, status, extra = {}) => appendFile(journal, `${JSON.stringify({ timestamp: new Date().toISOString(), source: 'runner_queue_adapter', run_id: context.runId, event, status, ...extra })}\n`, 'utf8');
@@ -75,7 +84,7 @@ export class WorkBuddyQueueAdapter {
       try {
         const result = JSON.parse(await readFile(resultPath, 'utf8'));
         if (!claimed || result.run_id !== context.runId || result.case_id !== context.caseId || !['submitted', 'blocked'].includes(result.status)) throw new Error('result_record_mismatch');
-        const resultRef = `${EVIDENCE_DIR}/result-summary.json`;
+        const resultRef = this.evidenceDir + '/result-summary.json';
         await writeFile(path.join(context.runDir, resultRef), JSON.stringify({ run_id: result.run_id, case_id: result.case_id, status: result.status, artifacts_observed_by_connector: result.artifacts_observed_by_connector, independent_task_verification: result.independent_task_verification }, null, 2) + '\n');
         await observe('result', result.status);
         observations.push({ source: 'runner_queue_adapter', event: 'result', status: result.status });
@@ -83,16 +92,49 @@ export class WorkBuddyQueueAdapter {
         const connectorLog = path.join(queueDir, 'events', `${context.runId}.jsonl`);
         try {
           if ((await stat(connectorLog)).isFile()) {
-            const ref = `${EVIDENCE_DIR}/connector-events.jsonl`;
+            const ref = this.evidenceDir + '/connector-events.jsonl';
             await copyFile(connectorLog, path.join(context.runDir, ref));
             refs.push(ref);
           }
         } catch (error) { if (error.code !== 'ENOENT') throw error; }
+        if (this.productId === 'workbuddy' && context.config.session_evidence === true) {
+          const sourceRoot = process.env.HARNESS_EVAL_WORKBUDDY_PROJECTS_DIR;
+          let captured = false;
+          if (sourceRoot && path.isAbsolute(sourceRoot)) {
+            for (let attempt=0; attempt<4 && !captured; attempt++) {
+              try {
+                const source = await locateSession(sourceRoot, context.runId);
+                await extract({source, runId:context.runId, outputDir:path.join(evidenceDir,'client-tool'), outputRoot:evidenceDir});
+                refs.push(this.evidenceDir + '/client-tool/tool-evidence.json');
+                await observe('client_tool_evidence','captured');
+                observations.push({source:'workbuddy_local_session_jsonl',event:'tool_evidence',status:'captured'});
+                captured = true;
+              } catch { if(attempt<3) await new Promise(resolve=>setTimeout(resolve,500)); }
+            }
+          }
+          if (!captured) { await observe('client_tool_evidence','unknown'); missing.push('client_tool_evidence_unavailable'); }
+        }
+        if (this.productId === 'doubao-work' && context.config.session_evidence === true) {
+          const sourceRoot = process.env.HARNESS_EVAL_DOUBAO_SESSIONS_DIR;
+          let captured = false;
+          if (context.caseId === 'tracetrial-e8-cmd' && sourceRoot && path.isAbsolute(sourceRoot)) {
+            for (let attempt=0; attempt<4 && !captured; attempt++) {
+              try {
+                await collectDoubaoEvidence({sessionsDir:sourceRoot, runId:context.runId, outputDir:path.join(evidenceDir,'client-tool')});
+                refs.push(this.evidenceDir + '/client-tool/tool-evidence.json');
+                await observe('client_tool_evidence','captured');
+                observations.push({source:'doubao_work_local_session_jsonl',event:'tool_evidence',status:'captured'});
+                captured = true;
+              } catch { if(attempt<3) await new Promise(resolve=>setTimeout(resolve,500)); }
+            }
+          }
+          if (!captured) { await observe('client_tool_evidence','unknown'); missing.push('client_tool_evidence_unavailable'); }
+        }
         return {
           submission_status: 'submitted', submission_evidence: { prompt_submitted: true, prompt_ref: 'prompt.md', inputs: task.inputs },
           execution_status: result.status === 'submitted' ? 'completed' : 'requires_action',
           completion_evidence: { task_success_verified: false, remote_status: result.status }, observations, missing, evidence_refs: refs,
-          error: result.status === 'blocked' ? { code: 'workbuddy_reported_blocked', phase: 'execute' } : null,
+          error: result.status === 'blocked' ? { code: 'connector_reported_blocked', phase: 'execute' } : null,
         };
       } catch (error) { if (error.code !== 'ENOENT') throw error; }
       await new Promise(resolve => {
