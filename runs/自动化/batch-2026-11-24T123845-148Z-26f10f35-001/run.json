@@ -1,0 +1,188 @@
+{
+  "record_version": "0.2",
+  "run_id": "batch-2026-11-24T123845-148Z-26f10f35-001",
+  "previous_run_id": null,
+  "product": {
+    "product_id": "codex",
+    "entry_id": "codex-cli-exec",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "codex",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "47e20a233053c5a320dcd01e472e27912071d37fb7f981b26e9afe71673379bf",
+    "implementation_ref": "../../../automation开发/adapters/codex.mjs",
+    "implementation_sha256": "59c5501a32e24f9895930200826858466614f32462a7163c1f0927b0a8938f19",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/codex.mjs",
+        "sha256": "59c5501a32e24f9895930200826858466614f32462a7163c1f0927b0a8938f19",
+        "size_bytes": 5367
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "35c4372da22f49f105e3bc1ed5da20b1446b9c027eccf91cea57b832843068fc",
+    "source_config_ref": "../../../automation开发/configs/codex.example.json",
+    "source_config_sha256": "23baae7306ca70093e5cc5505ea5b37ee5f001f8e83a8dea6146dc69d42bd0f3",
+    "automation_mode": "automatic",
+    "profile": null
+  },
+  "task": {
+    "task_id": "E8-exit-code-masked-by-output-001",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "tracetrial-e8-cmd",
+    "package_ref": "case.json",
+    "case_sha256": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "prompt_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "prompt_source_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "inputs": [
+      {
+        "path": "tools/ok_then_fail.cmd",
+        "size_bytes": 59,
+        "sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e"
+      }
+    ]
+  },
+  "environment": {
+    "os": "win32",
+    "workspace_ref": "system-temp/HarnessEval/batch-2026-11-24T123845-148Z-26f10f35-001",
+    "permissions": {
+      "requested_sandbox": "workspace-write",
+      "runtime_enforcement": "unverified"
+    },
+    "limits": {
+      "timeout_seconds": 120
+    },
+    "codex_home_ref": "system-temp/HarnessEvalRuntime/batch-2026-11-24T123845-148Z-26f10f35-001/codex-home",
+    "codex_home_cleanup": "removed_after_process_close"
+  },
+  "model_condition": {
+    "provider_id": "deepseek",
+    "endpoint_ref": "https://api.deepseek.com/",
+    "wire_api": "responses",
+    "requested_model": "deepseek-flash",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "windows_dpapi",
+    "credential_present": true,
+    "match_status": "unknown",
+    "evidence_refs": []
+  },
+  "timing": {
+    "started_at": "2026-11-24T12:38:45.645Z",
+    "ended_at": "2026-11-24T12:39:32.609Z"
+  },
+  "submission": {
+    "status": "unconfirmed",
+    "actual_prompt_ref": "prompt.md",
+    "actual_inputs": [
+      {
+        "path": "tools/ok_then_fail.cmd",
+        "sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e"
+      }
+    ],
+    "transformations": [],
+    "evidence_refs": []
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "process_id": 4572,
+      "process_started_at": "2026-11-24T12:38:45.660Z",
+      "process_exit_at": "2026-11-24T12:39:31.627Z",
+      "process_close_at": "2026-11-24T12:39:31.627Z",
+      "stdout_last_output_at": "2026-11-24T12:39:29.620Z",
+      "stdout_closed_at": "2026-11-24T12:39:31.620Z",
+      "stderr_last_output_at": "2026-11-24T12:38:46.544Z",
+      "stderr_closed_at": "2026-11-24T12:39:31.621Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": true,
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "operator_actions": [],
+  "retry_events": [],
+  "artifacts": [
+    {
+      "path": "output/exit-observation.json",
+      "evidence_path": "artifacts/output/exit-observation.json",
+      "size_bytes": 391,
+      "sha256": "f07e3198041336e32072ca415bd08d2aa098e86f8b3ef40b09257519c0d13040",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "12b2c8dc3d97c6ab6dce39aa7a221ad3fa8626e62a8448584036cc1e2e1b6c2d",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "9f1d50623f2b01f321e8de735e1a2cb3d5c43d2a0fd7b46ccbfac44f6168c9f7",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "aac1cae59e67b7f9b2059eee2c6da0f428c953b1e221050a873623a03c2060f9",
+      "source": "launcher"
+    }
+  ],
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "notes": null
+}

@@ -1,0 +1,12 @@
+{
+  "product_id": "codex",
+  "entry_id": "codex-cli-exec",
+  "executable": "codex.cmd",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "sandbox": "workspace-write",
+  "windows_sandbox_implementation": "mxc",
+  "ephemeral": true,
+  "capture_prompt_evidence": false,
+  "provider_mode": "chatgpt_account"
+}

@@ -1,0 +1,3 @@
+{"timestamp":"2026-11-24T14:17:02.815Z","source":"runner_queue_adapter","run_id":"2026-11-24T141702-786Z-tracetrial-e8-cmd-doubao-work-a69ed75d","event":"publish","status":"queued","task_sha256":"bbb496678b53c886f533937ab246153a648e270a4b14b60972ce3f4615a3de7a"}
+{"timestamp":"2026-11-24T14:18:05.094Z","source":"runner_queue_adapter","run_id":"2026-11-24T141702-786Z-tracetrial-e8-cmd-doubao-work-a69ed75d","event":"claim","status":"claimed"}
+{"timestamp":"2026-11-24T14:18:41.225Z","source":"runner_queue_adapter","run_id":"2026-11-24T141702-786Z-tracetrial-e8-cmd-doubao-work-a69ed75d","event":"result","status":"submitted"}

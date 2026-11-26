@@ -1,0 +1,32 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-24T07:53:16.082846+00:00",
+  "run_id": "batch-2026-11-24T075242-268Z-7fca86e2-002",
+  "case_id": "codex-command-probe",
+  "archive_status": "passed",
+  "task_correctness": "passed",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "size_bytes": 36
+    }
+  ],
+  "scope": "archive_integrity_and_text_exact",
+  "trace_sha256": "372dd20458587035d3dfe7e9cfd3b14894820a7f78d3751dd3cb390567c0ac6e",
+  "run_sha256": "c182202e232af5312f36c8f07a73b0c07dc2fb93ca4ac4e3deffa196efc654e8",
+  "case_sha256": "f13d0faf70826650da3ec59038d21808f9a0465d0c337ca76183c5b728f9ddf6",
+  "text_check": {
+    "artifact_path": "outputs/probe.txt",
+    "actual_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+    "expected_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+    "expected_size_bytes": 36,
+    "actual_size_bytes": 36,
+    "method": "exact_bytes",
+    "status": "passed"
+  }
+}

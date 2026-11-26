@@ -1,0 +1,3 @@
+{"timestamp":"2026-11-23T04:24:22.218Z","source":"runner_queue_adapter","run_id":"2026-11-23T042422-190Z-workbuddy-runner-smoke-workbuddy-4cbc0375","event":"publish","status":"queued","task_sha256":"8870c1e425a297a7b3092573c6cf6458f3e304e845a52534fb41202068f7f792"}
+{"timestamp":"2026-11-23T04:25:24.488Z","source":"runner_queue_adapter","run_id":"2026-11-23T042422-190Z-workbuddy-runner-smoke-workbuddy-4cbc0375","event":"claim","status":"claimed"}
+{"timestamp":"2026-11-23T04:25:40.552Z","source":"runner_queue_adapter","run_id":"2026-11-23T042422-190Z-workbuddy-runner-smoke-workbuddy-4cbc0375","event":"result","status":"submitted"}

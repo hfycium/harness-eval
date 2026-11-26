@@ -1,0 +1,3 @@
+{"timestamp":"2026-11-25T14:46:02.581Z","source":"runner_queue_adapter","run_id":"2026-11-25T144602-539Z-theagentcompany-ds-sql-exercise-workbuddy-b9bbb4d7","event":"publish","status":"queued","task_sha256":"aabdb01bceeaf3a19d9f5164a34f894fc0c26e82282bb5750ce0ebc74ff48a33"}
+{"timestamp":"2026-11-25T14:49:11.463Z","source":"runner_queue_adapter","run_id":"2026-11-25T144602-539Z-theagentcompany-ds-sql-exercise-workbuddy-b9bbb4d7","event":"claim","status":"claimed"}
+{"timestamp":"2026-11-25T14:49:41.599Z","source":"runner_queue_adapter","run_id":"2026-11-25T144602-539Z-theagentcompany-ds-sql-exercise-workbuddy-b9bbb4d7","event":"result","status":"submitted"}

@@ -1,0 +1,182 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-25T142449-690Z-theagentcompany-ds-sql-exercise-codex-55afbe69",
+  "product": {
+    "product_id": "codex",
+    "entry_id": "codex-cli-exec",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "codex",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "976ddf7857eae0b800bef5a64348635ee12a17b2508711e9b5d75bd7b72c83a4",
+    "implementation_ref": "../../../automation开发/adapters/codex.mjs",
+    "implementation_sha256": "89f7a11beddc9b5e322156182cc7f73abdf3b134c944605e75c415a939d68c26",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/codex.mjs",
+        "sha256": "89f7a11beddc9b5e322156182cc7f73abdf3b134c944605e75c415a939d68c26",
+        "size_bytes": 6909
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "e66ea074af091d44cb9b563709576c556820c0bfd9a2c2aa270e59113e03a487",
+    "source_config_ref": "../../../automation开发/configs/codex.local.json",
+    "source_config_sha256": "da542343a13669cde2007a20a8e3dfc3c21a0475db57fd23cda2a0e8af52c434",
+    "automation_mode": "automatic",
+    "profile": null
+  },
+  "task": {
+    "task_id": "ds-sql-exercise",
+    "task_version": "0.1-windows-local",
+    "contract_version": "0.2",
+    "case_id": "theagentcompany-ds-sql-exercise",
+    "package_ref": "case.json",
+    "case_sha256": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+    "prompt_sha256": "2e0841e6dc39d80de7076d354d718ce062d9b9138ba2cdbd15abef52c65dde9a",
+    "prompt_source_sha256": "2e0841e6dc39d80de7076d354d718ce062d9b9138ba2cdbd15abef52c65dde9a",
+    "inputs": [
+      {
+        "path": "inputs/database.db",
+        "size_bytes": 8192,
+        "sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2"
+      }
+    ]
+  },
+  "model_condition": {
+    "provider_id": "deepseek",
+    "endpoint_ref": "https://api.deepseek.com/",
+    "wire_api": "responses",
+    "requested_model": "deepseek-flash",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "windows_dpapi",
+    "credential_present": true,
+    "match_status": "unknown",
+    "evidence_refs": []
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "process_id": 28732,
+      "process_started_at": "2026-11-25T14:24:49.722Z",
+      "process_exit_at": "2026-11-25T14:25:26.241Z",
+      "process_close_at": "2026-11-25T14:25:26.241Z",
+      "stdout_last_output_at": "2026-11-25T14:25:23.365Z",
+      "stdout_closed_at": "2026-11-25T14:25:26.236Z",
+      "stderr_last_output_at": "2026-11-25T14:24:50.715Z",
+      "stderr_closed_at": "2026-11-25T14:25:26.235Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": true,
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "inputs/database.db",
+      "initial_sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2",
+      "final_sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "task1.txt",
+      "evidence_path": "artifacts/task1.txt",
+      "size_bytes": 4,
+      "sha256": "8ce88a8842c1584e3d6871e84e166e3b513c3ce2a9da6166760c7af1645dea29",
+      "collection_status": "collected"
+    },
+    {
+      "path": "task2.txt",
+      "evidence_path": "artifacts/task2.txt",
+      "size_bytes": 3,
+      "sha256": "24ba1e99dc06b19351323aae0d7370243d586475a634b7f6ff7927fbc72cfaed",
+      "collection_status": "collected"
+    },
+    {
+      "path": "task3.txt",
+      "evidence_path": "artifacts/task3.txt",
+      "size_bytes": 91,
+      "sha256": "54d34d6750010a058db5924ead45af249d6bac8de4e28c411ad01d6aeb188395",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "9c4a2e7f14f488c2b2cefa405060fd9cfe39aad00563e36f3650392d0ff847e1",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "23da0ee95cc0c9435bcd1ec54c903fc1c07e50ee08204fd4d4fce5a5e4155181",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "fe1f89be11e710ab797408e87be1c7377172070ab0b7493b6fc5cf8939ab6ce1",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

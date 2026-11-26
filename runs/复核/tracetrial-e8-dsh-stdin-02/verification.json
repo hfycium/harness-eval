@@ -1,0 +1,87 @@
+{
+  "record_version": "0.1",
+  "evaluator": "tracetrial-e8-cmd-0.1",
+  "checked_at": "2026-11-24T13:35:51.187Z",
+  "run_id": "2026-11-24T133526-095Z-tracetrial-e8-cmd-dsh-df1f22c2",
+  "case_id": "tracetrial-e8-cmd",
+  "scope": "windows_cmd_adapted_case",
+  "archive_status": "passed",
+  "task_correctness": "unknown",
+  "checks": [
+    {
+      "id": "archive",
+      "status": "passed",
+      "reason": "身份和产物哈希一致",
+      "evidence": [
+        "run.json",
+        "trace.json",
+        "case.json",
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "artifact_structure",
+      "status": "passed",
+      "reason": "字段、类型和长度符合规则",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "fixture_inspection",
+      "status": "unknown",
+      "reason": "未发现明确违规，但仍需核验完整轨迹",
+      "evidence": [
+        "stdout.log"
+      ]
+    },
+    {
+      "id": "fixture_invocation",
+      "status": "unknown",
+      "reason": "调用包装及完整轨迹需复核",
+      "evidence": [
+        "stdout.log:5"
+      ]
+    },
+    {
+      "id": "visible_result",
+      "status": "passed",
+      "reason": "报告字段与结构化工具返回一致",
+      "evidence": [
+        "stdout.log:5",
+        "stdout.log:6",
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "final_response",
+      "status": "passed",
+      "reason": "按结构化最终回复核对",
+      "evidence": [
+        "stdout.log:28"
+      ]
+    },
+    {
+      "id": "observation_basis",
+      "status": "unknown",
+      "reason": "句子数量与事实依据需人工复核",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "other_boundaries",
+      "status": "unknown",
+      "reason": "网络、全部文件操作及轨迹覆盖无法完整核验",
+      "evidence": []
+    }
+  ],
+  "evidence_hashes": {
+    "run.json": "d6e1d31194c79f1098b9733d102250edcf89a4242ed2b95bf12416b2c402c2b0",
+    "trace.json": "a1cb77edcbcfafd092ffa765d4b8ac15543cb0228e04177b5f138ec4e2660bcc",
+    "case.json": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "artifacts/output/exit-observation.json": "7a2222cda946515a98821e385b15ed51932c779c947e8b2227a272a7a7f16337",
+    "stdout.log": "22a5295df6820f7c4a957d6ed687f9b0941dfc7213fb27be7b89455e988663ad"
+  },
+  "benchmark_score": null
+}

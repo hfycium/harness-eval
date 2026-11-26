@@ -1,0 +1,3 @@
+{"sequence":1,"timestamp":"2026-11-25T14:42:29.131Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-25T144229-116Z-theagentcompany-ds-sql-exercise-dsh-76a05737"}}
+{"sequence":2,"timestamp":"2026-11-25T14:42:29.151Z","phase":"submit","actor":"launcher","event":"process_starting","result":"ok","details":{"executable":"dsh.cmd","profile":"headless","pid":29612,"timestamp":"2026-11-25T14:42:29.150Z"}}
+{"sequence":3,"timestamp":"2026-11-25T14:42:29.898Z","phase":"close_run","actor":"launcher","event":"process_closed","result":"failed","details":{"code":1,"signal":null,"spawn_error":null}}

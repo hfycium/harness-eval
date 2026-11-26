@@ -1,0 +1,17 @@
+{
+  "case_id": "codex-prompt-baf71ce5683939a6",
+  "case_version": "0.1",
+  "dataset": "synthetic_prompt_delivery",
+  "dataset_task_id": "codex-prompt-delivery",
+  "prompt_source": "runs/探针/codex-prompt-baf71ce5683939a6/prompt.md",
+  "input_source": "runs/探针/codex-prompt-baf71ce5683939a6/input.txt",
+  "input_destination": "inputs/input.txt",
+  "expected_artifacts": [],
+  "limits": {
+    "timeout_seconds": 180
+  },
+  "oracle": {
+    "status": "probe_only",
+    "type": "markers"
+  }
+}

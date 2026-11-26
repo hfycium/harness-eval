@@ -1,0 +1,248 @@
+{
+  "record_version": "0.2",
+  "run_id": "2026-11-25T144602-539Z-theagentcompany-ds-sql-exercise-workbuddy-b9bbb4d7",
+  "previous_run_id": null,
+  "product": {
+    "product_id": "workbuddy",
+    "entry_id": "workbuddy-connector-queue",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "workbuddy",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "976ddf7857eae0b800bef5a64348635ee12a17b2508711e9b5d75bd7b72c83a4",
+    "implementation_ref": "../../../automation开发/adapters/workbuddy.mjs",
+    "implementation_sha256": "f99ba56df944651f5c577cdb8959157beb7a9a16294e827ece53a6e3a3d612bb",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/workbuddy.mjs",
+        "sha256": "f99ba56df944651f5c577cdb8959157beb7a9a16294e827ece53a6e3a3d612bb",
+        "size_bytes": 18433
+      },
+      {
+        "ref": "automation开发/adapters/workbuddy-connector-queue.mjs",
+        "sha256": "e8b1caac4cb3dc0d7186f89d4d21ad30b22a5d4a45e2384de96c0da3d37bee32",
+        "size_bytes": 10889
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/publish-task.mjs",
+        "sha256": "adf734009860951124ad56537c9eeba989e64e46e118b2ecf8cdd5f669a2f0c2",
+        "size_bytes": 6685
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/server.mjs",
+        "sha256": "352364b91b2ee393d8b1c730e49818e4df5f1a9b22e37c18d32748cc7ccc80ff",
+        "size_bytes": 19102
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/queue-lifecycle.mjs",
+        "sha256": "6ab5921a206c294df3d249b7b6bc48576f705bae2299a56417dd3a5ab6b4ed99",
+        "size_bytes": 3101
+      },
+      {
+        "ref": "automation开发/adapters/workbuddy/skills/workbuddy-eval-execution/SKILL.md",
+        "sha256": "69bd769cf50a467813b71611eb5e1a0c46c8b139089d26fa388bd5e4e5fb815c",
+        "size_bytes": 2265
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "1c92869bbeb269d747caa941af30ae1a79de668217d165f0fbd38561ced4197d",
+    "source_config_ref": "../../../automation开发/configs/workbuddy-queue.example.json",
+    "source_config_sha256": "3c81fdb73ff0c419cd93d4e8e142e668b4a96d33dc21b0ad705d09f72491838a",
+    "automation_mode": "assisted",
+    "profile": null
+  },
+  "task": {
+    "task_id": "ds-sql-exercise",
+    "task_version": "0.1-windows-local",
+    "contract_version": "0.2",
+    "case_id": "theagentcompany-ds-sql-exercise",
+    "package_ref": "case.json",
+    "case_sha256": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+    "prompt_sha256": "05f3fe911dd5daa2ffa4721e08a6520aa742739c83553876699f64d1c394247f",
+    "prompt_source_sha256": "2e0841e6dc39d80de7076d354d718ce062d9b9138ba2cdbd15abef52c65dde9a",
+    "inputs": [
+      {
+        "path": "inputs/database.db",
+        "size_bytes": 8192,
+        "sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2"
+      }
+    ]
+  },
+  "environment": {
+    "os": "win32",
+    "workspace_ref": "workbuddy-authorized-root/2026-11-25T144602-539Z-theagentcompany-ds-sql-exercise-workbuddy-b9bbb4d7",
+    "permissions": {
+      "requested_workspace": "dedicated_workbuddy_root",
+      "runtime_scope_confirmation": "unknown",
+      "automatic_permission_response": false
+    },
+    "limits": {
+      "timeout_seconds": 900
+    }
+  },
+  "model_condition": null,
+  "timing": {
+    "started_at": "2026-11-25T14:46:02.568Z",
+    "ended_at": "2026-11-25T14:49:41.629Z"
+  },
+  "submission": {
+    "status": "submitted",
+    "actual_prompt_ref": "prompt.md",
+    "actual_inputs": [
+      {
+        "path": "inputs/database.db",
+        "sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2"
+      }
+    ],
+    "transformations": [],
+    "evidence_refs": [
+      "workbuddy-queue/queue-events.jsonl",
+      "workbuddy-queue/result-summary.json",
+      "workbuddy-queue/connector-events.jsonl"
+    ]
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "task_success_verified": false,
+      "remote_status": "submitted"
+    },
+    "error": null
+  },
+  "operator_actions": [],
+  "retry_events": [],
+  "artifacts": [
+    {
+      "path": "task1.txt",
+      "evidence_path": "artifacts/task1.txt",
+      "size_bytes": 4,
+      "sha256": "8ce88a8842c1584e3d6871e84e166e3b513c3ce2a9da6166760c7af1645dea29",
+      "collection_status": "collected"
+    },
+    {
+      "path": "task2.txt",
+      "evidence_path": "artifacts/task2.txt",
+      "size_bytes": 3,
+      "sha256": "24ba1e99dc06b19351323aae0d7370243d586475a634b7f6ff7927fbc72cfaed",
+      "collection_status": "collected"
+    },
+    {
+      "path": "task3.txt",
+      "evidence_path": "artifacts/task3.txt",
+      "size_bytes": 92,
+      "sha256": "1a3e6565111f841c3eec0ead3769803263f06bd158145aff80f7cea5b5d121b4",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "product_session",
+      "path": "workbuddy-queue/queue-events.jsonl",
+      "sha256": "42f6f07efabd7e450381f53304e1f8a0c233b4a2ddd43022c4ac415d363832a0",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "workbuddy-queue/result-summary.json",
+      "sha256": "57d561b00650e73c516078569319abaf802466db0677db7c0641f2468180f15f",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "workbuddy-queue/connector-events.jsonl",
+      "sha256": "1e12a53c0602dd895f069e6c5de02c6b8062dae499c9f46a3c27c0d89d05fffc",
+      "source": "mcp_connector_server"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "d63a51d9f5b0ed06bf98c66a63afd7759a35869bd7b2733d4e3314df51acd6ab",
+      "source": "launcher"
+    }
+  ],
+  "observations": [
+    {
+      "source": "runner_queue_adapter",
+      "event": "publish",
+      "status": "queued"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "claim",
+      "status": "claimed"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "result",
+      "status": "submitted"
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "inputs/database.db",
+      "initial_sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2",
+      "final_sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.effective_model",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.effective_mode",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_skill_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_permission_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.internal_trace",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.task_success_not_independently_verified",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "notes": null
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "2026-11-23T035714-920Z-workbuddy-runner-smoke-workbuddy-2dcdc114",
+  "case_id": "workbuddy-runner-smoke",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "outputs/probe.txt",
+      "size_bytes": 29,
+      "sha256": "d978be705d82a7643158010e2790244b9ee2d666c607a14646c1aecf51f2484f",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}

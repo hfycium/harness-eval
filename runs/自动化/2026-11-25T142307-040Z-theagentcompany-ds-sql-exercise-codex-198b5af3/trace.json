@@ -1,0 +1,121 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-25T142307-040Z-theagentcompany-ds-sql-exercise-codex-198b5af3",
+  "product": {
+    "product_id": "codex",
+    "entry_id": "codex-cli-exec",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "codex",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "976ddf7857eae0b800bef5a64348635ee12a17b2508711e9b5d75bd7b72c83a4",
+    "implementation_ref": "../../../automation开发/adapters/codex.mjs",
+    "implementation_sha256": "89f7a11beddc9b5e322156182cc7f73abdf3b134c944605e75c415a939d68c26",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/codex.mjs",
+        "sha256": "89f7a11beddc9b5e322156182cc7f73abdf3b134c944605e75c415a939d68c26",
+        "size_bytes": 6909
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "949610a12d79aaaea3b4be40efbaf6a56d9ea9c553e60cfdcd34e2d76198e056",
+    "source_config_ref": "../../../automation开发/configs/codex.local.json",
+    "source_config_sha256": "da542343a13669cde2007a20a8e3dfc3c21a0475db57fd23cda2a0e8af52c434",
+    "automation_mode": "automatic",
+    "profile": null
+  },
+  "task": {
+    "task_id": "ds-sql-exercise",
+    "task_version": "0.1-windows-local",
+    "contract_version": "0.2",
+    "case_id": "theagentcompany-ds-sql-exercise",
+    "package_ref": "case.json",
+    "case_sha256": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+    "prompt_sha256": "2e0841e6dc39d80de7076d354d718ce062d9b9138ba2cdbd15abef52c65dde9a",
+    "prompt_source_sha256": "2e0841e6dc39d80de7076d354d718ce062d9b9138ba2cdbd15abef52c65dde9a",
+    "inputs": [
+      {
+        "path": "inputs/database.db",
+        "size_bytes": 8192,
+        "sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2"
+      }
+    ]
+  },
+  "model_condition": {
+    "provider_id": "deepseek",
+    "endpoint_ref": "https://api.deepseek.com/",
+    "wire_api": "responses",
+    "requested_model": "deepseek-flash",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "none",
+    "credential_present": false,
+    "match_status": "unknown",
+    "evidence_refs": []
+  },
+  "execution": {
+    "status": "not_admitted",
+    "completion_evidence": null,
+    "error": {
+      "code": "adapter_not_admitted",
+      "message": "Codex DeepSeek mode requires the supported provider settings and API key in its named environment variable.",
+      "phase": "preflight"
+    }
+  },
+  "observations": [],
+  "artifacts": [],
+  "evidence": [
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "9c95fb86bcb602b2fa579319854ccc6b5a9118b97983e3fe56543d461ab4418b",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.deepseek_api_key",
+      "reason": "unknown",
+      "detail": "Codex DeepSeek mode requires the supported provider settings and API key in its named environment variable."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "blocked",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

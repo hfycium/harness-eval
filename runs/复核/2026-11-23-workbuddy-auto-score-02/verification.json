@@ -1,0 +1,28 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-23T07:35:33.360063+00:00",
+  "run_id": "2026-11-23T072508-103Z-spreadsheetbench-59196-workbuddy-48610536",
+  "case_id": "spreadsheetbench-59196",
+  "archive_status": "passed",
+  "task_correctness": "passed",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/59196_output.xlsx",
+      "evidence_path": "artifacts/outputs/59196_output.xlsx",
+      "sha256": "738af730f856b2d01324e3fcd03bd5e94cdb6cf5fec2f882fb744f714e177d2f",
+      "size_bytes": 6651
+    }
+  ],
+  "scope": "archive_integrity_and_spreadsheetbench_single_case",
+  "trace_sha256": "81e48f1c6f9c4adb993b794aa5fef35c146fe43a2bdf4082c06312fbdd38391c",
+  "run_sha256": "1f8ada0dd2ce252a88707e382aa6dc3b8c9c11d77d5e72001e598996a1e24adb",
+  "case_sha256": "80a0755670e4bb6fd73a926a65d8c933055f12e696efca619134923f084b1e7b",
+  "spreadsheetbench_check": {
+    "status": "passed",
+    "reason": "official_single_case_comparison",
+    "evaluator_revision": "e2758ac01c6c52ef746bf0d53b2fd01dbc42dd2"
+  }
+}

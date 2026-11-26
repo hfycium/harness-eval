@@ -1,0 +1,14 @@
+{
+  "run_id": "2026-11-24T141556-509Z-tracetrial-e8-cmd-workbuddy-325240d4",
+  "case_id": "tracetrial-e8-cmd",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "output/exit-observation.json",
+      "size_bytes": 477,
+      "sha256": "76a6ceaa401240c0bb920d1ee01e7ca43b033991d2538140af3c26e8da5b84c6",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}

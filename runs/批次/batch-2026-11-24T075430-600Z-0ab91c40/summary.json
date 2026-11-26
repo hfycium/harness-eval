@@ -1,0 +1,42 @@
+{
+  "batch_id": "batch-2026-11-24T075430-600Z-0ab91c40",
+  "status": "completed_with_failures",
+  "generated_at": "2026-11-24T07:54:30.869Z",
+  "on_failure": "continue",
+  "jobs": [
+    {
+      "index": 1,
+      "harness": "codex",
+      "case": "cases/smoke/codex-command-probe/case.json",
+      "status": "failed",
+      "exit_code": 2,
+      "run_path": "runs/自动化/batch-2026-11-24T075430-600Z-0ab91c40-001",
+      "execution": "not_admitted",
+      "submission": "unconfirmed",
+      "artifacts": [],
+      "requested_model": null,
+      "effective_model": null,
+      "verification": "not_performed",
+      "archive": "not_checked",
+      "scoring": "not_requested",
+      "scoring_reason": null
+    },
+    {
+      "index": 2,
+      "harness": "codex",
+      "case": "cases/smoke/codex-command-probe/case.json",
+      "status": "failed",
+      "exit_code": 2,
+      "run_path": "runs/自动化/batch-2026-11-24T075430-600Z-0ab91c40-002",
+      "execution": "not_admitted",
+      "submission": "unconfirmed",
+      "artifacts": [],
+      "requested_model": null,
+      "effective_model": null,
+      "verification": "not_performed",
+      "archive": "not_checked",
+      "scoring": "not_requested",
+      "scoring_reason": null
+    }
+  ]
+}

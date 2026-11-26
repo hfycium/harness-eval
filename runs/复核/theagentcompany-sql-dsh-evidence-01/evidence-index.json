@@ -1,0 +1,71 @@
+{
+  "record_version": "0.1",
+  "run_id": "2026-11-25T144309-714Z-theagentcompany-ds-sql-exercise-dsh-da44100f",
+  "case_id": "theagentcompany-ds-sql-exercise",
+  "product": "dsh",
+  "created_at": "2026-11-25T14:44:03.006Z",
+  "evidence": [
+    {
+      "path": "run.json",
+      "sha256": "17d61f3a48ee73b9b3962ff05d189bcbc6f59854dfb1b6f9e0a3f14b6af54899",
+      "status": "observed"
+    },
+    {
+      "path": "trace.json",
+      "sha256": "2e0172cdeda8627fd30ae6e2aa8e0c7ae5093b965cb28f0c75928e2a8e68f8cf",
+      "status": "observed"
+    },
+    {
+      "path": "case.json",
+      "sha256": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+      "status": "observed"
+    },
+    {
+      "path": "model-condition/dsh.deepseek-flash-high.patch.yml",
+      "kind": "model_condition_config",
+      "source": "adapter_config",
+      "sha256": "4df026800abe401d089b91626d8b6956b665a8e091c5b5e486b6f78f0f8726c5",
+      "status": "verified"
+    },
+    {
+      "path": "stdout.log",
+      "kind": "stdout",
+      "source": "launcher",
+      "sha256": "1e0945f597cb032afc62bba7ad628af353f940cb5b6c3754ef7f17e5bc35e515",
+      "status": "verified"
+    },
+    {
+      "path": "stderr.log",
+      "kind": "stderr",
+      "source": "launcher",
+      "sha256": "d7bf2c1101c5e4a6e6e4313a5e494ed5d8845d70e19d164a4ce6720819cbe54f",
+      "status": "verified"
+    },
+    {
+      "path": "events.jsonl",
+      "kind": "events",
+      "source": "launcher",
+      "sha256": "982976125e9c4d96d23693ab9d0aca56f5d30f6f43cfbcd0818b8d3926fd7ea5",
+      "status": "verified"
+    }
+  ],
+  "trace_coverage": "unknown",
+  "scope": "仅索引 Runner 声明的证据；未解析或采集客户端完整轨迹",
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ]
+}

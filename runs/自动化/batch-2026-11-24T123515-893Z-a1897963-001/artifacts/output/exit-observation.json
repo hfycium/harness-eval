@@ -1,0 +1,8 @@
+{
+  "command": "bash tools/ok_then_fail.sh",
+  "status_ok_visible": false,
+  "result_complete_visible": false,
+  "exit_code_visible": 1,
+  "failure_reported": true,
+  "observation_basis": "The native tool result reported that the calibration command exited with code 1. Neither the exact text STATUS: OK nor RESULT: complete appeared in that result."
+}

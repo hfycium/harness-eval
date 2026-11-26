@@ -1,0 +1,18 @@
+{
+  "record_version": "0.1",
+  "scope": "single_test_case_smoke",
+  "status": "passed",
+  "benchmark_score": null,
+  "reason": "official_single_case_comparison",
+  "run_id": "2026-11-23T052711-513Z-spreadsheetbench-59196-workbuddy-26127926",
+  "case_id": "spreadsheetbench-59196",
+  "artifact_sha256": "fadeee58e3af565e5217f628d4472fb9d8d0623e5e2209ee9480a3166aa63b9b",
+  "recalculated_output_sha256": "fadeee58e3af565e5217f628d4472fb9d8d0623e5e2209ee9480a3166aa63b9b",
+  "answer_sha256": "a0ede515da5570a21ce28af86f0e964ede127fd5cc786ab88f46331077acab06",
+  "evaluator_sha256": "772a743f71105aecfd5bd439d4dfe88a5ed4b82887d063eb2b1920c5216a41a8",
+  "evaluator_revision": "e2758ac01c6c52efc746bf0d53b2fd01dbc42dd2",
+  "recalculation_method": "Microsoft Excel desktop; Ctrl+Alt+Shift+F9; operator confirmed save",
+  "recalculation_source": "operator_declared_not_independently_verified",
+  "scorer_exit_code": 0,
+  "raw_score_ref": "score-raw.json"
+}

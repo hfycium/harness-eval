@@ -1,0 +1,3 @@
+{"timestamp":"2026-11-25T14:56:01.664Z","source":"runner_queue_adapter","run_id":"2026-11-25T145601-627Z-theagentcompany-ds-sql-exercise-doubao-work-67ca1446","event":"publish","status":"queued","task_sha256":"7f9d6c41d0a40a59d541b8e26cbc8693b04a8b753f8d26198d3328f526a768c6"}
+{"timestamp":"2026-11-25T14:57:20.020Z","source":"runner_queue_adapter","run_id":"2026-11-25T145601-627Z-theagentcompany-ds-sql-exercise-doubao-work-67ca1446","event":"claim","status":"claimed"}
+{"timestamp":"2026-11-25T14:58:06.199Z","source":"runner_queue_adapter","run_id":"2026-11-25T145601-627Z-theagentcompany-ds-sql-exercise-doubao-work-67ca1446","event":"result","status":"submitted"}

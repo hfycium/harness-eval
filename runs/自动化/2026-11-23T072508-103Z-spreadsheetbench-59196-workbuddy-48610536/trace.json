@@ -1,0 +1,195 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-23T072508-103Z-spreadsheetbench-59196-workbuddy-48610536",
+  "product": {
+    "product_id": "workbuddy",
+    "entry_id": "workbuddy-connector-queue",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "workbuddy",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "c86534d6dc34fb3046217999b751c05b111f15bf3eb1d5d8d5570c58f0351f6c",
+    "implementation_ref": "../../../automation开发/adapters/workbuddy.mjs",
+    "implementation_sha256": "f99ba56df944651f5c577cdb8959157beb7a9a16294e827ece53a6e3a3d612bb",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/workbuddy.mjs",
+        "sha256": "f99ba56df944651f5c577cdb8959157beb7a9a16294e827ece53a6e3a3d612bb",
+        "size_bytes": 18433
+      },
+      {
+        "ref": "automation开发/adapters/workbuddy-connector-queue.mjs",
+        "sha256": "8a480ae73da7b35bf176743e5add6f3961321a1882da6861ac867a56246b91f2",
+        "size_bytes": 8139
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/publish-task.mjs",
+        "sha256": "adf734009860951124ad56537c9eeba989e64e46e118b2ecf8cdd5f669a2f0c2",
+        "size_bytes": 6685
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/server.mjs",
+        "sha256": "352364b91b2ee393d8b1c730e49818e4df5f1a9b22e37c18d32748cc7ccc80ff",
+        "size_bytes": 19102
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/queue-lifecycle.mjs",
+        "sha256": "6ab5921a206c294df3d249b7b6bc48576f705bae2299a56417dd3a5ab6b4ed99",
+        "size_bytes": 3101
+      },
+      {
+        "ref": "automation开发/adapters/workbuddy/skills/workbuddy-eval-execution/SKILL.md",
+        "sha256": "69bd769cf50a467813b71611eb5e1a0c46c8b139089d26fa388bd5e4e5fb815c",
+        "size_bytes": 2265
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "2296155f046cb01cda8b7562307d801d85e7eb93780d1f9450b1d511a4250adc",
+    "source_config_ref": "../../../automation开发/configs/workbuddy-queue.example.json",
+    "source_config_sha256": "3c81fdb73ff0c419cd93d4e8e142e668b4a96d33dc21b0ad705d09f72491838a",
+    "automation_mode": "assisted",
+    "profile": null
+  },
+  "task": {
+    "task_id": "59196",
+    "task_version": "0.2",
+    "contract_version": "0.2",
+    "case_id": "spreadsheetbench-59196",
+    "package_ref": "case.json",
+    "case_sha256": "80a0755670e4bb6fd73a926a65d8c933055f12e696efca619134923f084b1e7b",
+    "prompt_sha256": "659ffe617294eef421b2b425d37b360db8c2ff8a30465f10a3bd48fbce5fb385",
+    "prompt_source_sha256": "71e0d4818b4ec09fbd7f80fd412f6a24242a9f873e8c05237ffbc1d61bf53e2e",
+    "inputs": [
+      {
+        "path": "inputs/sample_data_200/spreadsheet/59196/1_59196_input.xlsx",
+        "size_bytes": 8894,
+        "sha256": "209d1a6de8c8d2cbf31bc4075c9b2c2299817d3fedf748727249c01ac2730495"
+      }
+    ]
+  },
+  "model_condition": null,
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "task_success_verified": false,
+      "remote_status": "submitted"
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "runner_queue_adapter",
+      "event": "publish",
+      "status": "queued"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "claim",
+      "status": "claimed"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "result",
+      "status": "submitted"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/59196_output.xlsx",
+      "evidence_path": "artifacts/outputs/59196_output.xlsx",
+      "size_bytes": 6651,
+      "sha256": "738af730f856b2d01324e3fcd03bd5e94cdb6cf5fec2f882fb744f714e177d2f",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "product_session",
+      "path": "workbuddy-queue/queue-events.jsonl",
+      "sha256": "e6c7d904016aa9c7887ca9a1fdb61d94165240bb1262eca72572a106106c3def",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "workbuddy-queue/result-summary.json",
+      "sha256": "19f4ba4f30695a2b3b135e38814f0f7918483d0054d54132756c3f8a8ea0ad91",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "workbuddy-queue/connector-events.jsonl",
+      "sha256": "6ef8e09918d6b9f210895f367c6bafab9e1752a8b34eb02d63cb809ddd6652a1",
+      "source": "mcp_connector_server"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "21273553859f5cac06b438b8c4582b881af3b8d3d2f0d0d3ff636148220b0f5f",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.effective_model",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.effective_mode",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_skill_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_permission_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.internal_trace",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.task_success_not_independently_verified",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

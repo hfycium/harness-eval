@@ -1,0 +1,19 @@
+{
+  "version": "0.2",
+  "status": "matched",
+  "reason": "exact_user_message_found_in_local_session",
+  "prompt_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+  "thread_id": "01a211c3-bf4d-7d53-bd0d-51da64b56bde",
+  "source_file_sha256": "9bef5ea02c30b13b562fb5176256a26333cb4101c121f6358b4cc0910110b27e",
+  "source_event_line": 12,
+  "initial_user_text": "读取本次任务工作区中的 `inputs/input.txt`。仅在 `outputs/probe.txt` 写入与输入文件完全相同的一行文本，不要修改输入文件或创建其他文件。完成后说明产物路径。\n",
+  "local_context_models": [
+    {
+      "line": 10,
+      "model": "gpt-6-luna",
+      "source": "local_turn_context_not_provider_receipt"
+    }
+  ],
+  "effective_model": null,
+  "scope": "codex_local_session_record_not_provider_receipt"
+}

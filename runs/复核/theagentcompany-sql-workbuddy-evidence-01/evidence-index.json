@@ -1,0 +1,101 @@
+{
+  "record_version": "0.1",
+  "run_id": "2026-11-25T144602-539Z-theagentcompany-ds-sql-exercise-workbuddy-b9bbb4d7",
+  "case_id": "theagentcompany-ds-sql-exercise",
+  "product": "workbuddy",
+  "created_at": "2026-11-25T14:51:02.786Z",
+  "evidence": [
+    {
+      "path": "run.json",
+      "sha256": "4cc21dde6bbaecddfe83d5e611c75d6a56ebb6bdae9cf298029668ca9f4bba13",
+      "status": "observed"
+    },
+    {
+      "path": "trace.json",
+      "sha256": "c501d96f2bf5f67817fb5992cb253bc2b8ff66174f2cd64a3bc291df74d02512",
+      "status": "observed"
+    },
+    {
+      "path": "case.json",
+      "sha256": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+      "status": "observed"
+    },
+    {
+      "path": "workbuddy-queue/queue-events.jsonl",
+      "kind": "product_session",
+      "source": "runner_queue_adapter",
+      "sha256": "42f6f07efabd7e450381f53304e1f8a0c233b4a2ddd43022c4ac415d363832a0",
+      "status": "verified"
+    },
+    {
+      "path": "workbuddy-queue/result-summary.json",
+      "kind": "product_session",
+      "source": "runner_queue_adapter",
+      "sha256": "57d561b00650e73c516078569319abaf802466db0677db7c0641f2468180f15f",
+      "status": "verified"
+    },
+    {
+      "path": "workbuddy-queue/connector-events.jsonl",
+      "kind": "product_session",
+      "source": "mcp_connector_server",
+      "sha256": "1e12a53c0602dd895f069e6c5de02c6b8062dae499c9f46a3c27c0d89d05fffc",
+      "status": "verified"
+    },
+    {
+      "path": "events.jsonl",
+      "kind": "events",
+      "source": "launcher",
+      "sha256": "d63a51d9f5b0ed06bf98c66a63afd7759a35869bd7b2733d4e3314df51acd6ab",
+      "status": "verified"
+    }
+  ],
+  "trace_coverage": "unknown",
+  "scope": "仅索引 Runner 声明的证据；未解析或采集客户端完整轨迹",
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.effective_model",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.effective_mode",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_skill_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_permission_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.internal_trace",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.task_success_not_independently_verified",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    }
+  ]
+}

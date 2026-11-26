@@ -1,0 +1,19 @@
+{
+  "product_id": "doubao-work",
+  "entry_id": "doubao-work-connector-queue",
+  "execution_method": "local_stdio_mcp_connector_queue",
+  "instrumented_connector": true,
+  "trigger_source": "manual",
+  "queue_root_configured": true,
+  "queue_root_identifier_sha256": "232ba3797a635dc054abb2f5bd7d5ae7ecd679a22a2a6ae81cf5163ec9fa770e",
+  "workspace_root_configured": true,
+  "workspace_root_identifier_sha256": "feefef9e5477127ff1fec402a1f4c964eb83ee7f13ee5db37c43a26d1c70af3b",
+  "queue_root_match_with_connector": "unconfirmed",
+  "poll_interval_seconds": 2,
+  "coordinated_expiry": false,
+  "task_execution_protocol": "runner_case_prompt_connector_contract_v1",
+  "native_skill_installation": "unknown",
+  "internal_trace": "unavailable",
+  "connector_transport": "stdio",
+  "product_client_trigger": "operator_started"
+}

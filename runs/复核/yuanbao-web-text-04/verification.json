@@ -1,0 +1,32 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-24T06:44:54.935383+00:00",
+  "run_id": "2026-11-24T064350-972Z-yuanbao-web-text-smoke-yuanbao-web-664f4c90",
+  "case_id": "yuanbao-web-text-smoke",
+  "archive_status": "passed",
+  "task_correctness": "failed",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/result.txt",
+      "evidence_path": "artifacts/outputs/result.txt",
+      "sha256": "3f1cb4aa9788e292b69b3c8f3283edade5502c2351a2781149cbba0f9a085c33",
+      "size_bytes": 31
+    }
+  ],
+  "scope": "archive_integrity_and_text_exact",
+  "trace_sha256": "8ebb2a17a7b9fd46ee9fe623cf5bfadddcfd19e97bf6e85e13d04f2081f5b2cd",
+  "run_sha256": "933aaa2b7b66f557ede203b31fef8db35bd8ca1c4a624355741a6acb1c6c946f",
+  "case_sha256": "18f7ad75963f96cad3d71bdfaa2285d5aca39878a2ac92ce4b33c6d2f4d5d71d",
+  "text_check": {
+    "artifact_path": "outputs/result.txt",
+    "actual_sha256": "3f1cb4aa9788e292b69b3c8f3283edade5502c2351a2781149cbba0f9a085c33",
+    "expected_sha256": "b5754cd6e6cfa0850f0a306eed66c63179af8a7657b53d7c4211c59b202c631a",
+    "expected_size_bytes": 32,
+    "actual_size_bytes": 31,
+    "method": "exact_bytes",
+    "status": "failed"
+  }
+}

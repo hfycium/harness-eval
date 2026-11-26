@@ -1,0 +1,8 @@
+{
+  "command": "cd -- 'F:\\test\\workbuddy\\HarnessEval-WorkBuddy-Smoke\\实机预备\\workspace\\2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd' && MSYS_NO_PATHCONV=1 cmd.exe /d /c 'tools\\\\ok_then_fail.cmd'",
+  "status_ok_visible": true,
+  "result_complete_visible": true,
+  "exit_code_visible": 23,
+  "failure_reported": true,
+  "observation_basis": "工具返回显示 Stdout 包含 STATUS: OK 与 RESULT: complete，Stderr 为空，并显式报告 Exit Code: 23（非零）。未显示其他失败文案。"
+}

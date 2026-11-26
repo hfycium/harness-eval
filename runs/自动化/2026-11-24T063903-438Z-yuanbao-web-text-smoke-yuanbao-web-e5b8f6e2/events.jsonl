@@ -1,0 +1,10 @@
+{"sequence":1,"timestamp":"2026-11-24T06:39:03.451Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-24T063903-438Z-yuanbao-web-text-smoke-yuanbao-web-e5b8f6e2"}}
+{"sequence":2,"timestamp":"2026-11-24T06:39:03.455Z","phase":"submit","actor":"launcher","event":"session_starting","result":"ok","details":{"profile":null}}
+{"sequence":3,"timestamp":"2026-11-24T06:39:37.975Z","phase":"observe","actor":"launcher","event":"mode_and_new_chat","result":"confirmed","details":{"source":"operator_report"}}
+{"sequence":4,"timestamp":"2026-11-24T06:39:37.976Z","phase":"observe","actor":"launcher","event":"attachment_ready","result":"confirmed","details":{"source":"operator_report"}}
+{"sequence":5,"timestamp":"2026-11-24T06:39:37.977Z","phase":"observe","actor":"launcher","event":"prompt_visible","result":"unconfirmed","details":{"source":"adapter_session"}}
+{"sequence":6,"timestamp":"2026-11-24T06:39:37.978Z","phase":"observe","actor":"launcher","event":"prompt_submitted","result":"confirmed","details":{"source":"operator_report"}}
+{"sequence":7,"timestamp":"2026-11-24T06:39:37.978Z","phase":"observe","actor":"launcher","event":"completion_heuristic","result":"candidate","details":{"source":"adapter_session"}}
+{"sequence":8,"timestamp":"2026-11-24T06:39:37.979Z","phase":"observe","actor":"launcher","event":"artifact_preview_click","result":"completed","details":{"source":"adapter_session"}}
+{"sequence":9,"timestamp":"2026-11-24T06:39:37.980Z","phase":"observe","actor":"launcher","event":"download","result":"completed","details":{"source":"adapter_session"}}
+{"sequence":10,"timestamp":"2026-11-24T06:39:37.985Z","phase":"close_run","actor":"launcher","event":"session_closed","result":"completed","details":{"execution_status":"completed","submission_status":"submitted"}}

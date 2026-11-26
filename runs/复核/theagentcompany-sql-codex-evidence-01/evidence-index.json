@@ -1,0 +1,64 @@
+{
+  "record_version": "0.1",
+  "run_id": "2026-11-25T142449-690Z-theagentcompany-ds-sql-exercise-codex-55afbe69",
+  "case_id": "theagentcompany-ds-sql-exercise",
+  "product": "codex",
+  "created_at": "2026-11-25T14:27:17.751Z",
+  "evidence": [
+    {
+      "path": "run.json",
+      "sha256": "fcd54cfb53d60e8cb1219fdae5fb3f926a3a9160b4198df4772efcda357905de",
+      "status": "observed"
+    },
+    {
+      "path": "trace.json",
+      "sha256": "fa3d2ef39a818feabba5ebcfee6af74fb62e05ce140d61759a1a43be3cc2a567",
+      "status": "observed"
+    },
+    {
+      "path": "case.json",
+      "sha256": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+      "status": "observed"
+    },
+    {
+      "path": "stdout.log",
+      "kind": "stdout",
+      "source": "launcher",
+      "sha256": "9c4a2e7f14f488c2b2cefa405060fd9cfe39aad00563e36f3650392d0ff847e1",
+      "status": "verified"
+    },
+    {
+      "path": "stderr.log",
+      "kind": "stderr",
+      "source": "launcher",
+      "sha256": "23da0ee95cc0c9435bcd1ec54c903fc1c07e50ee08204fd4d4fce5a5e4155181",
+      "status": "verified"
+    },
+    {
+      "path": "events.jsonl",
+      "kind": "events",
+      "source": "launcher",
+      "sha256": "fe1f89be11e710ab797408e87be1c7377172070ab0b7493b6fc5cf8939ab6ce1",
+      "status": "verified"
+    }
+  ],
+  "trace_coverage": "unknown",
+  "scope": "仅索引 Runner 声明的证据；未解析或采集客户端完整轨迹",
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ]
+}

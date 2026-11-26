@@ -1,0 +1,15 @@
+{
+  "record_version": "0.1",
+  "run_id": "2026-11-24T141702-786Z-tracetrial-e8-cmd-doubao-work-a69ed75d",
+  "source": "doubao_work_local_session_jsonl",
+  "source_ref": "C:\\Users\\21157\\AppData\\Local\\DoubaoWork\\User Data\\Default\\.doubaowork\\agent_mode\\workspace\\.sessions\\38456434489499906\\agents\\m_0cwGeRA4Jxj\\system\\trajectory.jsonl",
+  "source_sha256": "5394616fc89477351dac8e485847e614c02f7fd1f08b25cb527c9582554d9644",
+  "claim_line": 5,
+  "call_line": 8,
+  "result_line": 9,
+  "call_id": "0cffbe1b-252c-4b11-b509-8407cd9d6334",
+  "command": "cmd.exe /d /c tools\\ok_then_fail.cmd",
+  "tool_result": "Command 'cmd.exe /d /c tools\\ok_then_fail.cmd' exited with code 23. stdout: STATUS: OK\r\nRESULT: complete\r\n",
+  "extracted_at": "2026-11-25T07:08:13.347Z",
+  "scope": "E8 matched claim and one tool call; trajectory completeness unknown"
+}

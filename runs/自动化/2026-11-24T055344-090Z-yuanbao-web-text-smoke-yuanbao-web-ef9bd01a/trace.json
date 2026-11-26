@@ -1,0 +1,168 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-24T055344-090Z-yuanbao-web-text-smoke-yuanbao-web-ef9bd01a",
+  "product": {
+    "product_id": "yuanbao-web",
+    "entry_id": "yuanbao-web-playwright",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "yuanbao-web",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "47dc8b70dc37243db2ffdea47b98e3d8aa4c8dcb86135a607f51e94152db2f00",
+    "implementation_ref": "../../../automation开发/adapters/yuanbao-web.mjs",
+    "implementation_sha256": "4eb8045f6612e3fba2025bd349cefbb6cb9c34757478ed06f6ddbe78da899ee0",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/yuanbao-web.mjs",
+        "sha256": "4eb8045f6612e3fba2025bd349cefbb6cb9c34757478ed06f6ddbe78da899ee0",
+        "size_bytes": 7348
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "fe947514a8afc175c0539b05cc0d23f7a2f34826e8d7e1e37fe491f4fa838a71",
+    "source_config_ref": "../../../automation开发/configs/yuanbao-web.example.json",
+    "source_config_sha256": "9986e3a93d4cb3f3fc0eb67979e33d2eb25eba9e29d2b956bdb2bb1f4b943d4e",
+    "automation_mode": "assisted",
+    "profile": null
+  },
+  "task": {
+    "task_id": "yuanbao-web-text-smoke",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "yuanbao-web-text-smoke",
+    "package_ref": "case.json",
+    "case_sha256": "18f7ad75963f96cad3d71bdfaa2285d5aca39878a2ac92ce4b33c6d2f4d5d71d",
+    "prompt_sha256": "a0a4e9c8002d1d65c0c1394afb1d19fd926f0ec7d59ef295daea287b76eb9248",
+    "prompt_source_sha256": "a0a4e9c8002d1d65c0c1394afb1d19fd926f0ec7d59ef295daea287b76eb9248",
+    "inputs": [
+      {
+        "path": "inputs/input.txt",
+        "size_bytes": 32,
+        "sha256": "b5754cd6e6cfa0850f0a306eed66c63179af8a7657b53d7c4211c59b202c631a"
+      }
+    ]
+  },
+  "model_condition": null,
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "operator_report",
+      "event": "mode_and_new_chat",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:53:50.340Z"
+    },
+    {
+      "source": "operator_report",
+      "event": "attachment_ready",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:53:52.401Z"
+    },
+    {
+      "source": "operator_report",
+      "event": "prompt_submitted",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:53:53.856Z"
+    },
+    {
+      "source": "operator_report",
+      "event": "completion_and_artifact",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:54:06.240Z"
+    },
+    {
+      "source": "adapter_session",
+      "event": "artifact_preview_click",
+      "status": "completed",
+      "timestamp": "2026-11-24T05:54:06.412Z"
+    },
+    {
+      "source": "adapter_session",
+      "event": "download",
+      "status": "completed",
+      "timestamp": "2026-11-24T05:54:07.699Z"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/result.txt",
+      "evidence_path": "artifacts/outputs/result.txt",
+      "size_bytes": 31,
+      "sha256": "3f1cb4aa9788e292b69b3c8f3283edade5502c2351a2781149cbba0f9a085c33",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "api_session",
+      "path": "yuanbao-web-events.json",
+      "sha256": "11b1776c031a5aab442aabdf1f7258c5c9975fad3ab30553e9c07adcea1139e9",
+      "source": "adapter_session"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "8107281c65f5d7b343e5ffdf2fefed8cd7babfc7dc77a3257efd9d085090cf88",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.effective_model",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.native_skill_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.internal_trace",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.web_desktop_equivalence",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

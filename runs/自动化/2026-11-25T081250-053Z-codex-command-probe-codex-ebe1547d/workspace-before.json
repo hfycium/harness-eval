@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "scope": "workspace_files_at_capture_time_only",
+  "files": [
+    {
+      "path": "inputs/input.txt",
+      "size_bytes": 36,
+      "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+    },
+    {
+      "path": "prompt.md",
+      "size_bytes": 212,
+      "sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a"
+    }
+  ],
+  "issues": []
+}

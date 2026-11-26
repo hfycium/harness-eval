@@ -1,0 +1,7 @@
+{
+  "event": "verification_finished",
+  "run_id": "2026-11-24T055137-037Z-yuanbao-web-text-smoke-yuanbao-web-0e03d77a",
+  "output_dir": "runs/复核/yuanbao-web-text-01",
+  "status": "finished",
+  "exit_code": 0
+}

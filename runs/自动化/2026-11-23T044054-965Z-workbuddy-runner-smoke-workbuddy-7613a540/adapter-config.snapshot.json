@@ -1,0 +1,15 @@
+{
+  "product_id": "workbuddy",
+  "entry_id": "workbuddy-connector-queue",
+  "execution_method": "mcp_connector_queue",
+  "instrumented_connector": true,
+  "trigger_source": "scheduled",
+  "queue_root_configured": true,
+  "queue_root_identifier_sha256": "cee3fd1d687cef44ca164309086d6d5caf84c76670905fd39fb8c5c5c9cb6591",
+  "workspace_root_configured": true,
+  "workspace_root_identifier_sha256": "6948b432afa868eeceaa2a71fd2b768af8860d4df16f7aa1568a0b2590bb4508",
+  "queue_root_match_with_connector": "unconfirmed",
+  "poll_interval_seconds": 2,
+  "coordinated_expiry": false,
+  "internal_trace": "unavailable"
+}

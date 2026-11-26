@@ -1,0 +1,7 @@
+{
+  "event": "verification_finished",
+  "run_id": "batch-2026-11-24T075242-268Z-7fca86e2-002",
+  "output_dir": "runs/批次/batch-2026-11-24T075242-268Z-7fca86e2/verification-002",
+  "status": "finished",
+  "exit_code": 0
+}

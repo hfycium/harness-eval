@@ -1,0 +1,3 @@
+"Gaming Laptop G1", 1799.99,
+"Professional Laptop T1", 1299.99,
+"Tablet Pro T1", 899.99

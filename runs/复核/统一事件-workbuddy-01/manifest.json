@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1",
+  "converter": "normalize-evidence-0.1",
+  "run_id": "2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd",
+  "product_id": "workbuddy",
+  "case_id": "tracetrial-e8-workbuddy-bash",
+  "source_file": "E:\\ai-data\\workbuddy\\projects\\f-test-workbuddy\\b9099555-a5be-453a-b781-a14ad1e353ac.jsonl",
+  "source_sha256": "38c114495fad408985bf1f81f439457335c0139292a0c928d69d3b18c2d1e370",
+  "source_run_association": "unique_claim_in_session",
+  "coverage": "unknown",
+  "event_count": 13,
+  "events_sha256": "9b3add85b68292fb21b620f8d5d83ded35204e0622c40b1e0fe14ce49339dcb2",
+  "missing": [
+    "complete_operation_coverage",
+    "network_observation"
+  ],
+  "created_at": "2026-11-25T07:36:05.587Z"
+}

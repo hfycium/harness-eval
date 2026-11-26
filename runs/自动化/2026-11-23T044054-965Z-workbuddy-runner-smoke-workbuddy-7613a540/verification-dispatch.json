@@ -1,0 +1,7 @@
+{
+  "event": "verification_finished",
+  "run_id": "2026-11-23T044054-965Z-workbuddy-runner-smoke-workbuddy-7613a540",
+  "output_dir": "runs/复核/2026-11-23-workbuddy-scheduled-queue-01",
+  "status": "finished",
+  "exit_code": 0
+}

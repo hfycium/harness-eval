@@ -1,0 +1,16 @@
+{
+  "record_version": "0.1",
+  "run_id": "2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd",
+  "source": "workbuddy_local_session_jsonl",
+  "source_ref": "E:\\ai-data\\workbuddy\\projects\\f-test-workbuddy\\b9099555-a5be-453a-b781-a14ad1e353ac.jsonl",
+  "source_sha256": "7e8887bc633e6f6247e24b5111dc155bd03928a97d2307a8b4c0fb96d998047f",
+  "session_id": "b9099555-a5be-453a-b781-a14ad1e353ac",
+  "call_id": "chatcmpl-tool-a781548498158511",
+  "call_line": 12,
+  "result_line": 13,
+  "extracted_at": "2026-11-25T06:59:35.629Z",
+  "command": "cd -- 'F:\\test\\workbuddy\\HarnessEval-WorkBuddy-Smoke\\实机预备\\workspace\\2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd' && MSYS_NO_PATHCONV=1 cmd.exe /d /c 'tools\\\\ok_then_fail.cmd'",
+  "tool_status": "completed",
+  "tool_result": "Command: cd -- 'F:\\test\\workbuddy\\HarnessEval-WorkBuddy-Smoke\\实机预备\\workspace\\2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd' && MSYS_NO_PATHCONV=1 cmd.exe /d /c 'tools\\\\ok_then_fail.cmd'\nStdout: STATUS: OK\r\nRESULT: complete\r\n\nStderr: (empty)\nExit Code: 23\nSignal: (none)",
+  "scope": "one matched tool call only; completeness and session format not guaranteed"
+}

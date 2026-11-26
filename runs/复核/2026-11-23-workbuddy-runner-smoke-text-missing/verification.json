@@ -1,0 +1,24 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-23T04:21:25.332617+00:00",
+  "run_id": "2026-11-23T035714-920Z-workbuddy-runner-smoke-workbuddy-2dcdc114",
+  "case_id": "workbuddy-runner-smoke",
+  "archive_status": "passed",
+  "task_correctness": "unknown",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match",
+    "blocked:FileNotFoundError:[WinError 2] 系统找不到指定的文件。: 'F:\\\\大学\\\\大三上\\\\Harness评测-交付\\\\runs\\\\复核\\\\fixtures\\\\does-not-exist.txt'"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "sha256": "d978be705d82a7643158010e2790244b9ee2d666c607a14646c1aecf51f2484f",
+      "size_bytes": 29
+    }
+  ],
+  "scope": "archive_integrity_only",
+  "trace_sha256": "06c2fc24c8e9d5a64702f94473c764a4006734f2ec27b285700bc2705a7b0572",
+  "run_sha256": "278fd42e601655de1cc134eb54157cd4bc73f553d7a8548f26fbee3be7ae0a8e",
+  "case_sha256": "701bcedfdb48734d5202670126eb957dea64d9585db16d77766b63d85b33b836"
+}

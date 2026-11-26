@@ -1,0 +1,11 @@
+{
+  "case_id": "yuanbao-web-text-smoke",
+  "case_version": "0.1",
+  "dataset": "synthetic-smoke",
+  "dataset_task_id": "yuanbao-web-text-smoke",
+  "prompt_source": "cases/smoke/yuanbao-web-text/prompt.md",
+  "input_source": "cases/smoke/yuanbao-web-text/input.txt",
+  "input_destination": "inputs/input.txt",
+  "expected_artifacts": ["outputs/result.txt"],
+  "limits": { "timeout_seconds": 900 }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1",
+  "converter": "normalize-evidence-0.1",
+  "run_id": "2026-11-24T141702-786Z-tracetrial-e8-cmd-doubao-work-a69ed75d",
+  "product_id": "doubao-work",
+  "case_id": "tracetrial-e8-cmd",
+  "source_file": "C:\\Users\\21157\\AppData\\Local\\DoubaoWork\\User Data\\Default\\.doubaowork\\agent_mode\\workspace\\.sessions\\38456434489499906\\agents\\m_0cwGeRA4Jxj\\system\\trajectory.jsonl",
+  "source_sha256": "5394616fc89477351dac8e485847e614c02f7fd1f08b25cb527c9582554d9644",
+  "source_run_association": "unique_claim_in_session",
+  "coverage": "unknown",
+  "event_count": 18,
+  "events_sha256": "94a333853daf3583bd907e8e00b7ca4509e027e582e528501bef3ff64a77c826",
+  "missing": [
+    "complete_operation_coverage",
+    "network_observation"
+  ],
+  "created_at": "2026-11-25T07:36:07.653Z"
+}

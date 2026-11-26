@@ -1,0 +1,11 @@
+{
+  "case_id": "doubao-work-connector-smoke",
+  "case_version": "0.1",
+  "dataset": "synthetic-smoke",
+  "dataset_task_id": "doubao-work-connector-smoke",
+  "prompt_source": "cases/smoke/doubao-work-connector/prompt.md",
+  "input_source": "cases/smoke/doubao-work-connector/input.txt",
+  "input_destination": "inputs/input.txt",
+  "expected_artifacts": ["outputs/probe.txt"],
+  "limits": { "timeout_seconds": 300 }
+}

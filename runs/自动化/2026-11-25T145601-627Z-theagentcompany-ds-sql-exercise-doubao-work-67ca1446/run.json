@@ -1,0 +1,243 @@
+{
+  "record_version": "0.2",
+  "run_id": "2026-11-25T145601-627Z-theagentcompany-ds-sql-exercise-doubao-work-67ca1446",
+  "previous_run_id": null,
+  "product": {
+    "product_id": "doubao-work",
+    "entry_id": "doubao-work-connector-queue",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "doubao-work",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "976ddf7857eae0b800bef5a64348635ee12a17b2508711e9b5d75bd7b72c83a4",
+    "implementation_ref": "../../../automation开发/adapters/doubao-work.mjs",
+    "implementation_sha256": "de316e266443fa4ca2f3afa2b9f1461cf121fc276ef8b75fc92e0789554b1a23",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/doubao-work.mjs",
+        "sha256": "de316e266443fa4ca2f3afa2b9f1461cf121fc276ef8b75fc92e0789554b1a23",
+        "size_bytes": 1351
+      },
+      {
+        "ref": "automation开发/adapters/workbuddy-connector-queue.mjs",
+        "sha256": "e8b1caac4cb3dc0d7186f89d4d21ad30b22a5d4a45e2384de96c0da3d37bee32",
+        "size_bytes": 10889
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/publish-task.mjs",
+        "sha256": "adf734009860951124ad56537c9eeba989e64e46e118b2ecf8cdd5f669a2f0c2",
+        "size_bytes": 6685
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/server.mjs",
+        "sha256": "352364b91b2ee393d8b1c730e49818e4df5f1a9b22e37c18d32748cc7ccc80ff",
+        "size_bytes": 19102
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/queue-lifecycle.mjs",
+        "sha256": "6ab5921a206c294df3d249b7b6bc48576f705bae2299a56417dd3a5ab6b4ed99",
+        "size_bytes": 3101
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "dad9eaf7b7a919ae7b9ea5385e364940d7a4b726614a0f998fc0040301db7fd0",
+    "source_config_ref": "../../../automation开发/configs/doubao-work-connector.example.json",
+    "source_config_sha256": "8c078d1e8c341fed59525cb9697b3b4ff79b68df58da2cac61231a505c1943f9",
+    "automation_mode": "assisted",
+    "profile": null
+  },
+  "task": {
+    "task_id": "ds-sql-exercise",
+    "task_version": "0.1-windows-local",
+    "contract_version": "0.2",
+    "case_id": "theagentcompany-ds-sql-exercise",
+    "package_ref": "case.json",
+    "case_sha256": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+    "prompt_sha256": "2e0841e6dc39d80de7076d354d718ce062d9b9138ba2cdbd15abef52c65dde9a",
+    "prompt_source_sha256": "2e0841e6dc39d80de7076d354d718ce062d9b9138ba2cdbd15abef52c65dde9a",
+    "inputs": [
+      {
+        "path": "inputs/database.db",
+        "size_bytes": 8192,
+        "sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2"
+      }
+    ]
+  },
+  "environment": {
+    "os": "win32",
+    "workspace_ref": "doubao-work-authorized-root/2026-11-25T145601-627Z-theagentcompany-ds-sql-exercise-doubao-work-67ca1446",
+    "permissions": {
+      "requested_workspace": "dedicated_doubao_work_root",
+      "runtime_scope_confirmation": "unknown",
+      "automatic_permission_response": false
+    },
+    "limits": {
+      "timeout_seconds": 900
+    }
+  },
+  "model_condition": null,
+  "timing": {
+    "started_at": "2026-11-25T14:56:01.654Z",
+    "ended_at": "2026-11-25T14:58:06.217Z"
+  },
+  "submission": {
+    "status": "submitted",
+    "actual_prompt_ref": "prompt.md",
+    "actual_inputs": [
+      {
+        "path": "inputs/database.db",
+        "sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2"
+      }
+    ],
+    "transformations": [],
+    "evidence_refs": [
+      "doubao-work-queue/queue-events.jsonl",
+      "doubao-work-queue/result-summary.json",
+      "doubao-work-queue/connector-events.jsonl"
+    ]
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "task_success_verified": false,
+      "remote_status": "submitted"
+    },
+    "error": null
+  },
+  "operator_actions": [],
+  "retry_events": [],
+  "artifacts": [
+    {
+      "path": "task1.txt",
+      "evidence_path": "artifacts/task1.txt",
+      "size_bytes": 3,
+      "sha256": "5378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa3",
+      "collection_status": "collected"
+    },
+    {
+      "path": "task2.txt",
+      "evidence_path": "artifacts/task2.txt",
+      "size_bytes": 2,
+      "sha256": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2",
+      "collection_status": "collected"
+    },
+    {
+      "path": "task3.txt",
+      "evidence_path": "artifacts/task3.txt",
+      "size_bytes": 88,
+      "sha256": "0767b8af9a11f3c38603612629c0eba8cb8bd99a747876aa205e80afeb59de6a",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "product_session",
+      "path": "doubao-work-queue/queue-events.jsonl",
+      "sha256": "322f1f1ae283384d5a33339fb23461db2d5e803fb32bafb52629b5a22a3f43d5",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "doubao-work-queue/result-summary.json",
+      "sha256": "cc406ef2cc2ca1088f9bd6af846b2cbfed0460791d8be3a7bc3eeb461ae68024",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "doubao-work-queue/connector-events.jsonl",
+      "sha256": "d7734768e987a80e804aecef98b84f0f2b084cbe47bc953f5e82091b8681400d",
+      "source": "mcp_connector_server"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "3661cb734ce51dde9ec6bbd16817808a62ff7df9a2e2b8c882f52a41652e89ab",
+      "source": "launcher"
+    }
+  ],
+  "observations": [
+    {
+      "source": "runner_queue_adapter",
+      "event": "publish",
+      "status": "queued"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "claim",
+      "status": "claimed"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "result",
+      "status": "submitted"
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "inputs/database.db",
+      "initial_sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2",
+      "final_sha256": "dd2391a0df10735ed2133037e411c87173592dea57e49e40154e0f5a72f6b3d2",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.effective_model",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.effective_mode",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_skill_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_permission_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.internal_trace",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.task_success_not_independently_verified",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "notes": null
+}

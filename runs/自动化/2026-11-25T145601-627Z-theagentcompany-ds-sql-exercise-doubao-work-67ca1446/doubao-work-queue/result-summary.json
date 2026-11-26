@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-11-25T145601-627Z-theagentcompany-ds-sql-exercise-doubao-work-67ca1446",
+  "case_id": "theagentcompany-ds-sql-exercise",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "task1.txt",
+      "size_bytes": 3,
+      "sha256": "5378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa3",
+      "observation": "connector_process_filesystem_stat"
+    },
+    {
+      "path": "task2.txt",
+      "size_bytes": 2,
+      "sha256": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2",
+      "observation": "connector_process_filesystem_stat"
+    },
+    {
+      "path": "task3.txt",
+      "size_bytes": 88,
+      "sha256": "0767b8af9a11f3c38603612629c0eba8cb8bd99a747876aa205e80afeb59de6a",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}

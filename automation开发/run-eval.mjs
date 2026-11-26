@@ -3,6 +3,7 @@ import { main } from './runner/main.mjs';
 import { clearLoadedDeepSeekCredential, loadDeepSeekCredentialForRun, manageDeepSeekCredential } from './runner/deepseek-credential.mjs';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { codexModelCommand } from './runner/codex-model-config.mjs';
 
 const args = process.argv.slice(2);
 let credentialContext = { loaded: false, source: process.env.DEEPSEEK_API_KEY ? 'process_environment' : 'none' };
@@ -15,6 +16,8 @@ try {
     process.exitCode = code ?? 1;
   } else if (args[0] === 'credential' && args[1] === 'deepseek') {
     await manageDeepSeekCredential(args[2] ?? 'status');
+  } else if (args[0] === 'codex-model') {
+    console.log(JSON.stringify(await codexModelCommand(args[1] ?? 'show', args[2] ?? null)));
   } else {
     credentialContext = await loadDeepSeekCredentialForRun(args);
     if (credentialContext.source !== 'none') {

@@ -1,0 +1,7 @@
+{
+  "record_version": "0.1",
+  "scope": "single_test_case_smoke",
+  "status": "blocked",
+  "benchmark_score": null,
+  "reason": "invalid_scoring_input"
+}

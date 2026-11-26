@@ -1,0 +1,14 @@
+{
+  "run_id": "2026-11-24T141702-786Z-tracetrial-e8-cmd-doubao-work-a69ed75d",
+  "case_id": "tracetrial-e8-cmd",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "output/exit-observation.json",
+      "size_bytes": 475,
+      "sha256": "e81cce8c852ead13ea1285d00804baf7b130381cf3123b346383775a950e373f",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}

@@ -1,0 +1,76 @@
+{
+  "batch_id": "batch-2026-11-24T141013-646Z-65e78aeb",
+  "status": "completed_with_failures",
+  "generated_at": "2026-11-24T14:10:50.931Z",
+  "on_failure": "continue",
+  "jobs": [
+    {
+      "index": 1,
+      "harness": "codex",
+      "case": "cases/public/tracetrial-e8-cmd/case.json",
+      "status": "needs_review",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T141013-646Z-65e78aeb-001",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T14:10:32.002Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "output/exit-observation.json",
+          "evidence_path": "artifacts/output/exit-observation.json",
+          "size_bytes": 451,
+          "sha256": "79b38f9332bac893e5ba5d93a1dfff7a894b26f8a3962455595900b0457cfaca",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "unknown",
+      "verification_path": "runs/批次/batch-2026-11-24T141013-646Z-65e78aeb/verification-001/verification.json",
+      "archive": "passed",
+      "scoring": "unknown",
+      "scoring_reason": "adapted_case_not_official_benchmark"
+    },
+    {
+      "index": 2,
+      "harness": "dsh",
+      "case": "cases/public/tracetrial-e8-cmd/case.json",
+      "status": "needs_review",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T141013-646Z-65e78aeb-002",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T14:10:50.812Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "output/exit-observation.json",
+          "evidence_path": "artifacts/output/exit-observation.json",
+          "size_bytes": 330,
+          "sha256": "d2a2292b380a2eb3e986eeaee790d5d4857839badde8ca6842d4cbb2f45eb95e",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "unknown",
+      "verification_path": "runs/批次/batch-2026-11-24T141013-646Z-65e78aeb/verification-002/verification.json",
+      "archive": "passed",
+      "scoring": "unknown",
+      "scoring_reason": "adapted_case_not_official_benchmark"
+    }
+  ]
+}

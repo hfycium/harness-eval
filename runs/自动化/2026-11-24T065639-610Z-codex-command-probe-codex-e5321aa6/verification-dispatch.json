@@ -1,0 +1,7 @@
+{
+  "event": "verification_finished",
+  "run_id": "2026-11-24T065639-610Z-codex-command-probe-codex-e5321aa6",
+  "output_dir": "runs/复核/codex-dialog-smoke-01",
+  "status": "finished",
+  "exit_code": 0
+}

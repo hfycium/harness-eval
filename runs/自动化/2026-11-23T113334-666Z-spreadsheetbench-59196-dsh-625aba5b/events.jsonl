@@ -1,0 +1,3 @@
+{"sequence":1,"timestamp":"2026-11-23T11:33:34.697Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-23T113334-666Z-spreadsheetbench-59196-dsh-625aba5b"}}
+{"sequence":2,"timestamp":"2026-11-23T11:33:34.722Z","phase":"submit","actor":"launcher","event":"process_starting","result":"ok","details":{"executable":"dsh.cmd","profile":"headless","pid":37200,"timestamp":"2026-11-23T11:33:34.721Z"}}
+{"sequence":3,"timestamp":"2026-11-23T11:33:35.684Z","phase":"close_run","actor":"launcher","event":"process_closed","result":"failed","details":{"code":1,"signal":null,"spawn_error":null}}

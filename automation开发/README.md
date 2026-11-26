@@ -6,6 +6,8 @@
 
 需要由评测侧 Agent 协助启动时，可按路径加载 [Harness 评测启动 Skill](skills/harness-eval-launch/SKILL.md)。它指导 Agent 调用统一入口并在 WorkBuddy 队列任务发布后提供具体操作和提示词；该 Skill 尚未安装到全局，也尚未通过实机端到端验证。
 
+接入新测试集前，按[新测试集接入流程](docs/新测试集接入流程.md)准备题目、评分器和 Trace，先试跑再安排批次。
+
 ## 目录与命名
 
 ```text
@@ -107,6 +109,10 @@ node automation开发/connectors/workbuddy-eval/queue-manage.mjs expire --run-id
 调试默认模板 `configs/codex.example.json` 使用 ChatGPT 账号；DeepSeek 模板为 `configs/codex-deepseek.example.json`，现有批次如果明确引用其他配置仍按其指定模式运行。Windows 下两种模式均显式请求 MXC。
 
 账号模式可通过配置中的 `model` 指定 CLI 模型，示例为 `configs/codex-account-model.example.json`；不设置时沿用用户 Codex 配置。示例模型来自当前本机配置，并不保证其他账号可用。运行快照记录请求模型，实际生效模型仍需证据。已在用户终端以未显式指定模型的账号配置完成一次文件探针，指定模型的运行尚待验证。
+
+日常切换可使用统一入口维护本地活动配置：`node automation开发/run-eval.mjs codex-model set <模型名>`、`codex-model show`、`codex-model reset`。活动配置保存在被 Git 忽略的 `configs/codex-active.local.json`，不覆盖模板；运行时用 `--config automation开发/configs/codex-active.local.json`。切换仅记录请求模型，账号是否有权使用及实际生效模型仍需单次运行确认。
+
+也可以直接在对话中提出“Codex 切到 `<模型名>`，用 `<case>` 跑一次”。启动 Skill 会先设置本地活动配置，再启动 Runner；若当前 Agent 执行环境没有你的 Codex 登录态，会一次性给出完整可复制命令，在登录终端完成切换和运行。
 
 ### DeepSeek API Key 一次配置
 

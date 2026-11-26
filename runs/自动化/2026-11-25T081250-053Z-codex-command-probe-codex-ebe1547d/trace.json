@@ -1,0 +1,194 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-25T081250-053Z-codex-command-probe-codex-ebe1547d",
+  "product": {
+    "product_id": "codex",
+    "entry_id": "codex-cli-exec",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "codex",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "60734d12c4bc983f75958b1f74793bcec8b4189a0f381483dda1926445b04f2c",
+    "implementation_ref": "../../../automation开发/adapters/codex.mjs",
+    "implementation_sha256": "89f7a11beddc9b5e322156182cc7f73abdf3b134c944605e75c415a939d68c26",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/codex.mjs",
+        "sha256": "89f7a11beddc9b5e322156182cc7f73abdf3b134c944605e75c415a939d68c26",
+        "size_bytes": 6909
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "ab7ffb4d7ab56443e927045d641d078e6eb4aa6ac6ec0d2c409bf2019d95d6f8",
+    "source_config_ref": "../../../automation开发/configs/codex-account-observation.example.json",
+    "source_config_sha256": "2dbdb9883dcb8a9e872a276b7affce16548858f3090937666f26bd58d3c87bd0",
+    "automation_mode": "automatic",
+    "profile": null
+  },
+  "task": {
+    "task_id": "codex-command-probe",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "codex-command-probe",
+    "package_ref": "case.json",
+    "case_sha256": "f13d0faf70826650da3ec59038d21808f9a0465d0c337ca76183c5b728f9ddf6",
+    "prompt_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "prompt_source_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "inputs": [
+      {
+        "path": "inputs/input.txt",
+        "size_bytes": 36,
+        "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+      }
+    ]
+  },
+  "model_condition": {
+    "provider_id": null,
+    "requested_model": "gpt-6-luna",
+    "effective_model": null,
+    "requested_reasoning_effort": null,
+    "effective_reasoning_effort": null,
+    "match_status": "unknown",
+    "evidence_refs": []
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "process_id": 46952,
+      "process_started_at": "2026-11-25T08:12:50.101Z",
+      "process_exit_at": "2026-11-25T08:15:22.700Z",
+      "process_close_at": "2026-11-25T08:15:22.700Z",
+      "stdout_last_output_at": "2026-11-25T08:15:19.235Z",
+      "stdout_closed_at": "2026-11-25T08:15:22.695Z",
+      "stderr_last_output_at": "2026-11-25T08:12:53.894Z",
+      "stderr_closed_at": "2026-11-25T08:15:22.695Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": true,
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    },
+    {
+      "source": "runner_workspace_snapshot",
+      "status": "complete",
+      "scope": "two_point_workspace_snapshot_only",
+      "changes_ref": "workspace-changes.json"
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "inputs/input.txt",
+      "initial_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "final_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "size_bytes": 36,
+      "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "workspace_snapshot",
+      "path": "workspace-before.json",
+      "sha256": "68a3234bcff840ee15ba4e5a95ee45ca3d3c59fe726bc0a32473433adb268c58",
+      "source": "runner_workspace_snapshot"
+    },
+    {
+      "kind": "codex_prompt_evidence",
+      "path": "codex-prompt-evidence.json",
+      "sha256": "e7dbba4af0c3e8eea0d1d1b62969eb6847fc8bfcc68abe7971eb16d294d5811a",
+      "source": "local_session_extracted_before_cleanup"
+    },
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "e16f1d35ced9e367d324eec5bf9abddbe7be4300ce0460b6525cdb0d4defdd37",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "205904f0b77c0a24a37e1eddfe313e7e1d3a305154751fd31c4993c9b41451bd",
+      "source": "launcher"
+    },
+    {
+      "kind": "workspace_snapshot",
+      "path": "workspace-after.json",
+      "sha256": "a17c631292cb0fdeed47a5e9690c08b3f7bfd92c8905d341810fab5f16b40ae1",
+      "source": "runner_workspace_snapshot"
+    },
+    {
+      "kind": "workspace_snapshot",
+      "path": "workspace-changes.json",
+      "sha256": "499b394b160332e8d14d45a7f7779f59831451ede6b4c7239d1c020d79c95233",
+      "source": "runner_workspace_snapshot"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "5a20fa212380d57d231e578333d645807619b9c38142296d619eb854e9a33793",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

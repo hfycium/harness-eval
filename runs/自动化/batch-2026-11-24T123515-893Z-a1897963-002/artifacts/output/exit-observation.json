@@ -1,0 +1,8 @@
+{
+  "command": "bash tools/ok_then_fail.sh",
+  "status_ok_visible": false,
+  "result_complete_visible": false,
+  "exit_code_visible": 1,
+  "failure_reported": true,
+  "observation_basis": "The native tool result reported a fatal bash startup error on stderr and exit code 1. Neither STATUS: OK nor RESULT: complete appeared in the result, so the check emitted no status text before the process failed to start."
+}

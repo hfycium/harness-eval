@@ -1,0 +1,28 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-23T13:58:55.115297+00:00",
+  "run_id": "2026-11-23T135745-268Z-spreadsheetbench-59196-codex-d6d41c25",
+  "case_id": "spreadsheetbench-59196",
+  "archive_status": "passed",
+  "task_correctness": "passed",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/59196_output.xlsx",
+      "evidence_path": "artifacts/outputs/59196_output.xlsx",
+      "sha256": "9a8caf9b9e398e3b9c6cc540722e29be7418f1429410c8d5accc887b10f4d217",
+      "size_bytes": 6650
+    }
+  ],
+  "scope": "archive_integrity_and_spreadsheetbench_single_case",
+  "trace_sha256": "bfbf1553ce404903eca84167abda78f7fc1f952a625dd34d49b262c9d84ce203",
+  "run_sha256": "d4e02de8899a9dfcf35f4455d99b3dafe57f873d65670ce9caf206d8ec8fd4a9",
+  "case_sha256": "80a0755670e4bb6fd73a926a65d8c933055f12e696efca619134923f084b1e7b",
+  "spreadsheetbench_check": {
+    "status": "passed",
+    "reason": "official_single_case_comparison",
+    "evaluator_revision": "e2758ac01c6c52efc746bf0d53b2fd01dbc42dd2"
+  }
+}

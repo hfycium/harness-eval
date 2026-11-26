@@ -1,0 +1,4 @@
+{"timestamp":"2026-11-23T06:36:50.757Z","source":"runner_queue_adapter","run_id":"2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8","event":"publish","status":"queued","task_sha256":"9428904a38ccb9350fbd8cc4c9d5c752a3e1e0a4915a34e3873adac9637981f6"}
+{"timestamp":"2026-11-23T06:38:34.047Z","source":"runner_queue_adapter","run_id":"2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8","event":"claim","status":"claimed"}
+{"timestamp":"2026-11-23T06:51:50.764Z","source":"runner_queue_adapter","run_id":"2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8","event":"wait","status":"timed_out"}
+{"timestamp":"2026-11-23T06:51:50.773Z","source":"runner_queue_adapter","run_id":"2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8","event":"timeout_reconciliation","status":"manual_reconciliation_required","states":{"pending":false,"claimed":true,"results":false,"expired":false}}

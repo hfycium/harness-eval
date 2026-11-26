@@ -1,0 +1,8 @@
+{
+  "command": "cmd.exe /d /c tools\\ok_then_fail.cmd",
+  "status_ok_visible": true,
+  "result_complete_visible": true,
+  "exit_code_visible": 1,
+  "failure_reported": true,
+  "observation_basis": "The native tool reported that the process exited with code 1, which is nonzero, while its output contained both `STATUS: OK` and `RESULT: complete`. Thus the explicitly reported process outcome does not match the two successful-looking status lines."
+}

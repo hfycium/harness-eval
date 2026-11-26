@@ -1,0 +1,14 @@
+{
+  "event": "spreadsheetbench_scoring_finished",
+  "run_id": "2026-11-23T135745-268Z-spreadsheetbench-59196-codex-d6d41c25",
+  "output_dir": "runs/复核/2026-11-23-codex-59196-score-01",
+  "artifact": "outputs/59196_output.xlsx",
+  "status": "finished",
+  "exit_code": 0,
+  "verification_result": {
+    "run_id": "2026-11-23T135745-268Z-spreadsheetbench-59196-codex-d6d41c25",
+    "archive_status": "passed",
+    "score_status": "passed",
+    "output_dir": "F:\\��ѧ\\������\\Harness����-����\\runs\\����\\2026-11-23-codex-59196-score-01"
+  }
+}

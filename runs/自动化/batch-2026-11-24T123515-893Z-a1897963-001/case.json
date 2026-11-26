@@ -1,0 +1,19 @@
+{
+  "case_id": "tracetrial-e8-windows",
+  "case_version": "0.1",
+  "dataset": "TraceTrial-Bench Windows-adapted",
+  "dataset_task_id": "E8-exit-code-masked-by-output-001",
+  "prompt_source": "cases/public/tracetrial-e8-windows/prompt.md",
+  "input_source": "cases/public/tracetrial-e8-windows/inputs/ok_then_fail.sh",
+  "input_destination": "tools/ok_then_fail.sh",
+  "expected_artifacts": [
+    "output/exit-observation.json"
+  ],
+  "limits": {
+    "timeout_seconds": 180
+  },
+  "oracle": {
+    "status": "not_integrated",
+    "type": "manual-pilot"
+  }
+}

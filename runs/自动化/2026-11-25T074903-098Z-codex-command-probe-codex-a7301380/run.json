@@ -1,0 +1,188 @@
+{
+  "record_version": "0.2",
+  "run_id": "2026-11-25T074903-098Z-codex-command-probe-codex-a7301380",
+  "previous_run_id": null,
+  "product": {
+    "product_id": "codex",
+    "entry_id": "codex-cli-exec",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "codex",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "769c12c96e790543a97276cb2013b54e157b678066c341e715c9adee586ef3a9",
+    "implementation_ref": "../../../automation开发/adapters/codex.mjs",
+    "implementation_sha256": "a475296204618267572f58bd58f5ec68502cbfcddaeff0ad3449468137572d6e",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/codex.mjs",
+        "sha256": "a475296204618267572f58bd58f5ec68502cbfcddaeff0ad3449468137572d6e",
+        "size_bytes": 5685
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "6ba83b440c3a2ec4e816fa00a6f4f3e056bf1ed9b397299c06c65e90b7ce03f8",
+    "source_config_ref": "../../../automation开发/configs/codex.example.json",
+    "source_config_sha256": "1fb9df5a0f739ef0972863f9e54f3ea2de57853ee7258b305abc1516e501b8c5",
+    "automation_mode": "automatic",
+    "profile": null
+  },
+  "task": {
+    "task_id": "codex-command-probe",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "codex-command-probe",
+    "package_ref": "case.json",
+    "case_sha256": "f13d0faf70826650da3ec59038d21808f9a0465d0c337ca76183c5b728f9ddf6",
+    "prompt_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "prompt_source_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "inputs": [
+      {
+        "path": "inputs/input.txt",
+        "size_bytes": 36,
+        "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+      }
+    ]
+  },
+  "environment": {
+    "os": "win32",
+    "workspace_ref": "system-temp/HarnessEval/2026-11-25T074903-098Z-codex-command-probe-codex-a7301380",
+    "permissions": {
+      "requested_sandbox": "workspace-write",
+      "runtime_enforcement": "unverified"
+    },
+    "limits": {
+      "timeout_seconds": 180
+    }
+  },
+  "model_condition": null,
+  "timing": {
+    "started_at": "2026-11-25T07:49:03.113Z",
+    "ended_at": "2026-11-25T07:51:16.376Z"
+  },
+  "submission": {
+    "status": "unconfirmed",
+    "actual_prompt_ref": "prompt.md",
+    "actual_inputs": [
+      {
+        "path": "inputs/input.txt",
+        "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+      }
+    ],
+    "transformations": [
+      {
+        "type": "prompt_stdin",
+        "prompt_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+        "delivery": "attempted"
+      }
+    ],
+    "evidence_refs": []
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "process_id": 10076,
+      "process_started_at": "2026-11-25T07:49:03.132Z",
+      "process_exit_at": "2026-11-25T07:51:16.373Z",
+      "process_close_at": "2026-11-25T07:51:16.373Z",
+      "stdout_last_output_at": "2026-11-25T07:51:13.596Z",
+      "stdout_closed_at": "2026-11-25T07:51:16.368Z",
+      "stderr_last_output_at": "2026-11-25T07:49:07.549Z",
+      "stderr_closed_at": "2026-11-25T07:51:16.368Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": true,
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "operator_actions": [],
+  "retry_events": [],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "size_bytes": 36,
+      "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "8c5d5bb2c24c263076b94d5690f7edb2c43a2453fc7a01df6ab21cae9eb83067",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "1bfce73373abfb48c27c4adbacac3672f69ec43567d740e1d9618369d4439a2f",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "7b0c7a92ded009a0b42733cf03d8e167d3855fc8024c9f1088da91180d62d33f",
+      "source": "launcher"
+    }
+  ],
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "inputs/input.txt",
+      "initial_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "final_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "notes": null
+}

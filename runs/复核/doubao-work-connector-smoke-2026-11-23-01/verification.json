@@ -1,0 +1,32 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-23T14:46:13.775383+00:00",
+  "run_id": "2026-11-23T144438-669Z-doubao-work-connector-smoke-doubao-work-6f8930dc",
+  "case_id": "doubao-work-connector-smoke",
+  "archive_status": "passed",
+  "task_correctness": "passed",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "sha256": "1ab1a0ee01505dc39855a2fec35f5f591d70c103ec549bdc4c5e6680de258539",
+      "size_bytes": 34
+    }
+  ],
+  "scope": "archive_integrity_and_text_exact",
+  "trace_sha256": "581edac09dda8832e073f06fc2303c15648ec3e28f2b7ba774520b4d8e877140",
+  "run_sha256": "49b9b2bec45985bd33e7c5417989ee4f21b4b19c20ece5adcc91d71d93b80f98",
+  "case_sha256": "7a567ad6bbe7f15b8aa9a2e536b575dbbc7d10991e0ef58ad6441b81eedc7f70",
+  "text_check": {
+    "artifact_path": "outputs/probe.txt",
+    "actual_sha256": "1ab1a0ee01505dc39855a2fec35f5f591d70c103ec549bdc4c5e6680de258539",
+    "expected_sha256": "1ab1a0ee01505dc39855a2fec35f5f591d70c103ec549bdc4c5e6680de258539",
+    "expected_size_bytes": 34,
+    "actual_size_bytes": 34,
+    "method": "exact_bytes",
+    "status": "passed"
+  }
+}

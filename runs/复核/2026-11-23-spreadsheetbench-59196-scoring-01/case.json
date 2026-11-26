@@ -1,0 +1,24 @@
+{
+  "case_id": "spreadsheetbench-59196",
+  "case_version": "0.1",
+  "dataset": "SpreadsheetBench/sample_data_200",
+  "dataset_task_id": "59196",
+  "instruction_type": "Cell-Level Manipulation",
+  "answer_position": "H3:H5",
+  "source_archive": "cases/sample_data_200.tar.gz",
+  "prompt_source": "runs/预实验/2026-11-21-spreadsheetbench-59196/prompt.md",
+  "input_source": "runs/预实验/2026-11-21-spreadsheetbench-59196/inputs/sample_data_200/spreadsheet/59196/1_59196_input.xlsx",
+  "input_destination": "inputs/sample_data_200/spreadsheet/59196/1_59196_input.xlsx",
+  "expected_artifacts": ["outputs/59196_output.xlsx"],
+  "oracle": {
+    "type": "spreadsheetbench-official",
+    "answer_archive_member": "sample_data_200/spreadsheet/59196/1_59196_answer.xlsx",
+    "status": "not_integrated",
+    "notes": "Do not expose the answer workbook to the product. A single task instance is a smoke result, not a benchmark score."
+  },
+  "limits": {
+    "timeout_seconds": null,
+    "budget": null,
+    "notes": "Freeze before a product run."
+  }
+}

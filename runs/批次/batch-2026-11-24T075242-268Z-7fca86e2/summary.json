@@ -1,0 +1,76 @@
+{
+  "batch_id": "batch-2026-11-24T075242-268Z-7fca86e2",
+  "status": "completed",
+  "generated_at": "2026-11-24T07:57:26.899Z",
+  "on_failure": "stop",
+  "jobs": [
+    {
+      "index": 1,
+      "harness": "codex",
+      "case": "cases/smoke/codex-command-probe/case.json",
+      "status": "completed",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T075242-268Z-7fca86e2-001",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T07:53:01.165Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "outputs/probe.txt",
+          "evidence_path": "artifacts/outputs/probe.txt",
+          "size_bytes": 36,
+          "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "passed",
+      "verification_path": "runs/批次/batch-2026-11-24T075242-268Z-7fca86e2/verification-001/verification.json",
+      "archive": "passed",
+      "scoring": "blocked",
+      "scoring_reason": "synthetic_task_not_scored"
+    },
+    {
+      "index": 2,
+      "harness": "codex",
+      "case": "cases/smoke/codex-command-probe/case.json",
+      "status": "completed",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T075242-268Z-7fca86e2-002",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T07:53:15.888Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "outputs/probe.txt",
+          "evidence_path": "artifacts/outputs/probe.txt",
+          "size_bytes": 36,
+          "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "passed",
+      "verification_path": "runs/批次/batch-2026-11-24T075242-268Z-7fca86e2/verification-002/verification.json",
+      "archive": "passed",
+      "scoring": "blocked",
+      "scoring_reason": "synthetic_task_not_scored"
+    }
+  ]
+}

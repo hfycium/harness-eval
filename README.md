@@ -9,7 +9,7 @@
 | [`automation开发/`](automation开发/README.md) | Runner、Harness 适配器、WorkBuddy Connector、运行/评分契约及接入记录。 |
 | `cases/` | 公开任务输入和用例合同。 |
 | `runs/` | 已归档的预实验与运行材料。 |
-| `docs/` | 项目说明、验收记录和交付规范。 |
+| [`docs/`](docs/README.md) | 项目说明、验收记录和文档更新规则；[五款产品评测总结](docs/五款产品评测总结.md)汇总跨产品发现与证据边界，[总看板](docs/五款产品评测总看板.md)跟踪当前状态和待办。 |
 | `reports/` | 周报及邮件稿。 |
 | `CHANGELOG.md` | 按日期记录交付仓库变化。 |
 

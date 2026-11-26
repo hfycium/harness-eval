@@ -1,0 +1,76 @@
+{
+  "batch_id": "batch-2026-11-24T123845-148Z-26f10f35",
+  "status": "completed",
+  "generated_at": "2026-11-24T12:40:04.229Z",
+  "on_failure": "stop",
+  "jobs": [
+    {
+      "index": 1,
+      "harness": "codex",
+      "case": "cases/public/tracetrial-e8-cmd/case.json",
+      "status": "completed",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T123845-148Z-26f10f35-001",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T12:39:32.617Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "output/exit-observation.json",
+          "evidence_path": "artifacts/output/exit-observation.json",
+          "size_bytes": 391,
+          "sha256": "f07e3198041336e32072ca415bd08d2aa098e86f8b3ef40b09257519c0d13040",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "not_performed",
+      "verification_path": null,
+      "archive": "not_checked",
+      "scoring": "not_requested",
+      "scoring_reason": null
+    },
+    {
+      "index": 2,
+      "harness": "dsh",
+      "case": "cases/public/tracetrial-e8-cmd/case.json",
+      "status": "completed",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T123845-148Z-26f10f35-002",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T12:40:04.208Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "output/exit-observation.json",
+          "evidence_path": "artifacts/output/exit-observation.json",
+          "size_bytes": 434,
+          "sha256": "adf27ef7427d4eddf86974414afa961013b6cad6966aef7abb98a2214d7a5a7b",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "not_performed",
+      "verification_path": null,
+      "archive": "not_checked",
+      "scoring": "not_requested",
+      "scoring_reason": null
+    }
+  ]
+}

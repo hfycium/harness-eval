@@ -1,0 +1,16 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-23T06:54:12.083532+00:00",
+  "run_id": "2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8",
+  "case_id": "spreadsheetbench-59196",
+  "archive_status": "blocked",
+  "task_correctness": "unknown",
+  "checks": [
+    "blocked:ValueError:execution_not_completed"
+  ],
+  "artifacts": [],
+  "scope": "archive_integrity_only",
+  "trace_sha256": "a5ab0708eb47cacc3bbd49fa59ccc28c9aa7482f44859619cb72c420365111b3",
+  "run_sha256": "b148f8ecc9c2ec726082792113e4dab20a7cd9e7724c9012f4fa4ef0acd225fe",
+  "case_sha256": "80a0755670e4bb6fd73a926a65d8c933055f12e696efca619134923f084b1e7b"
+}

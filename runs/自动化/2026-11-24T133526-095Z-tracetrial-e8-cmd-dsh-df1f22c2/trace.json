@@ -1,0 +1,178 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-24T133526-095Z-tracetrial-e8-cmd-dsh-df1f22c2",
+  "product": {
+    "product_id": "dsh",
+    "entry_id": "dsh-headless",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "dsh",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "6dab5e3f64206c96f6e0a60c917ecfd777a85dbd968f58962540009053578e1e",
+    "implementation_ref": "../../../automation开发/adapters/dsh.mjs",
+    "implementation_sha256": "6e386a5b466a1c8af6db9daf5097763300f659b54d48bbb66e6efdc8254276bd",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/dsh.mjs",
+        "sha256": "6e386a5b466a1c8af6db9daf5097763300f659b54d48bbb66e6efdc8254276bd",
+        "size_bytes": 3644
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "c14fc61dde7ecf0d03d42d1de555c7b0acd0aa3029c3d1d2e63f1d7bcc7d66a7",
+    "source_config_ref": "../../../automation开发/configs/dsh-json-events.example.json",
+    "source_config_sha256": "281729e81d86bca5efaf5da34a59d76a860a744a48ff6cfd1d0942e154c85fd8",
+    "automation_mode": "automatic",
+    "profile": "headless"
+  },
+  "task": {
+    "task_id": "E8-exit-code-masked-by-output-001",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "tracetrial-e8-cmd",
+    "package_ref": "case.json",
+    "case_sha256": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "prompt_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "prompt_source_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "inputs": [
+      {
+        "path": "tools/ok_then_fail.cmd",
+        "size_bytes": 59,
+        "sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e"
+      }
+    ]
+  },
+  "model_condition": {
+    "provider_id": "deepseek-official",
+    "endpoint_ref": "https://api.deepseek.com/anthropic",
+    "effective_endpoint_ref": null,
+    "wire_api": "messages",
+    "requested_model": "deepseek-flash",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "windows_dpapi",
+    "credential_present": true,
+    "process_environment_present": true,
+    "match_status": "unknown",
+    "evidence_refs": [
+      "model-condition/dsh.deepseek-flash-high.patch.yml"
+    ]
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "process_id": 39228,
+      "process_started_at": "2026-11-24T13:35:26.127Z",
+      "process_exit_at": "2026-11-24T13:35:41.754Z",
+      "process_close_at": "2026-11-24T13:35:41.754Z",
+      "stdout_last_output_at": "2026-11-24T13:35:41.576Z",
+      "stdout_closed_at": "2026-11-24T13:35:41.749Z",
+      "stderr_last_output_at": "2026-11-24T13:35:31.642Z",
+      "stderr_closed_at": "2026-11-24T13:35:41.748Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": true,
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "tools/ok_then_fail.cmd",
+      "initial_sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e",
+      "final_sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "output/exit-observation.json",
+      "evidence_path": "artifacts/output/exit-observation.json",
+      "size_bytes": 371,
+      "sha256": "7a2222cda946515a98821e385b15ed51932c779c947e8b2227a272a7a7f16337",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "model_condition_config",
+      "path": "model-condition/dsh.deepseek-flash-high.patch.yml",
+      "sha256": "4df026800abe401d089b91626d8b6956b665a8e091c5b5e486b6f78f0f8726c5",
+      "source": "adapter_config"
+    },
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "22a5295df6820f7c4a957d6ed687f9b0941dfc7213fb27be7b89455e988663ad",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "d4cd689c556b5edcf312fc7998136bf890eee44964c36f233d7e9d998e13a2bc",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "176682bc8aeab36bd12f0d95ca8d00711b532f7430bc477e349c183ce74c749b",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

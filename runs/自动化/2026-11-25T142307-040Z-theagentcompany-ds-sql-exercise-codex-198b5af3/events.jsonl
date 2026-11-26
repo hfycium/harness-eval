@@ -1,0 +1,2 @@
+{"sequence":1,"timestamp":"2026-11-25T14:23:07.055Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-25T142307-040Z-theagentcompany-ds-sql-exercise-codex-198b5af3"}}
+{"sequence":2,"timestamp":"2026-11-25T14:23:07.057Z","phase":"preflight","actor":"launcher","event":"execution_blocked","result":"not_admitted","details":{"code":"adapter_not_admitted","message":"Codex DeepSeek mode requires the supported provider settings and API key in its named environment variable.","phase":"preflight"}}

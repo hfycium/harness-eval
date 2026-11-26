@@ -1,0 +1,10 @@
+{
+  "product_id": "yuanbao-web",
+  "entry_id": "yuanbao-web-playwright",
+  "execution_method": "playwright_web_assisted",
+  "browser": "msedge",
+  "profile_configured": true,
+  "mode": "operator_confirmed",
+  "experimental_auto_checks": true,
+  "internal_trace": "unknown"
+}

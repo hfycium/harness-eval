@@ -21,7 +21,7 @@ function isConnectorQueueMode(productId, config) {
 }
 
 function usage() {
-  console.log('Usage:\n  node automation开发/run-eval.mjs credential deepseek set|status|remove\n  node automation开发/run-eval.mjs prepare --case <case.json> --harness <product_id> [--config <config.json>]\n  node automation开发/run-eval.mjs run --case <case.json> --harness <product_id> [--config <config.json>] [--score-spreadsheetbench-answer <answer.xlsx> --score-spreadsheetbench-evaluator <evaluation.py> --score-spreadsheetbench-revision <commit> --score-spreadsheetbench-output <new-dir>]\n  node automation开发/run-eval.mjs verify --run-dir <archived-run> --output-dir <new-dir> [--artifact <path>] [--answer <answer.xlsx> --recalculated-output <file.xlsx> --recalculated-from-sha256 <sha256> --recalculation-method <description> --evaluator <evaluation.py> --evaluator-revision <commit>]');
+  console.log('Usage:\n  node automation开发/run-eval.mjs codex-model show|set <model>|reset\n  node automation开发/run-eval.mjs credential deepseek set|status|remove\n  node automation开发/run-eval.mjs prepare --case <case.json> --harness <product_id> [--config <config.json>]\n  node automation开发/run-eval.mjs run --case <case.json> --harness <product_id> [--config <config.json>] [--score-spreadsheetbench-answer <answer.xlsx> --score-spreadsheetbench-evaluator <evaluation.py> --score-spreadsheetbench-revision <commit> --score-spreadsheetbench-output <new-dir>]\n  node automation开发/run-eval.mjs verify --run-dir <archived-run> --output-dir <new-dir> [--artifact <path>] [--answer <answer.xlsx> --recalculated-output <file.xlsx> --recalculated-from-sha256 <sha256> --recalculation-method <description> --evaluator <evaluation.py> --evaluator-revision <commit>]');
 }
 
 function option(args, name, fallback = null) {
@@ -475,6 +475,7 @@ export async function main(argv = process.argv.slice(2)) {
     profile, timeoutSeconds,
     interactive: Boolean(process.stdin.isTTY && process.stdout.isTTY),
     task,
+    ...(productId === 'yuanbao-web' ? { taskEvidence: { caseSha256: caseHash.sha256, promptSha256: (await digest(path.join(productWorkspace, promptRel))).sha256, inputSha256: (await digest(runInput)).sha256 } } : {}),
     environment: safeCredentialEnvironment,
   });
   if (preflight.status !== 'ready') {

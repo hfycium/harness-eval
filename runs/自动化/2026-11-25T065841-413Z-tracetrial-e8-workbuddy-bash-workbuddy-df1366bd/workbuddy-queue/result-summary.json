@@ -1,0 +1,14 @@
+{
+  "run_id": "2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd",
+  "case_id": "tracetrial-e8-workbuddy-bash",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "output/exit-observation.json",
+      "size_bytes": 540,
+      "sha256": "9307288001bfb6428463eb36f4ba4283c6b9b41453465d857151702e6d5a0bcb",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}

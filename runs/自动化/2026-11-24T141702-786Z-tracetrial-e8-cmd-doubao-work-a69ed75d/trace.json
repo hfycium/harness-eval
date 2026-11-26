@@ -1,0 +1,198 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-24T141702-786Z-tracetrial-e8-cmd-doubao-work-a69ed75d",
+  "product": {
+    "product_id": "doubao-work",
+    "entry_id": "doubao-work-connector-queue",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "doubao-work",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "769c12c96e790543a97276cb2013b54e157b678066c341e715c9adee586ef3a9",
+    "implementation_ref": "../../../automation开发/adapters/doubao-work.mjs",
+    "implementation_sha256": "de316e266443fa4ca2f3afa2b9f1461cf121fc276ef8b75fc92e0789554b1a23",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/doubao-work.mjs",
+        "sha256": "de316e266443fa4ca2f3afa2b9f1461cf121fc276ef8b75fc92e0789554b1a23",
+        "size_bytes": 1351
+      },
+      {
+        "ref": "automation开发/adapters/workbuddy-connector-queue.mjs",
+        "sha256": "33314af21c12e182a9722a6b73e1a6cd07546d39b5c77b212c0199ee6c40db38",
+        "size_bytes": 8454
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/publish-task.mjs",
+        "sha256": "adf734009860951124ad56537c9eeba989e64e46e118b2ecf8cdd5f669a2f0c2",
+        "size_bytes": 6685
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/server.mjs",
+        "sha256": "352364b91b2ee393d8b1c730e49818e4df5f1a9b22e37c18d32748cc7ccc80ff",
+        "size_bytes": 19102
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/queue-lifecycle.mjs",
+        "sha256": "6ab5921a206c294df3d249b7b6bc48576f705bae2299a56417dd3a5ab6b4ed99",
+        "size_bytes": 3101
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "b61fc265eff0c2fd9eafc67fe0631403974f95896a9370ba46ed93f504dc17f2",
+    "source_config_ref": "../../../automation开发/configs/doubao-work-connector.example.json",
+    "source_config_sha256": "8c078d1e8c341fed59525cb9697b3b4ff79b68df58da2cac61231a505c1943f9",
+    "automation_mode": "assisted",
+    "profile": null
+  },
+  "task": {
+    "task_id": "E8-exit-code-masked-by-output-001",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "tracetrial-e8-cmd",
+    "package_ref": "case.json",
+    "case_sha256": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "prompt_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "prompt_source_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "inputs": [
+      {
+        "path": "tools/ok_then_fail.cmd",
+        "size_bytes": 59,
+        "sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e"
+      }
+    ]
+  },
+  "model_condition": null,
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "task_success_verified": false,
+      "remote_status": "submitted"
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "runner_queue_adapter",
+      "event": "publish",
+      "status": "queued"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "claim",
+      "status": "claimed"
+    },
+    {
+      "source": "runner_queue_adapter",
+      "event": "result",
+      "status": "submitted"
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "tools/ok_then_fail.cmd",
+      "initial_sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e",
+      "final_sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "output/exit-observation.json",
+      "evidence_path": "artifacts/output/exit-observation.json",
+      "size_bytes": 475,
+      "sha256": "e81cce8c852ead13ea1285d00804baf7b130381cf3123b346383775a950e373f",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "product_session",
+      "path": "doubao-work-queue/queue-events.jsonl",
+      "sha256": "70749c0a7b5ede07e2cb61a3c7a1df9fc0601f63edf66f0c6e9eaeaa3f5d8e78",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "doubao-work-queue/result-summary.json",
+      "sha256": "09c47a0649f99c3ebb9d765d538addbeb2e33e05e873d44915bc87e379473872",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "product_session",
+      "path": "doubao-work-queue/connector-events.jsonl",
+      "sha256": "68aca0c830c43b826cc580b4e780cc4203c909e292e7bbf3a5d7d4c8b8d399b6",
+      "source": "mcp_connector_server"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "68b0cc00bc965be4ad78e2ae67efc4e608da5ba7821daa9789fbef7d9b05b1c0",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.effective_model",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.effective_mode",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_skill_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.runtime_permission_state",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.internal_trace",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "adapter.task_success_not_independently_verified",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

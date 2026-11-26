@@ -1,0 +1,6 @@
+{"sequence":1,"timestamp":"2026-11-23T04:29:08.959Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-23T042908-939Z-workbuddy-runner-smoke-workbuddy-c9dd553b"}}
+{"sequence":2,"timestamp":"2026-11-23T04:29:08.961Z","phase":"submit","actor":"launcher","event":"session_starting","result":"ok","details":{"profile":null}}
+{"sequence":3,"timestamp":"2026-11-23T04:30:21.300Z","phase":"observe","actor":"launcher","event":"publish","result":"queued","details":{"source":"runner_queue_adapter"}}
+{"sequence":4,"timestamp":"2026-11-23T04:30:21.303Z","phase":"observe","actor":"launcher","event":"claim","result":"claimed","details":{"source":"runner_queue_adapter"}}
+{"sequence":5,"timestamp":"2026-11-23T04:30:21.306Z","phase":"observe","actor":"launcher","event":"result","result":"submitted","details":{"source":"runner_queue_adapter"}}
+{"sequence":6,"timestamp":"2026-11-23T04:30:21.328Z","phase":"close_run","actor":"launcher","event":"session_closed","result":"completed","details":{"execution_status":"completed","submission_status":"submitted"}}

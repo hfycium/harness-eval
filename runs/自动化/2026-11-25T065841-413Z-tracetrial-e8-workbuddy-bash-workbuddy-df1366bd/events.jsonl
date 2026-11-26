@@ -1,0 +1,7 @@
+{"sequence":1,"timestamp":"2026-11-25T06:58:41.426Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd"}}
+{"sequence":2,"timestamp":"2026-11-25T06:58:41.427Z","phase":"submit","actor":"launcher","event":"session_starting","result":"ok","details":{"profile":null}}
+{"sequence":3,"timestamp":"2026-11-25T06:59:35.635Z","phase":"observe","actor":"launcher","event":"publish","result":"queued","details":{"source":"runner_queue_adapter"}}
+{"sequence":4,"timestamp":"2026-11-25T06:59:35.636Z","phase":"observe","actor":"launcher","event":"claim","result":"claimed","details":{"source":"runner_queue_adapter"}}
+{"sequence":5,"timestamp":"2026-11-25T06:59:35.636Z","phase":"observe","actor":"launcher","event":"result","result":"submitted","details":{"source":"runner_queue_adapter"}}
+{"sequence":6,"timestamp":"2026-11-25T06:59:35.637Z","phase":"observe","actor":"launcher","event":"tool_evidence","result":"captured","details":{"source":"workbuddy_local_session_jsonl"}}
+{"sequence":7,"timestamp":"2026-11-25T06:59:35.642Z","phase":"close_run","actor":"launcher","event":"session_closed","result":"completed","details":{"execution_status":"completed","submission_status":"submitted"}}

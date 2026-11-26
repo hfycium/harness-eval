@@ -1,0 +1,14 @@
+{
+  "run_id": "2026-11-23T144438-669Z-doubao-work-connector-smoke-doubao-work-6f8930dc",
+  "case_id": "doubao-work-connector-smoke",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "outputs/probe.txt",
+      "size_bytes": 34,
+      "sha256": "1ab1a0ee01505dc39855a2fec35f5f591d70c103ec549bdc4c5e6680de258539",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}

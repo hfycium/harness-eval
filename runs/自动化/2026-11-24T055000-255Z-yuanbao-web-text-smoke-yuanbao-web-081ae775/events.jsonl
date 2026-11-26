@@ -1,0 +1,2 @@
+{"sequence":1,"timestamp":"2026-11-24T05:50:00.269Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-24T055000-255Z-yuanbao-web-text-smoke-yuanbao-web-081ae775"}}
+{"sequence":2,"timestamp":"2026-11-24T05:50:00.269Z","phase":"prepare","actor":"launcher","event":"prepare_only","result":"ok","details":{}}

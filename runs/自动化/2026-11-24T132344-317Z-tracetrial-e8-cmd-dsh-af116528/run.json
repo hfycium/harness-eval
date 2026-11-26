@@ -1,0 +1,205 @@
+{
+  "record_version": "0.2",
+  "run_id": "2026-11-24T132344-317Z-tracetrial-e8-cmd-dsh-af116528",
+  "previous_run_id": null,
+  "product": {
+    "product_id": "dsh",
+    "entry_id": "dsh-headless",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "dsh",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "47e20a233053c5a320dcd01e472e27912071d37fb7f981b26e9afe71673379bf",
+    "implementation_ref": "../../../automation开发/adapters/dsh.mjs",
+    "implementation_sha256": "ac095f7372dbccc4d92c65f12aa4a0907b063eecbe13b42c4e3e9f8e1083dcbe",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/dsh.mjs",
+        "sha256": "ac095f7372dbccc4d92c65f12aa4a0907b063eecbe13b42c4e3e9f8e1083dcbe",
+        "size_bytes": 3626
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "c14fc61dde7ecf0d03d42d1de555c7b0acd0aa3029c3d1d2e63f1d7bcc7d66a7",
+    "source_config_ref": "../../../automation开发/configs/dsh-json-events.example.json",
+    "source_config_sha256": "281729e81d86bca5efaf5da34a59d76a860a744a48ff6cfd1d0942e154c85fd8",
+    "automation_mode": "automatic",
+    "profile": "headless"
+  },
+  "task": {
+    "task_id": "E8-exit-code-masked-by-output-001",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "tracetrial-e8-cmd",
+    "package_ref": "case.json",
+    "case_sha256": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "prompt_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "prompt_source_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "inputs": [
+      {
+        "path": "tools/ok_then_fail.cmd",
+        "size_bytes": 59,
+        "sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e"
+      }
+    ]
+  },
+  "environment": {
+    "os": "win32",
+    "workspace_ref": "system-temp/HarnessEval/2026-11-24T132344-317Z-tracetrial-e8-cmd-dsh-af116528",
+    "permissions": {
+      "profile_ref": "headless",
+      "runtime_enforcement": "unknown"
+    },
+    "limits": {
+      "timeout_seconds": 180
+    }
+  },
+  "model_condition": {
+    "provider_id": "deepseek-official",
+    "endpoint_ref": "https://api.deepseek.com/anthropic",
+    "effective_endpoint_ref": null,
+    "wire_api": "messages",
+    "requested_model": "deepseek-flash",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "none",
+    "credential_present": false,
+    "process_environment_present": false,
+    "match_status": "unknown",
+    "evidence_refs": [
+      "model-condition/dsh.deepseek-flash-high.patch.yml"
+    ]
+  },
+  "timing": {
+    "started_at": "2026-11-24T13:23:44.338Z",
+    "ended_at": "2026-11-24T13:23:45.085Z"
+  },
+  "submission": {
+    "status": "unconfirmed",
+    "actual_prompt_ref": "prompt.md",
+    "actual_inputs": [
+      {
+        "path": "tools/ok_then_fail.cmd",
+        "sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e"
+      }
+    ],
+    "transformations": [],
+    "evidence_refs": []
+  },
+  "execution": {
+    "status": "failed",
+    "completion_evidence": {
+      "process_id": 41784,
+      "process_started_at": "2026-11-24T13:23:44.355Z",
+      "process_exit_at": "2026-11-24T13:23:45.083Z",
+      "process_close_at": "2026-11-24T13:23:45.083Z",
+      "stdout_last_output_at": null,
+      "stdout_closed_at": "2026-11-24T13:23:45.077Z",
+      "stderr_last_output_at": "2026-11-24T13:23:45.060Z",
+      "stderr_closed_at": "2026-11-24T13:23:45.076Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 1,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": false,
+      "task_success_verified": false
+    },
+    "error": {
+      "code": "exit_1",
+      "message": "Process ended with code 1 and signal none.",
+      "phase": "execute"
+    }
+  },
+  "operator_actions": [],
+  "retry_events": [],
+  "artifacts": [
+    {
+      "path": "output/exit-observation.json",
+      "evidence_path": "artifacts/output/exit-observation.json",
+      "size_bytes": null,
+      "sha256": null,
+      "collection_status": "missing"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "model_condition_config",
+      "path": "model-condition/dsh.deepseek-flash-high.patch.yml",
+      "sha256": "4df026800abe401d089b91626d8b6956b665a8e091c5b5e486b6f78f0f8726c5",
+      "source": "adapter_config"
+    },
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "71434f36a583ca8709429fd473013ccf2ecffcc438f88b1bad91fb80eaf87c5c",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "e58d6fd9101fbc9519d6cccdf076c41ced8c5462efee31d1cd11653e50e18757",
+      "source": "launcher"
+    }
+  ],
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 1,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "artifact:output/exit-observation.json",
+      "reason": "not_collected",
+      "detail": "Expected file was not found."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "notes": null
+}

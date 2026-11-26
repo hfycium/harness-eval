@@ -1,0 +1,12 @@
+{
+  "product_id": "dsh",
+  "entry_id": "dsh-headless",
+  "executable": "dsh.cmd",
+  "profile": "headless",
+  "model_patch": "automation开发/configs/dsh.deepseek-flash-high.patch.yml",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "json_events": false,
+  "home_source": "default",
+  "model_patch_sha256": "4df026800abe401d089b91626d8b6956b665a8e091c5b5e486b6f78f0f8726c5"
+}

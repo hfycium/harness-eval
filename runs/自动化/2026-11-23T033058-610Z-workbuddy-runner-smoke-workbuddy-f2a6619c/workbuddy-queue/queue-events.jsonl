@@ -1,0 +1,2 @@
+{"timestamp":"2026-11-23T03:30:58.643Z","source":"runner_queue_adapter","run_id":"2026-11-23T033058-610Z-workbuddy-runner-smoke-workbuddy-f2a6619c","event":"publish","status":"queued","task_sha256":"76cc4ac4a192eed2998ce3fd511131e5291e20c72bbd0308efb381216321d899"}
+{"timestamp":"2026-11-23T03:35:58.639Z","source":"runner_queue_adapter","run_id":"2026-11-23T033058-610Z-workbuddy-runner-smoke-workbuddy-f2a6619c","event":"wait","status":"timed_out"}

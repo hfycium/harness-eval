@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-11-25T144602-539Z-theagentcompany-ds-sql-exercise-workbuddy-b9bbb4d7",
+  "case_id": "theagentcompany-ds-sql-exercise",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "task1.txt",
+      "size_bytes": 4,
+      "sha256": "8ce88a8842c1584e3d6871e84e166e3b513c3ce2a9da6166760c7af1645dea29",
+      "observation": "connector_process_filesystem_stat"
+    },
+    {
+      "path": "task2.txt",
+      "size_bytes": 3,
+      "sha256": "24ba1e99dc06b19351323aae0d7370243d586475a634b7f6ff7927fbc72cfaed",
+      "observation": "connector_process_filesystem_stat"
+    },
+    {
+      "path": "task3.txt",
+      "size_bytes": 92,
+      "sha256": "1a3e6565111f841c3eec0ead3769803263f06bd158145aff80f7cea5b5d121b4",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}

@@ -1,0 +1,6 @@
+{"sequence":1,"timestamp":"2026-11-23T07:25:08.128Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-23T072508-103Z-spreadsheetbench-59196-workbuddy-48610536"}}
+{"sequence":2,"timestamp":"2026-11-23T07:25:08.130Z","phase":"submit","actor":"launcher","event":"session_starting","result":"ok","details":{"profile":null}}
+{"sequence":3,"timestamp":"2026-11-23T07:35:33.070Z","phase":"observe","actor":"launcher","event":"publish","result":"queued","details":{"source":"runner_queue_adapter"}}
+{"sequence":4,"timestamp":"2026-11-23T07:35:33.074Z","phase":"observe","actor":"launcher","event":"claim","result":"claimed","details":{"source":"runner_queue_adapter"}}
+{"sequence":5,"timestamp":"2026-11-23T07:35:33.077Z","phase":"observe","actor":"launcher","event":"result","result":"submitted","details":{"source":"runner_queue_adapter"}}
+{"sequence":6,"timestamp":"2026-11-23T07:35:33.099Z","phase":"close_run","actor":"launcher","event":"session_closed","result":"completed","details":{"execution_status":"completed","submission_status":"submitted"}}

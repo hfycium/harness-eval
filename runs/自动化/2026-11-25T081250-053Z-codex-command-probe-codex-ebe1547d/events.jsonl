@@ -1,0 +1,3 @@
+{"sequence":1,"timestamp":"2026-11-25T08:12:50.068Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-25T081250-053Z-codex-command-probe-codex-ebe1547d"}}
+{"sequence":2,"timestamp":"2026-11-25T08:12:50.103Z","phase":"submit","actor":"launcher","event":"process_starting","result":"ok","details":{"executable":"codex.cmd","profile":null,"pid":46952,"timestamp":"2026-11-25T08:12:50.101Z"}}
+{"sequence":3,"timestamp":"2026-11-25T08:15:22.747Z","phase":"close_run","actor":"launcher","event":"process_closed","result":"completed","details":{"code":0,"signal":null,"spawn_error":null}}

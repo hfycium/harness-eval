@@ -1,0 +1,4 @@
+{"timestamp":"2026-11-25T06:58:41.433Z","source":"runner_queue_adapter","run_id":"2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd","event":"publish","status":"queued","task_sha256":"973ab2aa22b8b01653be63e8b85ac2cd21a5e1f1a4c61ef601c0ae18748e792e"}
+{"timestamp":"2026-11-25T06:59:15.561Z","source":"runner_queue_adapter","run_id":"2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd","event":"claim","status":"claimed"}
+{"timestamp":"2026-11-25T06:59:35.612Z","source":"runner_queue_adapter","run_id":"2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd","event":"result","status":"submitted"}
+{"timestamp":"2026-11-25T06:59:35.631Z","source":"runner_queue_adapter","run_id":"2026-11-25T065841-413Z-tracetrial-e8-workbuddy-bash-workbuddy-df1366bd","event":"client_tool_evidence","status":"captured"}

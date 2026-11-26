@@ -1,0 +1,8 @@
+{
+  "command": "cd -- '/f/test/workbuddy/HarnessEval-WorkBuddy-Smoke/实机预备/workspace/2026-11-25T061843-894Z-tracetrial-e8-workbuddy-bash-workbuddy-886d8f53' && MSYS_NO_PATHCONV=1 cmd.exe /d /c 'tools\\ok_then_fail.cmd'",
+  "status_ok_visible": true,
+  "result_complete_visible": true,
+  "exit_code_visible": 23,
+  "failure_reported": true,
+  "observation_basis": "The tool return shows stdout lines 'STATUS: OK' and 'RESULT: complete' with empty stderr. It explicitly reports Exit Code: 23, a nonzero exit, and no signal."
+}

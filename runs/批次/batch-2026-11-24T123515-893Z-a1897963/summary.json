@@ -1,0 +1,76 @@
+{
+  "batch_id": "batch-2026-11-24T123515-893Z-a1897963",
+  "status": "completed",
+  "generated_at": "2026-11-24T12:36:29.430Z",
+  "on_failure": "stop",
+  "jobs": [
+    {
+      "index": 1,
+      "harness": "codex",
+      "case": "cases/public/tracetrial-e8-windows/case.json",
+      "status": "completed",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T123515-893Z-a1897963-001",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T12:35:58.125Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "output/exit-observation.json",
+          "evidence_path": "artifacts/output/exit-observation.json",
+          "size_bytes": 352,
+          "sha256": "3ed9c765490892ea0661db0207fecca5922fba1348d2ccd4571376d33b65ae3e",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "not_performed",
+      "verification_path": null,
+      "archive": "not_checked",
+      "scoring": "not_requested",
+      "scoring_reason": null
+    },
+    {
+      "index": 2,
+      "harness": "dsh",
+      "case": "cases/public/tracetrial-e8-windows/case.json",
+      "status": "completed",
+      "exit_code": 0,
+      "run_path": "runs/自动化/batch-2026-11-24T123515-893Z-a1897963-002",
+      "execution": "completed",
+      "execution_error": null,
+      "submission": "unconfirmed",
+      "latest_event": {
+        "source": "events.jsonl",
+        "event": "process_closed",
+        "status": "completed",
+        "timestamp": "2026-11-24T12:36:29.410Z"
+      },
+      "artifact_status": "collected",
+      "artifacts": [
+        {
+          "path": "output/exit-observation.json",
+          "evidence_path": "artifacts/output/exit-observation.json",
+          "size_bytes": 414,
+          "sha256": "14e76220cf15840399af6fb9e11aa152b88536d4283ff07f2ecc4b3d12d5a69a",
+          "collection_status": "collected"
+        }
+      ],
+      "requested_model": "deepseek-flash",
+      "effective_model": null,
+      "verification": "not_performed",
+      "verification_path": null,
+      "archive": "not_checked",
+      "scoring": "not_requested",
+      "scoring_reason": null
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+{"sequence":1,"timestamp":"2026-11-23T06:36:50.746Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8"}}
+{"sequence":2,"timestamp":"2026-11-23T06:36:50.749Z","phase":"submit","actor":"launcher","event":"session_starting","result":"ok","details":{"profile":null}}
+{"sequence":3,"timestamp":"2026-11-23T06:51:50.790Z","phase":"close_run","actor":"launcher","event":"session_closed","result":"timed_out","details":{"execution_status":"timed_out","submission_status":"unconfirmed"}}

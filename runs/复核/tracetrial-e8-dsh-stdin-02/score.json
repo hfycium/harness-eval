@@ -1,0 +1,9 @@
+{
+  "record_version": "0.1",
+  "run_id": "2026-11-24T133526-095Z-tracetrial-e8-cmd-dsh-df1f22c2",
+  "case_id": "tracetrial-e8-cmd",
+  "scope": "windows_cmd_adapted_case",
+  "status": "unknown",
+  "benchmark_score": null,
+  "reason": "adapted_case_not_official_benchmark"
+}

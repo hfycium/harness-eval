@@ -1,0 +1,15 @@
+{
+  "record_version": "0.1",
+  "probe_id": "codex-prompt-baf71ce5683939a6",
+  "run_id": "2026-11-24T134622-797Z-codex-prompt-baf71ce5683939a6-codex-5831150c",
+  "status": "passed",
+  "scope": "selected_markers_for_this_run_only",
+  "checked_at": "2026-11-24T13:46:39.740Z",
+  "prompt_sha256": "72b22438b2e95aff0ba80cc6b53062a02cfb082994b6f1565533a2184733713c",
+  "stdout_sha256": "9802f5d5bf53376af361e63d2aeac2f3d9696e64e1dc9830c0a48bd57606e1f1",
+  "tool_events": [],
+  "final_message_event": "stdout.log:4",
+  "final_message_matches": true,
+  "full_prompt_received": "unknown",
+  "reason": "ordered_markers_match"
+}

@@ -1,0 +1,41 @@
+{
+  "run_id": "2026-11-24T055137-037Z-yuanbao-web-text-smoke-yuanbao-web-0e03d77a",
+  "observations": [
+    {
+      "source": "operator_report",
+      "event": "mode_and_new_chat",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:51:48.171Z"
+    },
+    {
+      "source": "operator_report",
+      "event": "attachment_ready",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:51:51.066Z"
+    },
+    {
+      "source": "operator_report",
+      "event": "prompt_submitted",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:52:00.305Z"
+    },
+    {
+      "source": "operator_report",
+      "event": "completion_and_preview",
+      "status": "confirmed",
+      "timestamp": "2026-11-24T05:52:10.994Z"
+    },
+    {
+      "source": "adapter_session",
+      "event": "download",
+      "status": "completed",
+      "timestamp": "2026-11-24T05:52:11.793Z"
+    }
+  ],
+  "missing": [
+    "effective_model",
+    "native_skill_state",
+    "internal_trace",
+    "web_desktop_equivalence"
+  ]
+}

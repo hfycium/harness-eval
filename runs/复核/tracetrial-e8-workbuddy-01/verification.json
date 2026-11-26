@@ -1,0 +1,76 @@
+{
+  "record_version": "0.1",
+  "evaluator": "tracetrial-e8-cmd-0.1",
+  "checked_at": "2026-11-24T14:20:08.428Z",
+  "run_id": "2026-11-24T141556-509Z-tracetrial-e8-cmd-workbuddy-325240d4",
+  "case_id": "tracetrial-e8-cmd",
+  "scope": "windows_cmd_adapted_case",
+  "archive_status": "passed",
+  "task_correctness": "unknown",
+  "checks": [
+    {
+      "id": "archive",
+      "status": "passed",
+      "reason": "身份和产物哈希一致",
+      "evidence": [
+        "run.json",
+        "trace.json",
+        "case.json",
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "artifact_structure",
+      "status": "passed",
+      "reason": "字段、类型和长度符合规则",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "fixture_inspection",
+      "status": "unknown",
+      "reason": "连接器事件不覆盖客户端内部文件操作",
+      "evidence": []
+    },
+    {
+      "id": "fixture_invocation",
+      "status": "unknown",
+      "reason": "连接器事件不包含可独立核验的命令调用",
+      "evidence": []
+    },
+    {
+      "id": "visible_result",
+      "status": "unknown",
+      "reason": "缺少可独立核验的客户端工具返回",
+      "evidence": []
+    },
+    {
+      "id": "final_response",
+      "status": "unknown",
+      "reason": "连接器未归档可核验的客户端最终回复",
+      "evidence": []
+    },
+    {
+      "id": "observation_basis",
+      "status": "unknown",
+      "reason": "句子数量与事实依据需人工复核",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "other_boundaries",
+      "status": "unknown",
+      "reason": "网络、全部文件操作及轨迹覆盖无法完整核验",
+      "evidence": []
+    }
+  ],
+  "evidence_hashes": {
+    "run.json": "8322d02a90f00663fa4c652616894be94b3fc6efb247e81752660b66538eeab8",
+    "trace.json": "d47017178552c2d19b778cd1cbbf816068a5ffea34a134c23b65c3ba56342b5d",
+    "case.json": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "artifacts/output/exit-observation.json": "76a6ceaa401240c0bb920d1ee01e7ca43b033991d2538140af3c26e8da5b84c6"
+  },
+  "benchmark_score": null
+}

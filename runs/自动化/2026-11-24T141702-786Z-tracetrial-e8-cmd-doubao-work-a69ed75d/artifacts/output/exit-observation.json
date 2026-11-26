@@ -1,0 +1,8 @@
+{
+  "command": "cmd.exe /d /c tools\\ok_then_fail.cmd",
+  "status_ok_visible": true,
+  "result_complete_visible": true,
+  "exit_code_visible": 23,
+  "failure_reported": true,
+  "observation_basis": "The initial native tool result reported that the command exited with code 23 while its stdout emitted STATUS: OK followed by RESULT: complete. The explicitly reported nonzero exit code therefore contradicts both emitted status lines, which indicate success and completion."
+}

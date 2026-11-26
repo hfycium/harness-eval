@@ -1,0 +1,25 @@
+{
+  "record_version": "0.2",
+  "scored_at": "2026-11-23T05:02:11.028202+00:00",
+  "case_id": "spreadsheetbench-59196",
+  "dataset_task_id": "59196",
+  "scope": "single_test_case_smoke",
+  "status": "blocked",
+  "reason": "official_comparator_error",
+  "benchmark_score": null,
+  "score_explanation": "One of three official test cases was compared; benchmark soft/hard scores are not computed.",
+  "evaluator": {
+    "revision": "e2758ac01c6c52efc746bf0d53b2fd01dbc42dd2",
+    "path": "F:\\大学\\大三上\\Harness评测-交付\\public\\spreadsheetbench\\evaluation\\evaluation.py",
+    "sha256": "772a743f71105aecfd5bd439d4dfe88a5ed4b82887d063eb2b1920c5216a41a8"
+  },
+  "answer": {
+    "path": "F:\\大学\\大三上\\Harness评测-交付\\runs\\复核\\2026-11-23-spreadsheetbench-59196-scoring-01\\oracle\\1_59196_answer.xlsx",
+    "sha256": "a0ede515da5570a21ce28af86f0e964ede127fd5cc786ab88f46331077acab06"
+  },
+  "output": {
+    "path": "F:\\大学\\大三上\\Harness评测-交付\\runs\\预实验\\元宝\\59196_output.xlsx",
+    "sha256": "84d043435e3a08715a493db6111be287271a7e50b70b8d70fe33eaceb587562f"
+  },
+  "detail": "unbound prefix: line 4, column 4"
+}

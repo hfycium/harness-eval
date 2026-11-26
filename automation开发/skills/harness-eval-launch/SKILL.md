@@ -13,6 +13,18 @@ description: Launch Harness evaluation runs from user choices through the projec
 2. 通过 `automation开发/adapters/registry.mjs` 核对可用产品：Codex、DSH、WorkBuddy、豆包工作和元宝网页均已有适配器，但支持范围不同。元宝当前仅实现单 TXT 产物；豆包工作 Connector 完成过合成文本烟测，文件任务仍须核实。不要假设登录、模型、权限或文件可用。
 3. 从对话确定题目、一个或多个产品、需要的模型和运行方式。Runner 每次运行一个 case 和一个产品；可用 `node automation开发/run-eval.mjs batch run --plan <计划.json>` 串行调度显式列出的任务，并用 `batch summary --batch <批次目录>` 查看汇总。计划示例见 `automation开发/configs/batch-text-smoke.example.json`，当前批量评分仅支持文本精确验收；SpreadsheetBench 评分仍使用单次 Runner。并行调度尚未实现，人工交互、共享 profile 或队列不可假定能并行。
 4. Codex 模型通过适配器配置选择，DSH 使用 profile 和 patch；检查实际配置允许的值。WorkBuddy、豆包工作和元宝的模型可控性须以当前产品证据为准，未知时如实报告。区分请求的模型、实际生效模型及其证据；不把相同模型名视为已验证一致。密钥通过既有凭据机制注入，不记录明文。
+
+## 对话式模型切换和启动
+
+当用户在同一请求里说“切换 Codex 到 <模型>，用 <用例> 跑一次”时，按以下步骤直接完成，不要求用户手工编辑配置：
+
+1. 确认 case 路径、Harness、账号/API 模式和运行权限；未明确指定 Harness 时默认 Codex。模型名按原样请求，不声称账号具备该模型权限。
+2. Codex ChatGPT 账号模式调用 `node automation开发/run-eval.mjs codex-model set <模型>`，再用 `codex-active.local.json` 启动。记录 Runner 输出的真实运行目录；该文件已被 Git 忽略。
+3. 同一次执行环境具备用户 Codex 登录态时直接运行；若当前工具环境登录身份不同或无法启动 CLI，立即给出可复制的完整命令让用户在已登录终端运行，不让用户先单独设置模型再回来。
+4. 读取实际 run 的 `run.json`、配置快照、模型会话证据、产物和日志。只有可核验的模型响应证据才能填实际模型；本地配置或 turn context 只证明请求/本地上下文。
+5. 用完按用户要求保留模型配置供后续任务，或调用 `codex-model reset` 恢复模板默认；不擅自重置。切换后紧接执行时保留所选配置。
+
+用户只说“切换 Codex 模型”而未给模型和任务时，先询问目标模型；有模型但无任务时完成切换并报告活动配置路径，不启动任务。
 5. WorkBuddy 和豆包工作队列入口分别使用产品对应的示例或本机配置。检查 `HARNESS_EVAL_WORKBUDDY_QUEUE_ROOT` 与 `HARNESS_EVAL_WORKBUDDY_ROOT` 是有效的独立绝对路径，且与目标产品 Connector 配置一致；对端配置无法读取或确认时如实说明并取得用户核实。检查 `queue/pending/`：若有旧任务，先停止并解释会领错任务；不要自动删除、移动或重发。参考 README 的队列管理和恢复说明。禁止默认启用 `coordinated_expiry`；仅在所有消费者已确认更新并重启后，按用户选择使用该功能。
 
 ## 启动与路由

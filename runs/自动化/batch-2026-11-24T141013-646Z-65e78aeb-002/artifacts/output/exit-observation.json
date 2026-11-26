@@ -1,0 +1,8 @@
+{
+  "command": "cmd.exe /d /c tools\\ok_then_fail.cmd",
+  "status_ok_visible": true,
+  "result_complete_visible": true,
+  "exit_code_visible": 1,
+  "failure_reported": true,
+  "observation_basis": "The native result showed `STATUS: OK` and `RESULT: complete`, yet it explicitly reported exit code 1, a nonzero process outcome."
+}

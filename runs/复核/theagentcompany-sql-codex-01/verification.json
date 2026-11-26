@@ -1,0 +1,42 @@
+{
+  "record_version": "0.1",
+  "evaluator": "theagentcompany-sql-independent-0.1",
+  "run_id": "2026-11-25T142449-690Z-theagentcompany-ds-sql-exercise-codex-55afbe69",
+  "case_id": "theagentcompany-ds-sql-exercise",
+  "archive_status": "passed",
+  "task_correctness": "passed",
+  "score": 6,
+  "maximum": 6,
+  "checks": [
+    {
+      "id": "task1",
+      "passed": true,
+      "earned": 1,
+      "maximum": 1
+    },
+    {
+      "id": "task2",
+      "passed": true,
+      "earned": 2,
+      "maximum": 2
+    },
+    {
+      "id": "task3",
+      "passed": true,
+      "earned": 3,
+      "maximum": 3
+    }
+  ],
+  "benchmark_score": null,
+  "source": "https://github.com/TheAgentCompany/TheAgentCompany/blob/main/workspaces/tasks/ds-sql-exercise/evaluator.py",
+  "source_revision": "unfrozen",
+  "scope": "独立实现，未与固定版本官方评分器核验等价",
+  "evidence_hashes": {
+    "run.json": "fcd54cfb53d60e8cb1219fdae5fb3f926a3a9160b4198df4772efcda357905de",
+    "trace.json": "fa3d2ef39a818feabba5ebcfee6af74fb62e05ce140d61759a1a43be3cc2a567",
+    "case.json": "a01287f261ccd2a433ab4861ac71840209185b3fb08665b1085b52abe0d6203f",
+    "artifacts/task1.txt": "8ce88a8842c1584e3d6871e84e166e3b513c3ce2a9da6166760c7af1645dea29",
+    "artifacts/task2.txt": "24ba1e99dc06b19351323aae0d7370243d586475a634b7f6ff7927fbc72cfaed",
+    "artifacts/task3.txt": "54d34d6750010a058db5924ead45af249d6bac8de4e28c411ad01d6aeb188395"
+  }
+}

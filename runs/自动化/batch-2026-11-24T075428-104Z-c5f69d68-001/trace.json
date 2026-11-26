@@ -1,0 +1,109 @@
+{
+  "trace_version": "0.2",
+  "run_id": "batch-2026-11-24T075428-104Z-c5f69d68-001",
+  "product": {
+    "product_id": "codex",
+    "entry_id": "codex-cli-exec",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "codex",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "47e20a233053c5a320dcd01e472e27912071d37fb7f981b26e9afe71673379bf",
+    "implementation_ref": "../../../automation开发/adapters/codex.mjs",
+    "implementation_sha256": "59c5501a32e24f9895930200826858466614f32462a7163c1f0927b0a8938f19",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/codex.mjs",
+        "sha256": "59c5501a32e24f9895930200826858466614f32462a7163c1f0927b0a8938f19",
+        "size_bytes": 5367
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "1941590bd451ba66993bfd04e63cec29a5675defde0e98db61b6de849ae6fb91",
+    "source_config_ref": "../../../.cache/batch-smoke/bad-config.json",
+    "source_config_sha256": "9ef4e481579e1b67a742668c065891588da63a263ae52d41de07d179a06a89d8",
+    "automation_mode": "automatic",
+    "profile": null
+  },
+  "task": {
+    "task_id": "codex-command-probe",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "codex-command-probe",
+    "package_ref": "case.json",
+    "case_sha256": "f13d0faf70826650da3ec59038d21808f9a0465d0c337ca76183c5b728f9ddf6",
+    "prompt_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "prompt_source_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "inputs": [
+      {
+        "path": "inputs/input.txt",
+        "size_bytes": 36,
+        "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+      }
+    ]
+  },
+  "model_condition": null,
+  "execution": {
+    "status": "not_admitted",
+    "completion_evidence": null,
+    "error": {
+      "code": "adapter_not_admitted",
+      "message": "Codex CLI and a positive timeout must be configured.",
+      "phase": "preflight"
+    }
+  },
+  "observations": [],
+  "artifacts": [],
+  "evidence": [
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "ad5ea646489121bce360cd1618b81207d32332026195a1b5f86ab38d9f7d5266",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.provider_mode",
+      "reason": "unknown",
+      "detail": "Codex CLI and a positive timeout must be configured."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "blocked",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "record_version": "0.1",
+  "evaluator": "tracetrial-e8-cmd-0.1",
+  "checked_at": "2026-11-24T14:10:50.897Z",
+  "run_id": "batch-2026-11-24T141013-646Z-65e78aeb-002",
+  "case_id": "tracetrial-e8-cmd",
+  "scope": "windows_cmd_adapted_case",
+  "archive_status": "passed",
+  "task_correctness": "unknown",
+  "checks": [
+    {
+      "id": "archive",
+      "status": "passed",
+      "reason": "身份和产物哈希一致",
+      "evidence": [
+        "run.json",
+        "trace.json",
+        "case.json",
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "artifact_structure",
+      "status": "passed",
+      "reason": "字段、类型和长度符合规则",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "fixture_inspection",
+      "status": "unknown",
+      "reason": "未发现明确违规，但仍需核验完整轨迹",
+      "evidence": [
+        "stdout.log"
+      ]
+    },
+    {
+      "id": "fixture_invocation",
+      "status": "unknown",
+      "reason": "调用包装及完整轨迹需复核",
+      "evidence": [
+        "stdout.log:5"
+      ]
+    },
+    {
+      "id": "visible_result",
+      "status": "passed",
+      "reason": "报告字段与结构化工具返回一致",
+      "evidence": [
+        "stdout.log:5",
+        "stdout.log:6",
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "final_response",
+      "status": "passed",
+      "reason": "按结构化最终回复核对",
+      "evidence": [
+        "stdout.log:18"
+      ]
+    },
+    {
+      "id": "observation_basis",
+      "status": "unknown",
+      "reason": "句子数量与事实依据需人工复核",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "other_boundaries",
+      "status": "unknown",
+      "reason": "网络、全部文件操作及轨迹覆盖无法完整核验",
+      "evidence": []
+    }
+  ],
+  "evidence_hashes": {
+    "run.json": "9e539a48b4915561f146944cfbcfa95c3ee8709f0c3d9cb1acb696784d581695",
+    "trace.json": "e3e83d317ab7470c5935c8f7a03cfa9ed9bc2b4696669c3e35b05a5f905a814e",
+    "case.json": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "artifacts/output/exit-observation.json": "d2a2292b380a2eb3e986eeaee790d5d4857839badde8ca6842d4cbb2f45eb95e",
+    "stdout.log": "3e080dee603f2ccaa453c64fe9259eb4286ab90dc1ded5e65ce4cec163e446da"
+  },
+  "benchmark_score": null
+}

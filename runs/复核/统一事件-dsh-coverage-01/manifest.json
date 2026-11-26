@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1",
+  "converter": "normalize-evidence-0.2",
+  "run_id": "2026-11-24T133526-095Z-tracetrial-e8-cmd-dsh-df1f22c2",
+  "product_id": "dsh",
+  "case_id": "tracetrial-e8-cmd",
+  "source_file": "F:\\大学\\大三上\\Harness评测-交付\\runs\\自动化\\2026-11-24T133526-095Z-tracetrial-e8-cmd-dsh-df1f22c2\\stdout.log",
+  "source_sha256": "22a5295df6820f7c4a957d6ed687f9b0941dfc7213fb27be7b89455e988663ad",
+  "source_run_association": "archived_stdout_hash",
+  "coverage": "unknown",
+  "collection_checks": {
+    "jsonl_parse": "passed",
+    "tool_call_result_pairing": "passed",
+    "tool_calls": 4,
+    "final_responses": 1,
+    "final_response_visibility": "observed",
+    "source_capture_completeness": "unknown"
+  },
+  "event_count": 9,
+  "events_sha256": "f20b2b76781fb867cbdcf8b716d4087e0e148b0162d7b46bb7f552dca1a6d17a",
+  "missing": [
+    "complete_operation_coverage",
+    "network_observation"
+  ],
+  "created_at": "2026-11-25T08:10:56.186Z"
+}

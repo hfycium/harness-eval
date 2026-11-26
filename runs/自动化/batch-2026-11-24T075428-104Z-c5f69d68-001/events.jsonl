@@ -1,0 +1,2 @@
+{"sequence":1,"timestamp":"2026-11-24T07:54:28.235Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"batch-2026-11-24T075428-104Z-c5f69d68-001"}}
+{"sequence":2,"timestamp":"2026-11-24T07:54:28.238Z","phase":"preflight","actor":"launcher","event":"execution_blocked","result":"not_admitted","details":{"code":"adapter_not_admitted","message":"Codex CLI and a positive timeout must be configured.","phase":"preflight"}}

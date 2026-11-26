@@ -1,0 +1,22 @@
+{
+  "product_id": "codex",
+  "entry_id": "codex-cli-exec",
+  "executable": "codex.cmd",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "sandbox": "workspace-write",
+  "windows_sandbox_implementation": "mxc",
+  "ephemeral": true,
+  "capture_prompt_evidence": false,
+  "account_session_diagnostic": false,
+  "workspace_snapshot": false,
+  "provider_mode": "deepseek_api",
+  "provider_id": "deepseek",
+  "base_url": "https://api.deepseek.com/",
+  "wire_api": "responses",
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "api_key_env": "DEEPSEEK_API_KEY",
+  "credential_source": "windows_dpapi",
+  "credential_present": true
+}

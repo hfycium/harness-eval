@@ -1,0 +1,25 @@
+{
+  "record_version": "0.1",
+  "run_id": "2026-11-23T035714-920Z-workbuddy-runner-smoke-workbuddy-2dcdc114",
+  "case_id": "workbuddy-runner-smoke",
+  "method": "independent_read_and_sha256",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "archived_output_content",
+      "path": "artifacts/outputs/probe.txt",
+      "expected": "HARNESS_EVAL_RUNNER_SMOKE_OK followed by newline",
+      "size_bytes": 29,
+      "sha256": "d978be705d82a7643158010e2790244b9ee2d666c607a14646c1aecf51f2484f",
+      "matches_connector_and_run_sha256": true
+    },
+    {
+      "name": "workspace_input_unchanged",
+      "path": "inputs/input.txt in the isolated product workspace",
+      "sha256": "914537baa76c8c6032377c7080b5224a1a7ebdc14b810e835172947c358c765c",
+      "matches_recorded_input_sha256": true
+    }
+  ],
+  "scope": "single_synthetic_task_manual_trigger",
+  "notes": "Independent manual check added after the run. The original run, trace, and Connector result remain unchanged. This is not a benchmark score or scheduled-trigger verification."
+}

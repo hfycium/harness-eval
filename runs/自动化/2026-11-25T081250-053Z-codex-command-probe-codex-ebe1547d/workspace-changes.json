@@ -1,0 +1,12 @@
+{
+  "status": "complete",
+  "scope": "two_point_workspace_snapshot_only",
+  "changes": [
+    {
+      "path": "outputs/probe.txt",
+      "type": "added",
+      "before_sha256": null,
+      "after_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+    }
+  ]
+}

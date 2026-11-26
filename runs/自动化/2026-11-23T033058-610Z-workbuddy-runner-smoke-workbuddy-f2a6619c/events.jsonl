@@ -1,0 +1,3 @@
+{"sequence":1,"timestamp":"2026-11-23T03:30:58.632Z","phase":"prepare","actor":"launcher","event":"run_created","result":"ok","details":{"run_id":"2026-11-23T033058-610Z-workbuddy-runner-smoke-workbuddy-f2a6619c"}}
+{"sequence":2,"timestamp":"2026-11-23T03:30:58.635Z","phase":"submit","actor":"launcher","event":"session_starting","result":"ok","details":{"profile":null}}
+{"sequence":3,"timestamp":"2026-11-23T03:35:58.655Z","phase":"close_run","actor":"launcher","event":"session_closed","result":"timed_out","details":{"execution_status":"timed_out","submission_status":"unconfirmed"}}

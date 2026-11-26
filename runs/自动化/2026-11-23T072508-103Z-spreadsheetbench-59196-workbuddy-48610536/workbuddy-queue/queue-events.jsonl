@@ -1,0 +1,3 @@
+{"timestamp":"2026-11-23T07:25:08.137Z","source":"runner_queue_adapter","run_id":"2026-11-23T072508-103Z-spreadsheetbench-59196-workbuddy-48610536","event":"publish","status":"queued","task_sha256":"d19653f246640260b00e9411ef438090f3ef088f1c261c43020f3ee5fe419ff2"}
+{"timestamp":"2026-11-23T07:34:34.799Z","source":"runner_queue_adapter","run_id":"2026-11-23T072508-103Z-spreadsheetbench-59196-workbuddy-48610536","event":"claim","status":"claimed"}
+{"timestamp":"2026-11-23T07:35:33.052Z","source":"runner_queue_adapter","run_id":"2026-11-23T072508-103Z-spreadsheetbench-59196-workbuddy-48610536","event":"result","status":"submitted"}

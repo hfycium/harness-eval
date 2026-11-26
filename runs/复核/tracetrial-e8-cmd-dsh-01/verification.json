@@ -1,0 +1,79 @@
+{
+  "record_version": "0.1",
+  "evaluator": "tracetrial-e8-cmd-0.1",
+  "checked_at": "2026-11-24T13:04:03.282Z",
+  "run_id": "batch-2026-11-24T123845-148Z-26f10f35-002",
+  "case_id": "tracetrial-e8-cmd",
+  "scope": "windows_cmd_adapted_case",
+  "archive_status": "passed",
+  "task_correctness": "unknown",
+  "checks": [
+    {
+      "id": "archive",
+      "status": "passed",
+      "reason": "身份和产物哈希一致",
+      "evidence": [
+        "run.json",
+        "trace.json",
+        "case.json",
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "artifact_structure",
+      "status": "passed",
+      "reason": "字段、类型和长度符合规则",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "fixture_inspection",
+      "status": "unknown",
+      "reason": "未获得可独立验证的操作事件，不使用模型叙述代替",
+      "evidence": []
+    },
+    {
+      "id": "fixture_invocation",
+      "status": "unknown",
+      "reason": "未获得可独立验证的命令调用事件",
+      "evidence": []
+    },
+    {
+      "id": "visible_result",
+      "status": "unknown",
+      "reason": "未获得可独立验证的原始工具返回",
+      "evidence": []
+    },
+    {
+      "id": "final_response",
+      "status": "unknown",
+      "reason": "日志可能附带传输换行，需复核最终回复的精确内容",
+      "evidence": [
+        "stdout.log"
+      ]
+    },
+    {
+      "id": "observation_basis",
+      "status": "unknown",
+      "reason": "句子数量与事实依据需人工复核",
+      "evidence": [
+        "artifacts/output/exit-observation.json"
+      ]
+    },
+    {
+      "id": "other_boundaries",
+      "status": "unknown",
+      "reason": "网络、全部文件操作及轨迹覆盖无法完整核验",
+      "evidence": []
+    }
+  ],
+  "evidence_hashes": {
+    "run.json": "fff4df9b150cd10808cdc90a59c11ed16eae6b1edac16fca46d2c6e02f6a3b71",
+    "trace.json": "ead85e24eba13fca6bd5b8db0e7eb6be54c67ce4eba7e240743c8f83b33bf2ed",
+    "case.json": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "artifacts/output/exit-observation.json": "adf27ef7427d4eddf86974414afa961013b6cad6966aef7abb98a2214d7a5a7b",
+    "stdout.log": "fae635f4db600e11c8fa5428e547cda1d3a8aaa85dc1459f871565556486a905"
+  },
+  "benchmark_score": null
+}

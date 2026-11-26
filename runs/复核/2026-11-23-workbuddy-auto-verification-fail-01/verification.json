@@ -1,0 +1,32 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-23T04:30:21.531416+00:00",
+  "run_id": "2026-11-23T042908-939Z-workbuddy-runner-smoke-workbuddy-c9dd553b",
+  "case_id": "workbuddy-runner-smoke",
+  "archive_status": "passed",
+  "task_correctness": "failed",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "sha256": "d978be705d82a7643158010e2790244b9ee2d666c607a14646c1aecf51f2484f",
+      "size_bytes": 29
+    }
+  ],
+  "scope": "archive_integrity_and_text_exact",
+  "trace_sha256": "5810d9c6b9c454ea7576207a393861417e79636a35acd6a8f1caa91908aaf6c0",
+  "run_sha256": "b8267529423e11f541bf6da7248169f270f47a1dd0b57e2aedbc39197ae9ed88",
+  "case_sha256": "701bcedfdb48734d5202670126eb957dea64d9585db16d77766b63d85b33b836",
+  "text_check": {
+    "artifact_path": "outputs/probe.txt",
+    "actual_sha256": "d978be705d82a7643158010e2790244b9ee2d666c607a14646c1aecf51f2484f",
+    "expected_sha256": "35ff448ee2641265e37a9b0e151a67fa3f0d4ace17ea0678c3c7f72402be6ddb",
+    "expected_size_bytes": 32,
+    "actual_size_bytes": 29,
+    "method": "exact_bytes",
+    "status": "failed"
+  }
+}

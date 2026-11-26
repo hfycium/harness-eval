@@ -1,0 +1,24 @@
+{
+  "record_version": "0.1",
+  "checked_at": "2026-11-23T06:20:44.216094+00:00",
+  "run_id": "2026-11-23T052711-513Z-spreadsheetbench-59196-workbuddy-26127926",
+  "case_id": "spreadsheetbench-59196",
+  "archive_status": "passed",
+  "task_correctness": "unknown",
+  "checks": [
+    "run_trace_case_and_artifact_hashes_match",
+    "blocked:ValueError:selected_artifact_not_required"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/59196_output.xlsx",
+      "evidence_path": "artifacts/outputs/59196_output.xlsx",
+      "sha256": "fadeee58e3af565e5217f628d4472fb9d8d0623e5e2209ee9480a3166aa63b9b",
+      "size_bytes": 6651
+    }
+  ],
+  "scope": "archive_integrity_only",
+  "trace_sha256": "0135f4897b0a2cd51b6788300dc319afcd61a2ebfbb340f4fe5dcf0e4b2f238e",
+  "run_sha256": "944ccb6cb6b303d9b40d40d147ae8619ceba557c74985976de0d6e672f130e8e",
+  "case_sha256": "80a0755670e4bb6fd73a926a65d8c933055f12e696efca619134923f084b1e7b"
+}

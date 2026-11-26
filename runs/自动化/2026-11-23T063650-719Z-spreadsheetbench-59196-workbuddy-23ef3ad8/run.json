@@ -1,0 +1,169 @@
+{
+  "record_version": "0.2",
+  "run_id": "2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8",
+  "previous_run_id": null,
+  "product": {
+    "product_id": "workbuddy",
+    "entry_id": "workbuddy-connector-queue",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "workbuddy",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "f71edcfc30979a787a20b133cfd3c95d9b57c0d0546f60143e5f3f07c1be2363",
+    "implementation_ref": "../../../automation开发/adapters/workbuddy.mjs",
+    "implementation_sha256": "f99ba56df944651f5c577cdb8959157beb7a9a16294e827ece53a6e3a3d612bb",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/workbuddy.mjs",
+        "sha256": "f99ba56df944651f5c577cdb8959157beb7a9a16294e827ece53a6e3a3d612bb",
+        "size_bytes": 18433
+      },
+      {
+        "ref": "automation开发/adapters/workbuddy-connector-queue.mjs",
+        "sha256": "5abc5ae80d1761ea4ec75875c3f6b75acea9beafe020b74235f9022cf580e167",
+        "size_bytes": 8007
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/publish-task.mjs",
+        "sha256": "adf734009860951124ad56537c9eeba989e64e46e118b2ecf8cdd5f669a2f0c2",
+        "size_bytes": 6685
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/server.mjs",
+        "sha256": "352364b91b2ee393d8b1c730e49818e4df5f1a9b22e37c18d32748cc7ccc80ff",
+        "size_bytes": 19102
+      },
+      {
+        "ref": "automation开发/connectors/workbuddy-eval/queue-lifecycle.mjs",
+        "sha256": "6ab5921a206c294df3d249b7b6bc48576f705bae2299a56417dd3a5ab6b4ed99",
+        "size_bytes": 3101
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "8d0ceb7274034afe8323639a25480d08130b16e8c5f8dbb2a03348b83dddbfca",
+    "source_config_ref": "../../../automation开发/configs/workbuddy-queue.example.json",
+    "source_config_sha256": "3c81fdb73ff0c419cd93d4e8e142e668b4a96d33dc21b0ad705d09f72491838a",
+    "automation_mode": "assisted",
+    "profile": null
+  },
+  "task": {
+    "task_id": "59196",
+    "task_version": "0.2",
+    "contract_version": "0.2",
+    "case_id": "spreadsheetbench-59196",
+    "package_ref": "case.json",
+    "case_sha256": "80a0755670e4bb6fd73a926a65d8c933055f12e696efca619134923f084b1e7b",
+    "prompt_sha256": "71e0d4818b4ec09fbd7f80fd412f6a24242a9f873e8c05237ffbc1d61bf53e2e",
+    "inputs": [
+      {
+        "path": "inputs/sample_data_200/spreadsheet/59196/1_59196_input.xlsx",
+        "size_bytes": 8894,
+        "sha256": "209d1a6de8c8d2cbf31bc4075c9b2c2299817d3fedf748727249c01ac2730495"
+      }
+    ]
+  },
+  "environment": {
+    "os": "win32",
+    "workspace_ref": "workbuddy-authorized-root/2026-11-23T063650-719Z-spreadsheetbench-59196-workbuddy-23ef3ad8",
+    "permissions": {
+      "requested_workspace": "dedicated_workbuddy_root",
+      "runtime_scope_confirmation": "unknown",
+      "automatic_permission_response": false
+    },
+    "limits": {
+      "timeout_seconds": 900,
+      "budget": null,
+      "notes": "Single-case pipeline smoke only; not a benchmark score or ranking."
+    }
+  },
+  "model_condition": null,
+  "timing": {
+    "started_at": "2026-11-23T06:36:50.748Z",
+    "ended_at": "2026-11-23T06:51:50.785Z"
+  },
+  "submission": {
+    "status": "unconfirmed",
+    "actual_prompt_ref": "prompt.md",
+    "actual_inputs": [],
+    "transformations": [],
+    "evidence_refs": [
+      "workbuddy-queue/queue-events.jsonl"
+    ]
+  },
+  "execution": {
+    "status": "timed_out",
+    "completion_evidence": {
+      "task_success_verified": false
+    },
+    "error": {
+      "code": "session_timeout",
+      "phase": "execute"
+    }
+  },
+  "operator_actions": [],
+  "retry_events": [],
+  "artifacts": [
+    {
+      "path": "outputs/59196_output.xlsx",
+      "evidence_path": "artifacts/outputs/59196_output.xlsx",
+      "size_bytes": null,
+      "sha256": null,
+      "collection_status": "not_collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "product_session",
+      "path": "workbuddy-queue/queue-events.jsonl",
+      "sha256": "0adeb931c82ddcf5f50183fc0af4657b4bc831947e2b7c8697ca3c2b08c6466e",
+      "source": "runner_queue_adapter"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "e7d6c1f1cf71b0bb7a13ecde6c4928bff32c7cd055507f5d24c650a9ae43ee20",
+      "source": "launcher"
+    }
+  ],
+  "observations": [],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "adapter.queue_state_requires_manual_reconciliation",
+      "reason": "unknown",
+      "detail": "Session adapter reported this field as unavailable."
+    },
+    {
+      "field": "artifact:outputs/59196_output.xlsx",
+      "reason": "not_collected",
+      "detail": "Session timed out; artifact collection was skipped to avoid racing an unresponsive adapter."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "notes": null
+}

@@ -1,0 +1,8 @@
+{
+  "command": "cmd.exe /d /c tools\\ok_then_fail.cmd",
+  "status_ok_visible": false,
+  "result_complete_visible": false,
+  "exit_code_visible": 1,
+  "failure_reported": true,
+  "observation_basis": "The native tool result explicitly reported Exit Code 1 with Signal: SIGTERM, while its output showed only the Windows banner and a prompt. Neither STATUS: OK nor RESULT: complete appeared in that result, so the nonzero termination was not accompanied by either status line."
+}

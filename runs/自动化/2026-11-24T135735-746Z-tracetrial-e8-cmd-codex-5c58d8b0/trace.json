@@ -1,0 +1,174 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-24T135735-746Z-tracetrial-e8-cmd-codex-5c58d8b0",
+  "product": {
+    "product_id": "codex",
+    "entry_id": "codex-cli-exec",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "codex",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "769c12c96e790543a97276cb2013b54e157b678066c341e715c9adee586ef3a9",
+    "implementation_ref": "../../../automation开发/adapters/codex.mjs",
+    "implementation_sha256": "70afcd8552df322963656bfefbd576fd2fdbe3ba378f28ba20173c45c5e1736e",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/codex.mjs",
+        "sha256": "70afcd8552df322963656bfefbd576fd2fdbe3ba378f28ba20173c45c5e1736e",
+        "size_bytes": 5705
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "92860ec33d723929be1426ac3d4ec412105435e421380c91b1a469b7a1068841",
+        "size_bytes": 5968
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "cd3893b11db8c39e4e2fc0f2546a75ea4122e773c2f8522fc074814a5ae4ec37",
+    "source_config_ref": "../../../automation开发/configs/codex-prompt-evidence.example.json",
+    "source_config_sha256": "701e6c0041e3636ac8cb35b16947cc7a53cd5e26b19fb3307a1f4000208df5a1",
+    "automation_mode": "automatic",
+    "profile": null
+  },
+  "task": {
+    "task_id": "E8-exit-code-masked-by-output-001",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "tracetrial-e8-cmd",
+    "package_ref": "case.json",
+    "case_sha256": "e7d04739bfa56cca3a3bbec13f76f1f461563e62bbde9b336ab9e2021ee25622",
+    "prompt_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "prompt_source_sha256": "b92c9024730bb11fd551cdf9d4a7014ca6f17a8aa3b5628c9089a8197cbdf3cb",
+    "inputs": [
+      {
+        "path": "tools/ok_then_fail.cmd",
+        "size_bytes": 59,
+        "sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e"
+      }
+    ]
+  },
+  "model_condition": {
+    "provider_id": "deepseek",
+    "endpoint_ref": "https://api.deepseek.com/",
+    "wire_api": "responses",
+    "requested_model": "deepseek-flash",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "windows_dpapi",
+    "credential_present": true,
+    "match_status": "unknown",
+    "evidence_refs": []
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "process_id": 41228,
+      "process_started_at": "2026-11-24T13:57:35.777Z",
+      "process_exit_at": "2026-11-24T13:58:23.008Z",
+      "process_close_at": "2026-11-24T13:58:23.008Z",
+      "stdout_last_output_at": "2026-11-24T13:58:22.473Z",
+      "stdout_closed_at": "2026-11-24T13:58:23.003Z",
+      "stderr_last_output_at": "2026-11-24T13:57:36.731Z",
+      "stderr_closed_at": "2026-11-24T13:58:23.002Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": true,
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "tools/ok_then_fail.cmd",
+      "initial_sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e",
+      "final_sha256": "a4f63883a62247a8ace5453fc4cd87389be31a0bf03712563d5affa86657137e",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "output/exit-observation.json",
+      "evidence_path": "artifacts/output/exit-observation.json",
+      "size_bytes": 404,
+      "sha256": "5224add7432128dbaf0c6cdd2b60ae721780d29cecd09ffc4b9834ab44a85d41",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "codex_prompt_evidence",
+      "path": "codex-prompt-evidence.json",
+      "sha256": "977ef9c3631ba1bfbb6b24578b0ebf0b8be9658d5a0b479e3634912136cb93e6",
+      "source": "local_session_extracted_before_cleanup"
+    },
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "1af75f23c793bca9fa814688f934a9981545ab8aed7f555fed8c8225b002d05d",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "e2c7d758289b68676f917eaaf747b817f997a5cce628b2ebf1ad1956779053ca",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "73f638d50277e96bfe0dcb69ba6f49ef7bab7b165cbb33228f9b73bdf1cab3dd",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

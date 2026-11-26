@@ -1,0 +1,14 @@
+{
+  "run_id": "2026-11-23T052711-513Z-spreadsheetbench-59196-workbuddy-26127926",
+  "case_id": "spreadsheetbench-59196",
+  "status": "submitted",
+  "artifacts_observed_by_connector": [
+    {
+      "path": "outputs/59196_output.xlsx",
+      "size_bytes": 6651,
+      "sha256": "fadeee58e3af565e5217f628d4472fb9d8d0623e5e2209ee9480a3166aa63b9b",
+      "observation": "connector_process_filesystem_stat"
+    }
+  ],
+  "independent_task_verification": "pending"
+}
