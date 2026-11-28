@@ -29,7 +29,8 @@ automation开发/
 │   ├── workbuddy-scheduler-uia.mjs # WorkBuddy 定时任务 UIA 候选
 │   └── workbuddy/               # WorkBuddy operator Skill、队列执行 Skill 与说明
 ├── connectors/
-│   └── workbuddy-eval/           # 本地队列与 stdio MCP Connector 开发候选
+│   ├── workbuddy-eval/           # Runner 任务队列 stdio MCP Connector
+│   └── tool-bench-mcp/           # Tool-Bench 业务工具 MCP bridge
 ├── configs/
 │   ├── codex.example.json       # 非敏感配置模板
 │   ├── dsh.example.json
@@ -82,6 +83,12 @@ node automation开发/connectors/workbuddy-eval/queue-manage.mjs expire --run-id
 
 安装用 operator Skill 只协助安装与连接检查，不是被测 WorkBuddy 的运行时 Skill。另有队列执行 Skill，Runner 在 WorkBuddy 队列模式下将其正文注入有效任务 prompt，并在 run 记录中保留摘要；此条件是 Connector + Runner-injected execution protocol，不能与 Connector-only 或原生 WorkBuddy 基线混记。MCP Connector 服务本体继续放在 `connectors/workbuddy-eval/`，不迁入 Runner adapter。
 
+## Tool-Bench 四款产品接入（开发中）
+
+Codex、DSH、WorkBuddy、豆包工作共用 `connectors/tool-bench-mcp/stdio-bridge.mjs`，把 Tool-Bench HubSpot Streamable HTTP MCP 转为本机 stdio；Runner 用外部控制目录中的 active-run 文件限制工具调用，并把 bridge JSONL 收入运行记录。四份配置模板分别为 `configs/codex-tool-bench.example.json`、`configs/dsh-tool-bench.example.json`、`configs/workbuddy-tool-bench.example.json`、`configs/doubao-work-tool-bench.example.json`。Codex 使用单次 CLI 配置覆盖；DSH 在隔离工作区写项目 `.mcp.json`；WorkBuddy 和豆包工作需在产品 UI 单独添加第二个 Connector，现有队列 Connector 保留。
+
+当前完成的是代码接线与配置准备，不是产品准入或正式评测。尚未完成的项目包括 Tool-Bench 任务包与 schema 冻结、工作站 loopback 端口和 SSH 隧道生命周期、四款产品的实际 MCP 工具清单核对、协议 smoke、官方 verifier 收尾。适配器会注入 Tool-Bench MCP，但不会自动移除产品中其他可用工具；需先检查工具面并确认没有旁路调用，再决定是否准入。具体边界和状态见 [`connectors/tool-bench-mcp/README.md`](connectors/tool-bench-mcp/README.md) 与 OpenSpec `tool-bench-four-harness-adapters`。
+
 ## WorkBuddy 本机安装与验证状态
 
 1. WorkBuddy 官方用户指南说明桌面端在「专家·技能·连接器」页右上角有「自定义连接器」入口；市场审核上架是公开发布流程，与本机添加自定义 MCP 的入口不同。[用户指南](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Connector) · [MCP 配置文档](https://open.workbuddy.cn/docs/connector)
@@ -104,7 +111,7 @@ node automation开发/connectors/workbuddy-eval/queue-manage.mjs expire --run-id
 
 ## 运行准备
 
-通过 `--harness` 选择产品；可用 `--config` 指定本机非敏感配置。DSH 需要 profile，可用 `model_patch` 通过 `--patch` 显式请求模型条件；Codex 可选择 `chatgpt_account` 或 `deepseek_api`。DeepSeek 模式使用每次运行隔离的 `CODEX_HOME`，需要启动环境提供 `DEEPSEEK_API_KEY`，不要求 ChatGPT CLI 登录；默认账号模式继续使用本机登录状态和默认 `CODEX_HOME`。API Key 不写入配置模板、运行记录、日志或仓库。
+通过 `--harness` 选择产品；可用 `--config` 指定本机非敏感配置。DSH 需要 profile，可用 `model_patch` 通过 `--patch` 显式请求模型条件；Codex 可选择 `chatgpt_account`、`deepseek_api` 或 `chatanywhere_api`。API Key 不写入配置模板、运行记录、日志或仓库。
 
 调试默认模板 `configs/codex.example.json` 使用 ChatGPT 账号；DeepSeek 模板为 `configs/codex-deepseek.example.json`，现有批次如果明确引用其他配置仍按其指定模式运行。Windows 下两种模式均显式请求 MXC。
 
@@ -128,6 +135,30 @@ node .\automation开发\run-eval.mjs credential deepseek status
 ```powershell
 node .\automation开发\run-eval.mjs credential deepseek remove
 ```
+
+### ChatAnywhere API Key 与模型
+
+Codex 和 DSH 的 ChatAnywhere 凭据单独保存在 `%LOCALAPPDATA%\HarnessEval\chatanywhere-api-key.xml`，与 DeepSeek 官方 Key 分离。设置时在本机终端输入，不要把 Key 发到对话或写入配置：
+
+```powershell
+node .\automation开发\run-eval.mjs credential chatanywhere set
+node .\automation开发\run-eval.mjs credential chatanywhere status
+```
+
+Codex 样例为 `configs/codex-chatanywhere.example.json`；DSH 样例为 `configs/dsh-chatanywhere.example.json`，其请求配置在 `configs/dsh.chatanywhere-high.patch.yml`。两者请求 `deepseek-v4.1-flash-1017` 和 `high` 推理档位。Codex 使用 ChatAnywhere Responses API；DSH 使用 OpenAI Chat Completions。运行时从 Windows DPAPI 解密并仅传给本次产品进程。
+
+```powershell
+node .\automation开发\run-eval.mjs run --case .\cases\smoke\codex-command-probe\case.json --harness codex --config .\automation开发\configs\codex-chatanywhere.example.json --timeout 180
+node .\automation开发\run-eval.mjs run --case .\cases\smoke\codex-command-probe\case.json --harness dsh --config .\automation开发\configs\dsh-chatanywhere.example.json --timeout 180
+```
+
+移除凭据：
+
+```powershell
+node .\automation开发\run-eval.mjs credential chatanywhere remove
+```
+
+使用 ChatAnywhere 配置运行时应指定相应样例文件。trace 会记录请求 provider、模型、推理档位、协议和凭据来源；实际生效模型/推理档位仍先记为 unknown。成功返回只能证明本次 API 请求可用，不证明转发后的底层模型部署或推理档位未被服务方调整。
 
 如果存在 `configs/dsh.local.json`，不带 `--config` 的 DSH 命令会优先使用它；该个人配置默认选择用户 DSH_HOME 下的 `headless` profile。此文件在 `.gitignore` 覆盖范围内，不包含密钥。其他电脑须分别配置本机密钥与 DSH profile。
 
@@ -191,7 +222,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File automation开发/tools/workb
 
 获取 access token 需要已启用的 WorkBuddy 第三方应用和安全的服务端 token 交换；官方资料没有明确要求另租独立服务器，也未明确本地服务是否符合部署要求。个人学生的申请资格未从公开文档确认；token 有效期文档存在差异。当前 Runner 不实现 OAuth 授权、交换或刷新。完整说明见[WorkBuddy 手动准入及烟测手册](docs/workbuddy-api-admission.md#首次手动准备与运行步骤)。
 
-Codex 使用 `codex exec --json --sandbox workspace-write`、临时会话和独立临时目录。`chatgpt_account` 模式需本机 CLI 登录；`deepseek_api` 模式通过 `DEEPSEEK_API_KEY` 调 DeepSeek Responses API，Runner 为其创建/清理运行级 `CODEX_HOME`。DSH 使用 profile 和可选 `--patch` 条件覆盖；候选 patch 请求 `deepseek-flash` + `high`。两者已各自执行实际任务，但实际生效模型和推理强度仍为 unknown。当前 DSH 使用 Messages transport，Codex 使用 Responses transport，协议差异单独记录。产品进程退出码为 0 不自动等于任务完成；需检查运行记录、日志和产物，并另行做独立验收。
+Codex 使用 `codex exec --json --sandbox workspace-write`、临时会话和独立临时目录。`chatgpt_account` 模式需本机 CLI 登录；DeepSeek 与 ChatAnywhere API 模式都使用运行级 `CODEX_HOME`。DSH 使用 profile 和可选 `--patch` 条件覆盖。ChatAnywhere 配置请求同一模型名和 high 档位，但 Codex 使用 Responses、DSH 使用 Chat Completions。trace 记录请求条件而非保证服务端实际路由。产品进程退出码为 0 不自动等于任务完成；需检查运行记录、日志和产物，并另行做独立验收。
 
 ## 评分
 

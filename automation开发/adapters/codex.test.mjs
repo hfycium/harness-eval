@@ -28,3 +28,14 @@ test('ChatGPT account model is optional, passed explicitly, and never assumed ef
   assert.equal(adapter.snapshotConfig(diagnostic).account_session_diagnostic,true);
   assert.equal(adapter.preflight({...diagnostic,provider_mode:'deepseek_api'}, {timeoutSeconds:30}).status,'not_admitted');
 });
+
+test('Codex ChatAnywhere mode requests Responses model and refuses missing credentials', () => {
+  const adapter = new CodexAdapter();
+  const config = { executable:'codex.cmd', provider_mode:'chatanywhere_api', model:'deepseek-v4.1-flash-1017', reasoning_effort:'high', api_key_env:'CHATANYWHERE_API_KEY' };
+  const invocation = adapter.buildInvocation(config, { prompt:'hello', workspaceDir:process.cwd(), codexHomeDir:process.cwd() });
+  assert.equal(invocation.args[invocation.args.indexOf('-c') + 1], 'model="deepseek-v4.1-flash-1017"');
+  assert.ok(invocation.args.includes('model_providers.chatanywhere.wire_api="responses"'));
+  assert.equal(adapter.preflight(config, { timeoutSeconds:30 }).status, 'not_admitted');
+  assert.equal(adapter.modelCondition(config).requested_model, 'deepseek-v4.1-flash-1017');
+  assert.equal(adapter.modelCondition(config).effective_model, null);
+});

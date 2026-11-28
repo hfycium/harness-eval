@@ -1,0 +1,23 @@
+{
+  "case_id": "tool-bench-hubspot-largest-open-deal",
+  "case_version": "candidate-0.1",
+  "dataset_id": "tool-bench",
+  "dataset_task_id": "openrouter/tool-bench__business__hubspot__largest-open-deal",
+  "dataset_commit": "58e695b724ce550102c048b2470ea12cca6829ac",
+  "exposure_variant": "relevant_only",
+  "exposure_status": "not_generated_or_frozen",
+  "task_package_sha256": null,
+  "exposure_tools_sha256": null,
+  "tool_bench_schema_path": null,
+  "prompt_source": "cases/public/tool-bench-hubspot-largest-open-deal/prompt.md",
+  "expected_artifacts": [
+    "agent/answer.md"
+  ],
+  "limits": {
+    "timeout_seconds": 900
+  },
+  "oracle": {
+    "status": "not_integrated",
+    "method": "Tool-Bench official verifier on the isolated task environment"
+  }
+}

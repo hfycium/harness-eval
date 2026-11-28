@@ -1,0 +1,183 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-26T144748-509Z-codex-command-probe-dsh-140c86dd",
+  "product": {
+    "product_id": "dsh",
+    "entry_id": "dsh-headless",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "dsh",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "31cebc94875bc750affb4abc1963c9969bf46dbc4563e68f11dee8051c1ca703",
+    "implementation_ref": "../../../automation开发/adapters/dsh.mjs",
+    "implementation_sha256": "96ca47cdd5170f7de4bfea90bb819a6308da361b28718d507738f9bbf6a3c97e",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/dsh.mjs",
+        "sha256": "96ca47cdd5170f7de4bfea90bb819a6308da361b28718d507738f9bbf6a3c97e",
+        "size_bytes": 5607
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "94ae1346538d488dca9a9ecc64ee01725e8a9e81445327a44a7c225e3db29d4a",
+        "size_bytes": 6251
+      },
+      {
+        "ref": "automation开发/runner/chatanywhere-credential.mjs",
+        "sha256": "d20319a060c0a5d7c297593d71e44b02b0bcf822f97d3b8a0186c3c47db12048",
+        "size_bytes": 6561
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "978796124af131a3f1ecec67dc3e3cb1481a9e09fa8dca0cdb37084074f481b7",
+    "source_config_ref": "../../../automation开发/configs/dsh-chatanywhere.example.json",
+    "source_config_sha256": "e30612c9373870ac3a45d5433c5a2b47e38387cd620432d8cb33a067d7459e1b",
+    "automation_mode": "automatic",
+    "profile": "headless"
+  },
+  "task": {
+    "task_id": "codex-command-probe",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "codex-command-probe",
+    "package_ref": "case.json",
+    "case_sha256": "f13d0faf70826650da3ec59038d21808f9a0465d0c337ca76183c5b728f9ddf6",
+    "prompt_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "prompt_source_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "inputs": [
+      {
+        "path": "inputs/input.txt",
+        "size_bytes": 36,
+        "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+      }
+    ]
+  },
+  "model_condition": {
+    "provider_id": "chatanywhere",
+    "endpoint_ref": "https://api.chatanywhere.tech/v1",
+    "effective_endpoint_ref": null,
+    "wire_api": "openai-completions",
+    "requested_model": "deepseek-v4.1-flash-1017",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "windows_dpapi",
+    "credential_present": true,
+    "process_environment_present": true,
+    "match_status": "unknown",
+    "evidence_refs": [
+      "model-condition/dsh.chatanywhere-high.patch.yml"
+    ]
+  },
+  "execution": {
+    "status": "completed",
+    "completion_evidence": {
+      "process_id": 24992,
+      "process_started_at": "2026-11-26T14:47:48.539Z",
+      "process_exit_at": "2026-11-26T14:48:13.895Z",
+      "process_close_at": "2026-11-26T14:48:13.895Z",
+      "stdout_last_output_at": "2026-11-26T14:48:13.485Z",
+      "stdout_closed_at": "2026-11-26T14:48:13.889Z",
+      "stderr_last_output_at": "2026-11-26T14:48:06.565Z",
+      "stderr_closed_at": "2026-11-26T14:48:13.889Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": true,
+      "task_success_verified": false
+    },
+    "error": null
+  },
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    },
+    {
+      "source": "workspace_input_integrity",
+      "path": "inputs/input.txt",
+      "initial_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "final_sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "status": "unchanged",
+      "scope": "post_run_snapshot_only"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "size_bytes": 36,
+      "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6",
+      "collection_status": "collected"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "model_condition_config",
+      "path": "model-condition/dsh.chatanywhere-high.patch.yml",
+      "sha256": "6a4f1fdea9dca5f3894349055dfa8b639b3a195bc82f6aba986f24ea087020ab",
+      "source": "adapter_config"
+    },
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "86ac39fe479a6290259125ed8f265726a0dd0faf6292c3280fe4e272ba8e2cad",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "8ad6643091acdf96fa306452d36f34fbaf2573b4f696683dc1cd14b82637e207",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "c615bf54a229da243176b8713034b368540ed2801d49abbdcc9556bf1910ec38",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "ready",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

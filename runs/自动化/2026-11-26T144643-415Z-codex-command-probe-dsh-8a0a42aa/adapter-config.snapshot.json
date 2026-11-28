@@ -1,0 +1,20 @@
+{
+  "product_id": "dsh",
+  "entry_id": "dsh-headless",
+  "executable": "dsh.cmd",
+  "profile": "spreadsheetbench-headless",
+  "model_patch": "automation开发/configs/dsh.chatanywhere-high.patch.yml",
+  "provider_id": "chatanywhere",
+  "base_url": "https://api.chatanywhere.tech/v1",
+  "wire_api": "openai-completions",
+  "model": "deepseek-v4.1-flash-1017",
+  "reasoning_effort": "high",
+  "api_key_env": "CHATANYWHERE_API_KEY",
+  "credential_source": "windows_dpapi",
+  "credential_present": true,
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "json_events": false,
+  "home_source": "adapter_config",
+  "model_patch_sha256": "6a4f1fdea9dca5f3894349055dfa8b639b3a195bc82f6aba986f24ea087020ab"
+}

@@ -30,6 +30,10 @@ export class WorkBuddyQueueAdapter {
       coordinated_expiry: config.coordinated_expiry === true,
       task_execution_protocol: this.taskExecutionProtocol,
       native_skill_installation: 'unknown',
+      tool_bench_mcp_enabled: config.tool_bench_mcp_enabled === true,
+      tool_bench_mcp_url: config.tool_bench_mcp_enabled === true ? (process.env.TOOL_BENCH_MCP_URL ?? 'http://127.0.0.1:17123/mcp') : null,
+      tool_bench_control_root_configured: config.tool_bench_mcp_enabled === true ? Boolean(process.env.HARNESS_EVAL_TOOL_BENCH_CONTROL_ROOT) : false,
+      tool_bench_expected_tools_sha256: config.tool_bench_mcp_enabled === true ? (process.env.TOOL_BENCH_EXPECTED_TOOLS_SHA256 ?? null) : null,
       session_evidence_requested: config.session_evidence === true,
       internal_trace: 'unavailable',
     };
@@ -41,6 +45,20 @@ export class WorkBuddyQueueAdapter {
     const missing = [];
     for (const name of [QUEUE_ENV, WORKSPACE_ENV]) if (!process.env[name] || !path.isAbsolute(process.env[name])) missing.push(name);
     if (config.workspace_root_env !== WORKSPACE_ENV) missing.push('workspace_root_env');
+    if (config.tool_bench_mcp_enabled === true) {
+      const controlRoot = process.env.HARNESS_EVAL_TOOL_BENCH_CONTROL_ROOT;
+      const sshTarget = process.env.TOOL_BENCH_SSH_TARGET;
+      const expectedToolsHash = process.env.TOOL_BENCH_EXPECTED_TOOLS_SHA256;
+      const toolsSchemaPath = process.env.TOOL_BENCH_TOOLS_SCHEMA_PATH;
+      if (!controlRoot || !path.isAbsolute(controlRoot)) missing.push('tool_bench_control_root');
+      if (typeof sshTarget !== 'string' || !/^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+$/.test(sshTarget)) missing.push('tool_bench_ssh_target');
+      if (typeof expectedToolsHash !== 'string' || !/^[a-f0-9]{64}$/.test(expectedToolsHash)) missing.push('tool_bench_expected_tools_sha256');
+      if (typeof toolsSchemaPath !== 'string' || !path.isAbsolute(toolsSchemaPath)) missing.push('tool_bench_tools_schema_path');
+      try {
+        const endpoint = new URL(process.env.TOOL_BENCH_MCP_URL ?? 'http://127.0.0.1:17123/mcp');
+        if (endpoint.protocol !== 'http:' || !['127.0.0.1', 'localhost', '[::1]'].includes(endpoint.hostname) || endpoint.port !== '17123' || endpoint.pathname !== '/mcp') missing.push('tool_bench_loopback_endpoint');
+      } catch { missing.push('tool_bench_loopback_endpoint'); }
+    }
     if (!Number.isInteger(timeoutSeconds) || timeoutSeconds < 1 || timeoutSeconds > 86400) missing.push('timeout_seconds');
     if (!['manual', 'scheduled', 'unknown'].includes(config.trigger_source ?? 'unknown')) missing.push('trigger_source');
     return missing.length ? { status: 'not_admitted', missing, reason: 'Queue mode requires absolute queue/workspace environment roots, a valid trigger source and a positive integer timeout.' } : { status: 'ready', missing: [] };
@@ -55,7 +73,9 @@ export class WorkBuddyQueueAdapter {
     const task = {
       run_id: context.runId, case_id: context.caseId, prompt: context.prompt,
       workspace_dir: context.workspaceDir,
-      inputs: [{ path: context.inputRelativePath.replaceAll('\\', '/'), sha256: context.inputSha256 }],
+      inputs: context.inputRelativePath && context.inputSha256
+        ? [{ path: context.inputRelativePath.replaceAll('\\', '/'), sha256: context.inputSha256 }]
+        : [],
       expected_artifacts: context.expectedArtifacts, timeout_seconds: context.timeoutSeconds,
     };
     const published = await publishTask(task, { queueRoot: process.env[QUEUE_ENV], authorizedRoot: process.env[WORKSPACE_ENV] });

@@ -11,6 +11,8 @@ import { getAdapter } from '../adapters/registry.mjs';
 import { resolveWorkBuddyWorkspaceRoot } from '../adapters/workbuddy.mjs';
 import { captureCodexPromptEvidence } from './codex-prompt-evidence.mjs';
 import { workspaceSnapshot, compareSnapshots } from './workspace-snapshot.mjs';
+import { activateToolBenchRun, archiveAndDeactivateToolBenchRun, startToolBenchTunnel, stopToolBenchTunnel } from './tool-bench-run-state.mjs';
+import { inspectToolBenchEndpoint, canonicalToolsHash } from '../connectors/tool-bench-mcp/endpoint-inspection.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKBUDDY_WORKSPACE_ROOT_ENV = 'HARNESS_EVAL_WORKBUDDY_ROOT';
@@ -21,7 +23,7 @@ function isConnectorQueueMode(productId, config) {
 }
 
 function usage() {
-  console.log('Usage:\n  node automation开发/run-eval.mjs codex-model show|set <model>|reset\n  node automation开发/run-eval.mjs credential deepseek set|status|remove\n  node automation开发/run-eval.mjs prepare --case <case.json> --harness <product_id> [--config <config.json>]\n  node automation开发/run-eval.mjs run --case <case.json> --harness <product_id> [--config <config.json>] [--score-spreadsheetbench-answer <answer.xlsx> --score-spreadsheetbench-evaluator <evaluation.py> --score-spreadsheetbench-revision <commit> --score-spreadsheetbench-output <new-dir>]\n  node automation开发/run-eval.mjs verify --run-dir <archived-run> --output-dir <new-dir> [--artifact <path>] [--answer <answer.xlsx> --recalculated-output <file.xlsx> --recalculated-from-sha256 <sha256> --recalculation-method <description> --evaluator <evaluation.py> --evaluator-revision <commit>]');
+  console.log('Usage:\n  node automation开发/run-eval.mjs codex-model show|set <model>|reset\n  node automation开发/run-eval.mjs credential deepseek|chatanywhere set|status|remove\n  node automation开发/run-eval.mjs prepare --case <case.json> --harness <product_id> [--config <config.json>]\n  node automation开发/run-eval.mjs run --case <case.json> --harness <product_id> [--config <config.json>] [--score-spreadsheetbench-answer <answer.xlsx> --score-spreadsheetbench-evaluator <evaluation.py> --score-spreadsheetbench-revision <commit> --score-spreadsheetbench-output <new-dir>]\n  node automation开发/run-eval.mjs verify --run-dir <archived-run> --output-dir <new-dir> [--artifact <path>] [--answer <answer.xlsx> --recalculated-output <file.xlsx> --recalculated-from-sha256 <sha256> --recalculation-method <description> --evaluator <evaluation.py> --evaluator-revision <commit>]');
 }
 
 function option(args, name, fallback = null) {
@@ -256,6 +258,17 @@ export async function main(argv = process.argv.slice(2)) {
       insideRoot(path.join('automation开发', 'runner', 'deepseek-credential.mjs')),
     );
   }
+  if (command === 'run' && adapterConfig.tool_bench_mcp_enabled === true) {
+    adapterImplementationPaths.push(insideRoot(path.join('automation开发', 'connectors', 'tool-bench-mcp', 'stdio-bridge.mjs')));
+    adapterImplementationPaths.push(insideRoot(path.join('automation开发', 'connectors', 'tool-bench-mcp', 'endpoint-inspection.mjs')));
+    adapterImplementationPaths.push(insideRoot(path.join('automation开发', 'runner', 'tool-bench-run-state.mjs')));
+  }
+  if (command === 'run' && (
+    (productId === 'codex' && adapterConfig.provider_mode === 'chatanywhere_api')
+    || (productId === 'dsh' && typeof adapterConfig.model_patch === 'string' && adapterConfig.model_patch.toLowerCase().includes('chatanywhere'))
+  )) {
+    adapterImplementationPaths.push(insideRoot(path.join('automation开发', 'runner', 'chatanywhere-credential.mjs')));
+  }
   if (productId === 'workbuddy' && adapterConfig.entry_id === 'workbuddy-local-scheduler-uia') {
     adapterImplementationPaths.push(
       insideRoot(path.join('automation开发', 'adapters', 'workbuddy-scheduler-uia.mjs')),
@@ -274,9 +287,9 @@ export async function main(argv = process.argv.slice(2)) {
   const runnerModulePath = fileURLToPath(import.meta.url);
   const runnerModuleHash = await digest(runnerModulePath);
   const promptSource = insideRoot(task.prompt_source);
-  const inputSource = insideRoot(task.input_source);
+  const inputSource = task.input_source ? insideRoot(task.input_source) : null;
   await assertRealPathInsideRoot(promptSource, 'Prompt source');
-  await assertRealPathInsideRoot(inputSource, 'Input source');
+  if (inputSource) await assertRealPathInsideRoot(inputSource, 'Input source');
   if (wantsVerification) await assertRealPathInsideRoot(insideRoot(verifyExpectedArg), 'Evaluator-side text expectation');
   if (wantsSpreadsheetScoring) {
     for (const [label, value] of [['SpreadsheetBench answer', scoreAnswerArg], ['SpreadsheetBench evaluator', scoreEvaluatorArg]]) await assertRealPathInsideRoot(insideRoot(value), label);
@@ -292,7 +305,7 @@ export async function main(argv = process.argv.slice(2)) {
     if (!skillBody) throw new Error('WorkBuddy task execution Skill is empty.');
     effectivePrompt = `# WorkBuddy HarnessEval execution contract\n\n${skillBody}\n\n---\n\n# Case task prompt\n\n${effectivePrompt.trim()}\n`;
   }
-  const inputHash = await digest(inputSource);
+  const inputHash = inputSource ? await digest(inputSource) : null;
   if (!promptStat.isFile()) throw new Error('Prompt source must be a file.');
   if (adapter.productId !== productId || !adapterConfig.entry_id) throw new Error('Selected adapter and config must define matching product_id and entry_id.');
 
@@ -320,10 +333,10 @@ export async function main(argv = process.argv.slice(2)) {
     if (!useTempWorkspace) throw new Error('Product workspace isolation is required. Set temp_workspace=true or configure a dedicated workspace root.');
     productWorkspace = path.join(os.tmpdir(), 'HarnessEval', runId);
   }
-  const inputRel = task.input_destination ?? path.join('inputs', path.basename(inputSource));
-  const runInput = path.resolve(productWorkspace, inputRel);
+  const inputRel = inputSource ? (task.input_destination ?? path.join('inputs', path.basename(inputSource))) : null;
+  const runInput = inputRel ? path.resolve(productWorkspace, inputRel) : null;
   if (wantsVerification && isWithinPath(productWorkspace, insideRoot(verifyExpectedArg))) throw new Error('Expected answer must not be inside the product workspace.');
-  if (!runInput.startsWith(productWorkspace + path.sep)) throw new Error('Input destination escapes product workspace.');
+  if (runInput && !runInput.startsWith(productWorkspace + path.sep)) throw new Error('Input destination escapes product workspace.');
   const promptRel = 'prompt.md';
   const outputDir = path.join(productWorkspace, 'outputs');
   await mkdir(runDir);
@@ -331,15 +344,17 @@ export async function main(argv = process.argv.slice(2)) {
   await mkdir(productWorkspace, { recursive: true });
   const canonicalProductWorkspace = await realpath(productWorkspace);
   if (isWithinPath(await realpath(root), canonicalProductWorkspace)) throw new Error('Product workspace resolves inside the project repository.');
-  await mkdir(path.dirname(runInput), { recursive: true });
+  if (runInput) await mkdir(path.dirname(runInput), { recursive: true });
   await mkdir(outputDir, { recursive: true });
   await writeFile(path.join(runDir, promptRel), effectivePrompt, 'utf8');
   await copyFile(casePath, path.join(runDir, 'case.json'));
   await writeFile(path.join(productWorkspace, promptRel), effectivePrompt, 'utf8');
-  await copyFile(inputSource, runInput);
-  const evidenceInput = path.join(runDir, inputRel);
-  await mkdir(path.dirname(evidenceInput), { recursive: true });
-  await copyFile(inputSource, evidenceInput);
+  if (inputSource && runInput && inputRel) {
+    await copyFile(inputSource, runInput);
+    const evidenceInput = path.join(runDir, inputRel);
+    await mkdir(path.dirname(evidenceInput), { recursive: true });
+    await copyFile(inputSource, evidenceInput);
+  }
   const promptHash = await digest(path.join(runDir, promptRel));
   const caseHash = await digest(path.join(runDir, 'case.json'));
   const apiKeyEnvName = /^[A-Za-z_][A-Za-z0-9_]*$/.test(adapterConfig.api_key_env ?? '')
@@ -349,8 +364,14 @@ export async function main(argv = process.argv.slice(2)) {
     DSH_HOME: Boolean(process.env.DSH_HOME),
     [apiKeyEnvName]: Boolean(process.env[apiKeyEnvName]),
     DEEPSEEK_API_KEY_SOURCE: process.env.HARNESS_EVAL_DEEPSEEK_CREDENTIAL_SOURCE ?? (process.env[apiKeyEnvName] ? 'process_environment' : 'none'),
+    CHATANYWHERE_API_KEY_SOURCE: process.env.HARNESS_EVAL_CHATANYWHERE_CREDENTIAL_SOURCE ?? (process.env.CHATANYWHERE_API_KEY ? 'process_environment' : 'none'),
+    CHATANYWHERE_API_KEY: Boolean(process.env.CHATANYWHERE_API_KEY),
     WORKBUDDY_ACCESS_TOKEN: Boolean(process.env.WORKBUDDY_ACCESS_TOKEN),
     [WORKBUDDY_WORKSPACE_ROOT_ENV]: Boolean(process.env[WORKBUDDY_WORKSPACE_ROOT_ENV]),
+    HARNESS_EVAL_TOOL_BENCH_CONTROL_ROOT: Boolean(process.env.HARNESS_EVAL_TOOL_BENCH_CONTROL_ROOT),
+    TOOL_BENCH_MCP_URL: process.env.TOOL_BENCH_MCP_URL ?? 'http://127.0.0.1:17123/mcp',
+    TOOL_BENCH_SSH_TARGET: process.env.TOOL_BENCH_SSH_TARGET ?? null,
+    TOOL_BENCH_EXPECTED_TOOLS_SHA256: process.env.TOOL_BENCH_EXPECTED_TOOLS_SHA256 ?? null,
   };
   const configSnapshot = {
     product_id: productId,
@@ -406,7 +427,7 @@ export async function main(argv = process.argv.slice(2)) {
     task: {
       task_id: task.dataset_task_id, task_version: task.case_version, contract_version: '0.2', case_id: task.case_id,
       package_ref: 'case.json', case_sha256: caseHash.sha256, prompt_sha256: promptHash.sha256, prompt_source_sha256: promptSourceHash.sha256,
-      inputs: [{ path: inputRel.replaceAll('\\', '/'), size_bytes: inputHash.size_bytes, sha256: inputHash.sha256 }]
+      inputs: inputHash && inputRel ? [{ path: inputRel.replaceAll('\\', '/'), size_bytes: inputHash.size_bytes, sha256: inputHash.sha256 }] : []
     },
     environment: { os: process.platform, workspace_ref: workspaceRef, permissions: permissionDescription, limits: task.limits ?? null },
     model_condition: modelCondition,
@@ -475,9 +496,33 @@ export async function main(argv = process.argv.slice(2)) {
     profile, timeoutSeconds,
     interactive: Boolean(process.stdin.isTTY && process.stdout.isTTY),
     task,
-    ...(productId === 'yuanbao-web' ? { taskEvidence: { caseSha256: caseHash.sha256, promptSha256: (await digest(path.join(productWorkspace, promptRel))).sha256, inputSha256: (await digest(runInput)).sha256 } } : {}),
+    ...(productId === 'yuanbao-web' ? { taskEvidence: { caseSha256: caseHash.sha256, promptSha256: (await digest(path.join(productWorkspace, promptRel))).sha256, ...(runInput ? { inputSha256: (await digest(runInput)).sha256 } : {}) } } : {}),
     environment: safeCredentialEnvironment,
   });
+  if (adapterConfig.tool_bench_mcp_enabled === true) {
+    const taskPackageHash = task.task_package_sha256;
+    const toolsHash = task.exposure_tools_sha256;
+    const toolsSchemaPath = task.tool_bench_schema_path ? insideRoot(task.tool_bench_schema_path) : null;
+    const admissionMissing = [];
+    if (task.dataset_id !== 'tool-bench') admissionMissing.push('tool_bench_case_identity');
+    if (task.exposure_status !== 'frozen' || typeof taskPackageHash !== 'string' || !/^[a-f0-9]{64}$/.test(taskPackageHash)) admissionMissing.push('tool_bench_task_package_not_frozen');
+    if (task.exposure_variant !== 'relevant_only') admissionMissing.push('tool_bench_exposure_variant');
+    if (typeof toolsHash !== 'string' || !/^[a-f0-9]{64}$/.test(toolsHash) || toolsHash !== process.env.TOOL_BENCH_EXPECTED_TOOLS_SHA256) admissionMissing.push('tool_bench_case_tools_hash');
+    if (typeof task.tool_bench_schema_path !== 'string' || !task.tool_bench_schema_path) admissionMissing.push('tool_bench_frozen_schema_path');
+    else {
+      try {
+        await assertRealPathInsideRoot(toolsSchemaPath, 'Frozen Tool-Bench MCP schema');
+        const frozenSchema = await loadJson(toolsSchemaPath);
+        if (!Array.isArray(frozenSchema.tools) || canonicalToolsHash(frozenSchema.tools) !== toolsHash) admissionMissing.push('tool_bench_frozen_schema_hash_mismatch');
+      } catch { admissionMissing.push('tool_bench_frozen_schema_unreadable'); }
+    }
+    if (!toolsSchemaPath || !process.env.TOOL_BENCH_TOOLS_SCHEMA_PATH || path.resolve(process.env.TOOL_BENCH_TOOLS_SCHEMA_PATH) !== path.resolve(toolsSchemaPath)) admissionMissing.push('tool_bench_bridge_schema_path_mismatch');
+    if (admissionMissing.length) {
+      preflight.status = 'not_admitted';
+      preflight.missing = [...(preflight.missing ?? []), ...admissionMissing];
+      preflight.reason = 'Tool-Bench case package and exposure/tool schema hashes must be frozen before a product can start.';
+    }
+  }
   if (preflight.status !== 'ready') {
     run.execution.status = 'not_admitted';
     run.execution.error = { code: 'adapter_not_admitted', message: preflight.reason, phase: 'preflight' };
@@ -495,6 +540,69 @@ export async function main(argv = process.argv.slice(2)) {
     process.exitCode = 2;
     return;
   }
+
+  let toolBenchActive = null;
+  let toolBenchTunnel = null;
+  const stopToolBenchTransport = async () => {
+    if (!toolBenchTunnel) return null;
+    const tunnelResult = await stopToolBenchTunnel(toolBenchTunnel, runDir);
+    toolBenchTunnel = null;
+    const logRef = tunnelResult?.log_ref;
+    if (logRef) run.evidence.push({ kind: 'ssh_tunnel_log', path: logRef, sha256: (await digest(path.join(runDir, logRef))).sha256, source: 'runner_ssh_tunnel' });
+    run.observations.push({ source: 'tool_bench_ssh_tunnel', status: 'closed', pid: tunnelResult?.pid ?? null, exit_code: tunnelResult?.exit_code ?? null, signal: tunnelResult?.signal ?? null });
+    return tunnelResult;
+  };
+  if (adapterConfig.tool_bench_mcp_enabled === true) {
+    try {
+      const frozenSchemaSource = insideRoot(task.tool_bench_schema_path);
+      const frozenSchemaArchive = path.join(runDir, 'tool-bench-mcp', 'expected-tools-schema.json');
+      await mkdir(path.dirname(frozenSchemaArchive), { recursive: true });
+      await copyFile(frozenSchemaSource, frozenSchemaArchive);
+      run.evidence.push({ kind: 'mcp_expected_schema', path: 'tool-bench-mcp/expected-tools-schema.json', sha256: (await digest(frozenSchemaArchive)).sha256, source: 'case_frozen_tool_list' });
+      toolBenchTunnel = await startToolBenchTunnel();
+      const admission = await inspectToolBenchEndpoint();
+      const admissionDir = path.join(runDir, 'tool-bench-mcp');
+      await mkdir(admissionDir, { recursive: true });
+      const admissionPath = path.join(admissionDir, 'admission-tools.json');
+      await writeFile(admissionPath, JSON.stringify(admission, null, 2) + '\n', 'utf8');
+      run.evidence.push({ kind: 'mcp_tools_schema', path: 'tool-bench-mcp/admission-tools.json', sha256: (await digest(admissionPath)).sha256, source: 'runner_loopback_admission_probe' });
+      run.observations.push({ source: 'tool_bench_mcp_admission', status: admission.tools_sha256 === process.env.TOOL_BENCH_EXPECTED_TOOLS_SHA256 ? 'schema_match' : 'schema_mismatch', tool_count: admission.tool_count, tools_sha256: admission.tools_sha256 });
+      if (admission.tools_sha256 !== process.env.TOOL_BENCH_EXPECTED_TOOLS_SHA256) {
+        run.execution.status = 'not_admitted';
+        run.execution.error = { code: 'tool_bench_schema_mismatch', message: 'Observed MCP tool schema does not match the frozen expected tools hash.', phase: 'preflight' };
+        run.missing.push({ field: 'tool_bench_mcp_tools_schema', reason: 'mismatch', detail: 'The product was not started.' });
+        await stopToolBenchTransport();
+        await event('preflight', 'tool_bench_tools_schema_mismatch', 'not_admitted', { observed_sha256: admission.tools_sha256 });
+        await recordEventEvidence(); await save(); await saveTrace();
+        console.error(`Tool-Bench MCP schema mismatch. Prepared run: ${runDir}`);
+        process.exitCode = 2;
+        return;
+      }
+      toolBenchActive = await activateToolBenchRun({ runId, timeoutSeconds, projectRoot: root, workspaceDir: productWorkspace });
+      run.observations.push({ source: 'tool_bench_run_state', status: 'active', run_id: runId, control_root_configured: true });
+      await event('prepare', 'tool_bench_run_activated', 'ok', { run_id: runId, tools_sha256: admission.tools_sha256 });
+    } catch (error) {
+      await stopToolBenchTransport();
+      run.execution.status = 'blocked';
+      run.execution.error = { code: 'tool_bench_admission_probe_failed', message: 'Tool-Bench SSH tunnel or MCP endpoint preflight did not complete.', phase: 'preflight' };
+      run.missing.push({ field: 'tool_bench_mcp_admission', reason: 'blocked', detail: error.message.slice(0, 240) });
+      await event('preflight', 'tool_bench_admission_probe_failed', 'blocked', { error_code: 'transport_or_protocol_unavailable' });
+      await recordEventEvidence(); await save(); await saveTrace();
+      console.error(`Tool-Bench admission blocked. Prepared run: ${runDir}`);
+      process.exitCode = 2;
+      return;
+    }
+  }
+
+  const closeToolBench = async () => {
+    if (!toolBenchActive) return;
+    const archived = await archiveAndDeactivateToolBenchRun({ active: toolBenchActive, runDir, closeTransport: stopToolBenchTransport });
+    toolBenchActive = null;
+    const logRef = archived?.event_log_ref;
+    if (logRef) run.evidence.push({ kind: 'mcp_boundary_events', path: logRef, sha256: (await digest(path.join(runDir, logRef))).sha256, source: 'tool_bench_mcp_bridge' });
+    run.observations.push({ source: 'tool_bench_run_state', status: 'deactivated', run_id: runId, event_log_archived: Boolean(logRef) });
+    await event('observe', 'tool_bench_run_deactivated', 'ok', { event_log_archived: Boolean(logRef) });
+  };
 
   const prompt = await readFile(path.join(runDir, promptRel), 'utf8');
   let workspaceBefore = null;
@@ -516,7 +624,7 @@ export async function main(argv = process.argv.slice(2)) {
     try {
       const execution = Promise.resolve().then(() => adapter.runSession({
         config: adapterConfig, prompt, profile, runId, caseId: task.case_id, timeoutSeconds, runDir, workspaceDir: productWorkspace,
-        inputPath: runInput, inputRelativePath: inputRel, inputSha256: inputHash.sha256,
+        inputPath: runInput, inputRelativePath: inputRel, inputSha256: inputHash?.sha256 ?? null,
         expectedArtifacts: task.expected_artifacts ?? [], outputDir, signal: controller.signal,
       })).then(validateSessionResult);
       const timeout = new Promise(resolve => {
@@ -551,9 +659,11 @@ export async function main(argv = process.argv.slice(2)) {
       } catch (error) { if (error.code !== 'ENOENT') throw error; }
       result.missing.push('queue_state_requires_manual_reconciliation');
     }
-    const expectedInput = { path: inputRel.replaceAll('\\', '/'), sha256: inputHash.sha256 };
+    const expectedInput = inputHash && inputRel ? { path: inputRel.replaceAll('\\', '/'), sha256: inputHash.sha256 } : null;
     const submittedInputs = result.submission_evidence.inputs;
-    const inputEvidenceMatches = submittedInputs.length === 0 || (submittedInputs.length === 1 && submittedInputs[0].path === expectedInput.path && submittedInputs[0].sha256 === expectedInput.sha256);
+    const inputEvidenceMatches = expectedInput
+      ? submittedInputs.length === 0 || (submittedInputs.length === 1 && submittedInputs[0].path === expectedInput.path && submittedInputs[0].sha256 === expectedInput.sha256)
+      : submittedInputs.length === 0;
     if (result.submission_status === 'submitted' && (!result.submission_evidence.prompt_submitted || !inputEvidenceMatches)) {
       result = {
         submission_status: 'unconfirmed', submission_evidence: { prompt_submitted: false, inputs: [] },
@@ -601,7 +711,7 @@ export async function main(argv = process.argv.slice(2)) {
   } else {
     let codexHomeDir = null;
     let codexHomeCleanup = async ({ processTreeSafe = true } = {}) => null;
-    if (productId === 'codex' && adapterConfig.provider_mode === 'deepseek_api') {
+    if (productId === 'codex' && ['deepseek_api', 'chatanywhere_api'].includes(adapterConfig.provider_mode)) {
       const runtimeBase = path.join(os.tmpdir(), 'HarnessEvalRuntime');
       const runtimeRoot = path.join(runtimeBase, runId);
       codexHomeDir = path.join(runtimeRoot, 'codex-home');
@@ -628,11 +738,17 @@ export async function main(argv = process.argv.slice(2)) {
     }
     let invocation;
     try {
-      invocation = adapter.buildInvocation(adapterConfig, {
+      invocation = await adapter.buildInvocation(adapterConfig, {
         prompt, profile, runDir, workspaceDir: productWorkspace, rootDir: root, dshHome, codexHomeDir,
       });
+      if (adapterConfig.tool_bench_mcp_enabled === true && productId === 'dsh') {
+        const generatedMcpConfig = path.join(productWorkspace, '.mcp.json');
+        await copyFile(generatedMcpConfig, path.join(runDir, 'adapter-config.snapshot.mcp.json'));
+        run.evidence.push({ kind: 'mcp_client_config', path: 'adapter-config.snapshot.mcp.json', sha256: (await digest(path.join(runDir, 'adapter-config.snapshot.mcp.json'))).sha256, source: 'dsh_project_workspace' });
+      }
     } catch (error) {
       await codexHomeCleanup();
+      await closeToolBench();
       throw error;
     }
     const executable = invocation.executable;
@@ -651,6 +767,7 @@ export async function main(argv = process.argv.slice(2)) {
       });
     } catch (error) {
       await codexHomeCleanup();
+      await closeToolBench();
       throw error;
     }
     const processStartedAt = now();
@@ -709,7 +826,7 @@ export async function main(argv = process.argv.slice(2)) {
     run.submission.status = 'unconfirmed';
     if (stdinErrorCode) run.submission.transformations.push({ type: 'prompt_stdin_error', code: stdinErrorCode });
     run.submission.actual_prompt_ref = promptRel;
-    run.submission.actual_inputs = [{ path: inputRel.replaceAll('\\', '/'), sha256: inputHash.sha256 }];
+    run.submission.actual_inputs = inputHash && inputRel ? [{ path: inputRel.replaceAll('\\', '/'), sha256: inputHash.sha256 }] : [];
     run.execution.status = timedOut ? 'timed_out' : result.signal ? 'interrupted' : result.code === 0 ? 'completed' : 'failed';
     run.execution.completion_evidence = {
       process_id: child.pid ?? null,
@@ -741,6 +858,7 @@ export async function main(argv = process.argv.slice(2)) {
     ];
     run.observations = [adapter.normalizeObservation({ stdoutRef: 'stdout.log', stderrRef: 'stderr.log', processResult: result, timedOut })];
   }
+  await closeToolBench();
   await save();
   run.timing.ended_at = now();
   const expected = task.expected_artifacts ?? [];
@@ -755,7 +873,7 @@ export async function main(argv = process.argv.slice(2)) {
       run.observations.push({source:'runner_workspace_snapshot',status:comparison.status,scope:comparison.scope,changes_ref:'workspace-changes.json'});
     } else run.missing.push({field:'workspace_after_snapshot',reason:'unknown',detail:'Execution not completed; product may still be active.'});
   }
-  if (run.execution.status === 'completed') {
+  if (run.execution.status === 'completed' && inputHash && runInput && inputRel) {
     try {
       const inputInfo = await lstat(runInput);
       const actualPath = await realpath(runInput);

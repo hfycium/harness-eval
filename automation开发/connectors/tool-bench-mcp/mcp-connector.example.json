@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "harness-eval-tool-bench-hubspot": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["<ABSOLUTE_PATH_TO_TOOL_BENCH_CONNECTOR>/stdio-bridge.mjs"],
+      "cwd": "<ABSOLUTE_PATH_TO_TOOL_BENCH_CONNECTOR>",
+      "runtime": { "type": "node", "version": ">=18.0.0" },
+      "env": {
+        "TOOL_BENCH_MCP_URL": "http://127.0.0.1:17123/mcp",
+        "HARNESS_EVAL_TOOL_BENCH_CONTROL_ROOT": "<ABSOLUTE_PATH_TO_PRIVATE_CONTROL_ROOT>",
+        "TOOL_BENCH_TOOLS_SCHEMA_PATH": "<ABSOLUTE_PATH_TO_FROZEN_TOOLS_SCHEMA_JSON>",
+        "TOOL_BENCH_EXPECTED_TOOLS_SHA256": "<FROZEN_TOOLS_SCHEMA_SHA256>"
+      },
+      "timeout": 30000
+    }
+  }
+}

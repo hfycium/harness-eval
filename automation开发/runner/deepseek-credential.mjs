@@ -67,7 +67,13 @@ async function selectedProviderMode(args) {
       return null;
     }
   }
-  if (harness === 'dsh') return 'deepseek_api';
+  if (harness === 'dsh') {
+    if (configArg) try {
+      const config = JSON.parse(await readFile(path.resolve(projectRoot, configArg), 'utf8'));
+      if (typeof config.model_patch === 'string' && config.model_patch.toLowerCase().includes('chatanywhere')) return null;
+    } catch { return null; }
+    return 'deepseek_api';
+  }
   if (harness !== 'codex') return null;
 
   let configPath = configArg ? path.resolve(projectRoot, configArg) : null;

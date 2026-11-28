@@ -1,0 +1,15 @@
+{
+  "product_id": "dsh",
+  "entry_id": "dsh-headless",
+  "executable": "dsh.cmd",
+  "profile": "headless",
+  "model_patch": "automation开发/configs/dsh.chatanywhere-high.patch.yml",
+  "model": "deepseek-v4.1-flash-1017",
+  "reasoning_effort": "high",
+  "api_key_env": "CHATANYWHERE_API_KEY",
+  "tool_bench_mcp_enabled": true,
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "automation_mode": "automatic",
+  "notes": "The adapter writes a project-scoped .mcp.json into this run's isolated workspace. Existing DSH profiles and user MCP configuration are not modified."
+}

@@ -1,0 +1,22 @@
+- id: agent-default-model
+  config:
+    provider: chatanywhere
+    model: deepseek-v4.1-flash-1017
+    reasoningEffort: high
+- id: llm-pi-ai
+  config:
+    providers:
+      chatanywhere:
+        apiKeyEnv: CHATANYWHERE_API_KEY
+        api: openai-completions
+        baseURL: https://api.chatanywhere.tech/v1
+        reasoning: high
+        models:
+          - id: deepseek-v4.1-flash-1017
+            compat:
+              thinkingFormat: deepseek
+            reasoningEfforts:
+              off:
+              low: low
+              high: high
+              max: max

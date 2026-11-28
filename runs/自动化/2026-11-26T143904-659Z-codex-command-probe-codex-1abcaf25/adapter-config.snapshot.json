@@ -1,0 +1,22 @@
+{
+  "product_id": "codex",
+  "entry_id": "codex-cli-exec",
+  "executable": "codex.cmd",
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "sandbox": "workspace-write",
+  "windows_sandbox_implementation": "mxc",
+  "ephemeral": true,
+  "capture_prompt_evidence": false,
+  "account_session_diagnostic": false,
+  "workspace_snapshot": false,
+  "provider_mode": "chatanywhere_api",
+  "provider_id": "chatanywhere",
+  "base_url": "https://api.chatanywhere.tech/v1",
+  "wire_api": "responses",
+  "model": "deepseek-v4.1-flash-1017",
+  "reasoning_effort": "high",
+  "api_key_env": "CHATANYWHERE_API_KEY",
+  "credential_source": "none",
+  "credential_present": false
+}

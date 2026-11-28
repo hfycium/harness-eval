@@ -1,0 +1,11 @@
+{
+  "case_id": "codex-command-probe",
+  "case_version": "0.1",
+  "dataset": "synthetic-smoke",
+  "dataset_task_id": "codex-command-probe",
+  "prompt_source": "cases/smoke/codex-command-probe/prompt.md",
+  "input_source": "cases/smoke/codex-command-probe/inputs/input.txt",
+  "input_destination": "inputs/input.txt",
+  "expected_artifacts": ["outputs/probe.txt"],
+  "limits": { "timeout_seconds": 180 }
+}

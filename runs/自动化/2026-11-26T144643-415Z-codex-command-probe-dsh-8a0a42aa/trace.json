@@ -1,0 +1,184 @@
+{
+  "trace_version": "0.2",
+  "run_id": "2026-11-26T144643-415Z-codex-command-probe-dsh-8a0a42aa",
+  "product": {
+    "product_id": "dsh",
+    "entry_id": "dsh-headless",
+    "product_version": null,
+    "version_evidence": null,
+    "model": null,
+    "model_evidence": null,
+    "mode": null
+  },
+  "adapter": {
+    "adapter_id": "dsh",
+    "revision": "0.2.0",
+    "launcher_version": "0.2.0",
+    "launcher_implementation_ref": "../../../automation开发/runner/main.mjs",
+    "launcher_implementation_sha256": "31cebc94875bc750affb4abc1963c9969bf46dbc4563e68f11dee8051c1ca703",
+    "implementation_ref": "../../../automation开发/adapters/dsh.mjs",
+    "implementation_sha256": "96ca47cdd5170f7de4bfea90bb819a6308da361b28718d507738f9bbf6a3c97e",
+    "implementation_files": [
+      {
+        "ref": "automation开发/adapters/dsh.mjs",
+        "sha256": "96ca47cdd5170f7de4bfea90bb819a6308da361b28718d507738f9bbf6a3c97e",
+        "size_bytes": 5607
+      },
+      {
+        "ref": "automation开发/runner/deepseek-credential.mjs",
+        "sha256": "94ae1346538d488dca9a9ecc64ee01725e8a9e81445327a44a7c225e3db29d4a",
+        "size_bytes": 6251
+      },
+      {
+        "ref": "automation开发/runner/chatanywhere-credential.mjs",
+        "sha256": "d20319a060c0a5d7c297593d71e44b02b0bcf822f97d3b8a0186c3c47db12048",
+        "size_bytes": 6561
+      }
+    ],
+    "config_ref": "adapter-config.snapshot.json",
+    "config_sha256": "116fb1b67017b23dde02d60ee672bb1a7d22e1e00a00fba5d1cd4d78b6c455dc",
+    "source_config_ref": "../../../automation开发/configs/dsh-chatanywhere.example.json",
+    "source_config_sha256": "1c31501c8a8b77e62e654b15737610d0308c343c6ebf41f67d8e481039437874",
+    "automation_mode": "automatic",
+    "profile": "spreadsheetbench-headless"
+  },
+  "task": {
+    "task_id": "codex-command-probe",
+    "task_version": "0.1",
+    "contract_version": "0.2",
+    "case_id": "codex-command-probe",
+    "package_ref": "case.json",
+    "case_sha256": "f13d0faf70826650da3ec59038d21808f9a0465d0c337ca76183c5b728f9ddf6",
+    "prompt_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "prompt_source_sha256": "5210ff9465abcb9d107e4bf97bd9b3a986bd62a44fee06dbdfcb02adc3002c2a",
+    "inputs": [
+      {
+        "path": "inputs/input.txt",
+        "size_bytes": 36,
+        "sha256": "976a7d98bc20cd1e91a428e853a0a64d38da06aaf7314e883c5c1391893f4ea6"
+      }
+    ]
+  },
+  "model_condition": {
+    "provider_id": "chatanywhere",
+    "endpoint_ref": "https://api.chatanywhere.tech/v1",
+    "effective_endpoint_ref": null,
+    "wire_api": "openai-completions",
+    "requested_model": "deepseek-v4.1-flash-1017",
+    "effective_model": null,
+    "requested_reasoning_effort": "high",
+    "effective_reasoning_effort": null,
+    "credential_source": "windows_dpapi",
+    "credential_present": true,
+    "process_environment_present": true,
+    "match_status": "unknown",
+    "evidence_refs": [
+      "model-condition/dsh.chatanywhere-high.patch.yml"
+    ]
+  },
+  "execution": {
+    "status": "failed",
+    "completion_evidence": {
+      "process_id": 38092,
+      "process_started_at": "2026-11-26T14:46:43.445Z",
+      "process_exit_at": "2026-11-26T14:46:43.950Z",
+      "process_close_at": "2026-11-26T14:46:43.950Z",
+      "stdout_last_output_at": null,
+      "stdout_closed_at": "2026-11-26T14:46:43.945Z",
+      "stderr_last_output_at": "2026-11-26T14:46:43.898Z",
+      "stderr_closed_at": "2026-11-26T14:46:43.944Z",
+      "timeout_at": null,
+      "timeout_termination": null,
+      "process_exit_code": 1,
+      "signal": null,
+      "spawn_error": null,
+      "process_ended_normally": false,
+      "task_success_verified": false
+    },
+    "error": {
+      "code": "exit_1",
+      "message": "Process ended with code 1 and signal none.",
+      "phase": "execute"
+    }
+  },
+  "observations": [
+    {
+      "source": "launcher_process",
+      "process_exit_code": 1,
+      "signal": null,
+      "timed_out": false,
+      "raw_evidence_refs": [
+        "stdout.log",
+        "stderr.log"
+      ],
+      "internal_trace_available": false
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/probe.txt",
+      "evidence_path": "artifacts/outputs/probe.txt",
+      "size_bytes": null,
+      "sha256": null,
+      "collection_status": "missing"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "model_condition_config",
+      "path": "model-condition/dsh.chatanywhere-high.patch.yml",
+      "sha256": "6a4f1fdea9dca5f3894349055dfa8b639b3a195bc82f6aba986f24ea087020ab",
+      "source": "adapter_config"
+    },
+    {
+      "kind": "stdout",
+      "path": "stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "launcher"
+    },
+    {
+      "kind": "stderr",
+      "path": "stderr.log",
+      "sha256": "d82d63bb8845f9f60376c6cf66374c59a98aede7c929729b29fe096e495c7354",
+      "source": "launcher"
+    },
+    {
+      "kind": "events",
+      "path": "events.jsonl",
+      "sha256": "44d3f3673e0023b4039bda424096269fe20880589f9fa42bc74b38a10e47350f",
+      "source": "launcher"
+    }
+  ],
+  "missing": [
+    {
+      "field": "product.product_version",
+      "reason": "unknown",
+      "detail": "Not yet captured by this adapter."
+    },
+    {
+      "field": "product.model",
+      "reason": "not_visible",
+      "detail": "Model identity is not assumed from the product name."
+    },
+    {
+      "field": "environment.permissions.enforcement",
+      "reason": "unknown",
+      "detail": "Requested permission mode is recorded, but runtime enforcement is not verified."
+    },
+    {
+      "field": "artifact:outputs/probe.txt",
+      "reason": "not_collected",
+      "detail": "Expected file was not found."
+    }
+  ],
+  "verification": {
+    "status": "not_performed",
+    "method": null,
+    "evidence_refs": []
+  },
+  "scoring_gate": {
+    "artifact_status": "blocked",
+    "benchmark_status": "blocked",
+    "benchmark_reason": "Case oracle is not integrated; no benchmark score may be reported."
+  }
+}

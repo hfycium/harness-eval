@@ -1,0 +1,14 @@
+{
+  "product_id": "codex",
+  "entry_id": "codex-cli-exec",
+  "executable": "codex.cmd",
+  "provider_mode": "chatanywhere_api",
+  "model": "deepseek-v4.1-flash-1017",
+  "reasoning_effort": "high",
+  "api_key_env": "CHATANYWHERE_API_KEY",
+  "tool_bench_mcp_enabled": true,
+  "temp_workspace": true,
+  "timeout_seconds": 900,
+  "automation_mode": "automatic",
+  "notes": "Tool-Bench MCP is injected with per-invocation Codex CLI overrides. It does not modify the user's global Codex MCP configuration."
+}
