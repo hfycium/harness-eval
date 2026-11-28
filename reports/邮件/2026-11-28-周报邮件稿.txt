@@ -1,0 +1,44 @@
+邮件主题：洪锋烨｜Harness 竞品评测周报（2026 年 11 月 28 日）
+导师好，以下是本周 Harness 竞品评测工作进展。
+
+本周项目进展
+
+一、完成上周首轮产物复核。
+WorkBuddy 公式与缓存值核验、固定版本官方单题比较通过；Excel 桌面端重算仅有操作员确认，缺少独立证据，仍属部分确认。Codex 在记录的 Windows 用户和配置下排除运行环境阻塞后，完成 Runner 运行、产物归档及官方单题比较。元宝工作簿仍未完成独立重算与评分。
+首轮产物复核记录：https://github.com/hfycium/harness-eval/blob/main/docs/2026-11-23-%E9%A6%96%E8%BD%AE%E4%BA%A7%E7%89%A9%E5%A4%8D%E6%A0%B8%E8%AE%B0%E5%BD%95.md
+
+二、建设并迭代自动化评测工具。
+Runner 负责准备任务、管理运行记录和归档产物；适配器负责接入不同产品；独立评分器读取归档内容并验收。桌面产品通过 MCP Connector 队列交接任务，产品侧触发领取。
+设计亮点：桌面端通过 MCP Connector 接入，共用 run_id、运行记录、产物归档和独立验收流程。
+迭代过程：从单个产品试跑，逐步支持桌面端任务交接、结果回收、批量运行和公开题评分。不同产品能提供的操作记录不同，Connector 日志只记录任务领取和结果提交。
+自动化工具说明：https://github.com/hfycium/harness-eval/blob/main/automation%E5%BC%80%E5%8F%91/README.md
+新测试集接入流程：https://github.com/hfycium/harness-eval/blob/main/automation%E5%BC%80%E5%8F%91/docs/%E6%96%B0%E6%B5%8B%E8%AF%95%E9%9B%86%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B.md
+
+三、开展 TraceTrial E8 Windows 命令结果观察实验（CMD/Bash 适配）。
+四份产物都记录了成功样式文本与非零退出码。WorkBuddy 与豆包工作的报告和提取到的工具回执经人工核对一致。Codex、DSH、豆包工作使用 CMD 适配题，WorkBuddy 使用 Bash 适配题，因此 WorkBuddy 的退出码不与 CMD 组直接比较。
+Codex 运行日志显示执行前读取过题目夹具，违反用例限制。DSH 尚未逐项完成约束核验，部分运行的完整调用次数也无法确认，因此本轮只报告观察到的现象，不作正式通过判定或基准评分。
+元宝提示词级试跑未成功，界面回复报告退出码 127，且未见两条状态文本；由于执行模式、夹具和 Runner 工作区访问未确认，该结果仅作为接入探索记录，不计入正式 E8 评分。
+Codex/DSH 首轮复核：https://github.com/hfycium/harness-eval/blob/main/runs/%E5%A4%8D%E6%A0%B8/2026-11-24-tracetrial-e8-cmd-%E4%BA%BA%E5%B7%A5%E5%A4%8D%E6%A0%B8.md
+WorkBuddy/豆包工作工具回执复核：https://github.com/hfycium/harness-eval/blob/main/runs/%E5%A4%8D%E6%A0%B8/2026-11-25-E8%E5%8A%9E%E5%85%AC%E4%BA%A7%E5%93%81%E5%B7%A5%E5%85%B7%E5%9B%9E%E6%89%A7%E5%A4%8D%E6%A0%B8.md
+元宝提示词探索记录：https://github.com/hfycium/harness-eval/blob/main/runs/%E5%A4%8D%E6%A0%B8/2026-11-28-%E5%85%83%E5%AE%9DE8%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8E%A2%E7%B4%A2%E8%AE%B0%E5%BD%95.md
+
+四、开展 TheAgentCompany SQL 任务预实验。
+准备公开任务的本地输入和 Windows 路径适配，使用本地独立评分器检查三个输出文件。Codex、DSH、WorkBuddy、豆包工作各运行一次，均得 6/6；这是本地评分结果，不是官方 Benchmark 成绩。本题下的任务接入、产物回收和评分链路可用，但单次满分无法体现产品差异或跨次稳定性。本地评分规则尚未与固定版本的官方评分器核验等价。元宝网页接入不支持本题的多文件产物合同，因此未参加。
+问题与改进：四款均满分，区分度不足；后续筛选更有区分度且评分客观的任务，并核验本地评分规则与官方实现的等价性。
+Codex 评分记录：https://github.com/hfycium/harness-eval/blob/main/runs/%E5%A4%8D%E6%A0%B8/theagentcompany-sql-codex-01/verification.json
+DSH 评分记录：https://github.com/hfycium/harness-eval/blob/main/runs/%E5%A4%8D%E6%A0%B8/theagentcompany-sql-dsh-01/verification.json
+WorkBuddy 评分记录：https://github.com/hfycium/harness-eval/blob/main/runs/%E5%A4%8D%E6%A0%B8/theagentcompany-sql-workbuddy-01/verification.json
+豆包工作评分记录：https://github.com/hfycium/harness-eval/blob/main/runs/%E5%A4%8D%E6%A0%B8/theagentcompany-sql-doubao-work-01/verification.json
+
+
+下周计划
+
+一、探索元宝的评测边界。针对本次 E8 提示词试跑未成功、回复报告退出码 127 的现象，核实文件输入与产物回收、代码或命令运行环境、Runner 工作区访问和工具过程证据，区分产品能力限制、适配器缺口与任务环境不匹配。
+二、从公开测试集筛选更有区分度且评分明确的候选题，先核对输入、评分和四款产品的准入条件。
+三、根据实跑中发现的过程证据缺口，继续完善采集与验收，记录无法验证的项目。
+四、核对 CMD 适配题中 Codex、DSH、豆包工作与本地基线的退出码差异；WorkBuddy 的 Bash 适配题单独验证，不与 CMD 结果直接比较。
+
+祝好！
+
+洪锋烨
+2026 年 11 月 28 日
