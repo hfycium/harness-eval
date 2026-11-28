@@ -1,0 +1,112 @@
+{
+  "id": "fa3b4235-a57a-467e-8aa3-6250fdd3fc3e",
+  "started_at": "2026-11-25T14:38:21.334Z",
+  "source_sha256": "1820567a93ae7490bdba75c69b2a3af986aaff80f62ebc7860cfd4831fb5c740",
+  "prompt_sha256": "65527792ee2c0d132403673b6f19629987cda1991aded648ac8fc86a3d902e00",
+  "input_sha256": "209d1a6de8c8d2cbf31bc4075c9b2c2299817d3fedf748727249c01ac2730495",
+  "submission": "not_sent",
+  "observations": [
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.231Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.433Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.436Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.479Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/v1/filelibrary/artifacts/config",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.746Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.767Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.862Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:22.862Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:23.607Z"
+    },
+    {
+      "source": "filechooser",
+      "at": "2026-11-25T14:38:23.974Z",
+      "event": "set_files_returned"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/resource/genUploadInfo",
+      "status": 200,
+      "at": "2026-11-25T14:38:24.074Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/resource/asyncFileParse",
+      "status": 200,
+      "at": "2026-11-25T14:38:24.562Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:25.822Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:26.336Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:38:33.939Z"
+    },
+    {
+      "source": "visible_attachment_candidates",
+      "at": "2026-11-25T14:38:38.989Z",
+      "nodes": [],
+      "upload_complete": "unknown"
+    },
+    {
+      "source": "visible_page_alerts",
+      "at": "2026-11-25T14:38:38.989Z",
+      "alerts": []
+    }
+  ],
+  "error": "attachment_uploaded_state_unconfirmed",
+  "finished_at": "2026-11-25T14:38:39.004Z"
+}

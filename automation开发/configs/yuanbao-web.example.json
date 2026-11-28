@@ -1,6 +1,8 @@
 {
   "product_id": "yuanbao-web",
   "entry_id": "yuanbao-web-playwright",
+  "model_label": "Hy4",
+  "mode_label": "专家模式",
   "automation_mode": "assisted",
   "temp_workspace": true,
   "timeout_seconds": 900

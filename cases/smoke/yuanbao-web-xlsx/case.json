@@ -1,0 +1,11 @@
+{
+  "case_id": "yuanbao-web-xlsx-smoke",
+  "case_version": "0.1",
+  "dataset": "file-roundtrip-smoke",
+  "dataset_task_id": "yuanbao-web-xlsx-smoke",
+  "prompt_source": "cases/smoke/yuanbao-web-xlsx/prompt.md",
+  "input_source": "cases/public/spreadsheetbench-59196/inputs/sample_data_200/spreadsheet/59196/1_59196_input.xlsx",
+  "input_destination": "inputs/1_59196_input.xlsx",
+  "expected_artifacts": ["outputs/result.xlsx"],
+  "limits": { "timeout_seconds": 900 }
+}

@@ -1,0 +1,126 @@
+{
+  "id": "714d96c1-5b19-4766-8fb8-ff64f0c7fb78",
+  "started_at": "2026-11-25T14:44:42.900Z",
+  "source_sha256": "1820567a93ae7490bdba75c69b2a3af986aaff80f62ebc7860cfd4831fb5c740",
+  "prompt_sha256": "65527792ee2c0d132403673b6f19629987cda1991aded648ac8fc86a3d902e00",
+  "input_sha256": "209d1a6de8c8d2cbf31bc4075c9b2c2299817d3fedf748727249c01ac2730495",
+  "submission": "not_sent",
+  "observations": [
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:44.461Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:44.462Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:44.468Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:44.944Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/v1/filelibrary/artifacts/config",
+      "status": 200,
+      "at": "2026-11-25T14:44:45.451Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:45.503Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:45.503Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:45.590Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:46.655Z"
+    },
+    {
+      "source": "filechooser",
+      "at": "2026-11-25T14:44:46.958Z",
+      "event": "set_files_returned"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/resource/genUploadInfo",
+      "status": 200,
+      "at": "2026-11-25T14:44:47.178Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/resource/asyncFileParse",
+      "status": 200,
+      "at": "2026-11-25T14:44:47.613Z"
+    },
+    {
+      "source": "parse_response_fields",
+      "keys": [
+        "status"
+      ],
+      "code": null,
+      "status": 1,
+      "data_keys": []
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:48.992Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:49.088Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:44:56.792Z"
+    },
+    {
+      "source": "visible_attachment_candidates",
+      "at": "2026-11-25T14:45:01.973Z",
+      "nodes": [],
+      "upload_complete": "unknown"
+    },
+    {
+      "source": "visible_page_alerts",
+      "at": "2026-11-25T14:45:01.973Z",
+      "alerts": []
+    },
+    {
+      "source": "screenshot",
+      "path": "upload-area.png",
+      "at": "2026-11-25T14:45:02.140Z"
+    }
+  ],
+  "error": "attachment_uploaded_state_unconfirmed",
+  "finished_at": "2026-11-25T14:45:02.145Z"
+}

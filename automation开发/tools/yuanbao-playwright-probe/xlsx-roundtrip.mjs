@@ -1,0 +1,48 @@
+import { chromium } from 'playwright';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { createHash, randomUUID } from 'node:crypto';
+const source=await readFile('元宝边界探测/XLSX文件往返探针-0.2.md','utf8');
+const prompt=source.match(/```text\r?\n([\s\S]*?)\r?\n```/)?.[1];
+const input='cases/public/spreadsheetbench-59196/inputs/sample_data_200/spreadsheet/59196/1_59196_input.xlsx';
+const hash=x=>createHash('sha256').update(x).digest('hex'); const bytes=await readFile(input);
+if(!prompt||hash(bytes)!=='209d1a6de8c8d2cbf31bc4075c9b2c2299817d3fedf748727249c01ac2730495')throw Error('frozen_input_mismatch');
+const id=randomUUID(), dir=`元宝边界探测/xlsx往返-${id}`; await mkdir(dir);
+const record={id,started_at:new Date().toISOString(),source_sha256:hash(source),prompt_sha256:hash(prompt),input_sha256:hash(bytes),submission:'not_sent',observations:[]};
+const save=()=>writeFile(`${dir}/observation.json`,JSON.stringify(record,null,2)+'\n'); await save(); let context; const pending=[];
+try{
+ context=await chromium.launchPersistentContext(process.env.YUANBAO_PROBE_PROFILE,{headless:false,channel:'msedge'});
+ const p=context.pages()[0]??await context.newPage();
+ p.on('response',r=>{const u=new URL(r.url());if(/upload|file/i.test(u.pathname))record.observations.push({source:'upload_response_metadata',path:u.pathname,status:r.status(),at:new Date().toISOString()}); if(u.pathname==='/api/resource/asyncFileParse')pending.push(r.json().then(x=>record.observations.push({source:'parse_response_fields',keys:Object.keys(x),code:x.code??null,status:x.status??null,data_keys:x.data&&typeof x.data==='object'?Object.keys(x.data):[]})).catch(()=>record.observations.push({source:'parse_response_fields',error:'unavailable'})));});
+ p.on('requestfailed',r=>{const u=new URL(r.url());if(/upload|file/i.test(u.pathname))record.observations.push({source:'upload_request_failed',path:u.pathname,error:r.failure()?.errorText,at:new Date().toISOString()});});
+ await p.goto('https://yuanbao.tencent.com/',{waitUntil:'domcontentloaded',timeout:60000});
+ await p.getByRole('button',{name:'切换模型',exact:true}).click();
+ const mode=p.locator('button:visible,[role="button"]:visible').filter({hasText:/^专家模式\s*使用工具，处理多步任务(?:\s*\(Hy4\))?$/});
+ await p.waitForTimeout(800); if(await mode.count()!==1)throw Error('expert_mode_ambiguous'); await mode.click();
+ await p.getByRole('button',{name:'添加',exact:true}).click();
+ const [chooser]=await Promise.all([p.waitForEvent('filechooser',{timeout:10000}),p.getByText('本地文件',{exact:true}).click()]); await chooser.setFiles(input);
+ record.observations.push({source:'filechooser',at:new Date().toISOString(),event:'set_files_returned'}); await save();
+ await p.waitForTimeout(15000);
+ const attachmentState=await p.evaluate(()=>[...document.querySelectorAll('*')].filter(e=>e.children.length===0&&(e.innerText||'').includes('1_59196_input')).map(e=>({text:e.innerText.slice(0,120),tag:e.tagName,class:String(e.className||'').slice(0,160),parentClass:String(e.parentElement?.className||'').slice(0,160),parentText:(e.parentElement?.innerText||'').slice(0,200),grandparentText:(e.parentElement?.parentElement?.innerText||'').slice(0,200)})).slice(0,10));
+ record.observations.push({source:'visible_attachment_candidates',at:new Date().toISOString(),nodes:attachmentState,upload_complete:'unknown'});
+ record.observations.push({source:'visible_page_alerts',at:new Date().toISOString(),alerts:await p.locator('[role="alert"]:visible,[class*="message"]:visible,[class*="error"]:visible').allTextContents().then(xs=>xs.map(x=>x.trim()).filter(x=>x&&x.length<300).slice(-12))});
+ const viewport=p.viewportSize(); if(viewport){const x=Math.floor(viewport.width*.25), y=Math.floor(viewport.height*.5); await p.screenshot({path:`${dir}/upload-area.png`,clip:{x,y,width:viewport.width-x,height:viewport.height-y}}); record.observations.push({source:'screenshot',path:'upload-area.png',at:new Date().toISOString()});}
+ await Promise.allSettled(pending);
+ const editor=p.locator('textarea,[contenteditable="true"],[role="textbox"]').filter({visible:true}); if(await editor.count()!==1)throw Error('editor_ambiguous');
+ const matching=attachmentState.filter(x=>x.text==='1_59196_input' && /XLSX/.test(x.grandparentText));
+ const progress=await p.getByText(/^(上传中|上传失败|解析中|解析失败)$/).filter({visible:true}).count();
+ if(matching.length!==1||progress!==0)throw Error('attachment_candidate_unconfirmed');
+ record.observations.push({source:'adapter_session',event:'attachment_ui_candidate',at:new Date().toISOString(),server_parse_completion:'unknown'});
+ await editor.fill(prompt);record.submission='send_attempting';await save();await editor.press('Enter');record.submission='enter_pressed_once';await save();
+ await p.waitForTimeout(60000);
+ const body=await p.locator('body').innerText(), index=body.indexOf(prompt);
+ record.observations.push({source:'visible_page',at:new Date().toISOString(),prompt_visible:index>=0,text:index>=0?body.slice(index,index+4500):null});
+ const cards=p.locator('span[class*="file-card_title"][title$=".xlsx"]:visible');
+ record.observations.push({source:'visible_product_cards',at:new Date().toISOString(),count:await cards.count(),completion:'unconfirmed'});
+ if(await cards.count()!==1)throw Error('xlsx_artifact_card_ambiguous');
+ await cards.click(); const download=p.locator('[aria-label="下载"]:visible'); await download.waitFor({state:'visible',timeout:10000});
+ if(await download.count()!==1)throw Error('download_control_ambiguous');await download.hover();
+ const choice=p.locator('.t-dropdown:visible').getByText('XLSX',{exact:true});if(await choice.count()!==1)throw Error('xlsx_download_option_ambiguous');
+ const [result]=await Promise.all([p.waitForEvent('download',{timeout:30000}),choice.click()]);const dest=`${dir}/output.xlsx`;await result.saveAs(dest);
+ const output=await readFile(dest);record.observations.push({source:'download',at:new Date().toISOString(),path:'output.xlsx',sha256:hash(output),size:output.length,byte_identical:hash(output)===hash(bytes)});
+}catch(e){record.error=e.message;}finally{record.finished_at=new Date().toISOString();await save();if(context)await context.close();}
+console.log(JSON.stringify(record));

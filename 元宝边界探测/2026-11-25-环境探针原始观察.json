@@ -1,0 +1,10 @@
+{
+  "version": "0.1",
+  "started_at": "2026-11-25T13:54:52.298Z",
+  "prompt": "请调用当前会话提供的命令工具一次，仅执行以下只读命令并原样展示初始工具返回；如没有可用工具请明确说明，不要模拟：\n\npwd; uname -s; command -v cmd.exe",
+  "prompt_sha256": "75cdfb529981ab0266034a685cd954c5bd77d7881cad31b507df2b4a3ec549d5",
+  "submission": "unconfirmed",
+  "observations": [],
+  "error": "expert_mode_ambiguous",
+  "finished_at": "2026-11-25T13:54:53.431Z"
+}

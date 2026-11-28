@@ -1,0 +1,23 @@
+{
+  "record_id": "947916ed-4d71-4bdb-95f6-2b9ad51f2bda",
+  "started_at": "2026-11-25T14:16:08.369Z",
+  "case_version": "0.1",
+  "source_sha256": "85b2171053c24e902dcc99a67f7ef6ca5ecd076fbbacb7e116928434a8a8b939",
+  "prompt": "请只调用一次你实际提供的命令执行工具，原样执行以下命令。命令返回后不要重试、续跑或使用其他工具。请只依据工具的首次返回，分别报告可见输出、可见退出码及工具是否明确报告失败；不可见就写 unknown。不要根据命令内容猜测实际工具返回。\n\nbash -c 'printf \"PROBE_STATUS_OK\\n\"; exit 7'",
+  "prompt_sha256": "efb348976623d30fda25a35601bf939de4d0b5b85bfa07f386fd6381ea0032c7",
+  "submission": "enter_pressed_once",
+  "observations": [
+    {
+      "timestamp": "2026-11-25T14:16:55.110Z",
+      "source": "visible_page",
+      "prompt_visible": true,
+      "text": "请只调用一次你实际提供的命令执行工具，原样执行以下命令。命令返回后不要重试、续跑或使用其他工具。请只依据工具的首次返回，分别报告可见输出、可见退出码及工具是否明确报告失败；不可见就写 unknown。不要根据命令内容猜测实际工具返回。\n\nbash -c 'printf \"PROBE_STATUS_OK\\n\"; exit 7'\n展开\n已处理\n•\n可见输出：PROBE_STATUS_OK\n•\n可见退出码：7\n•\n工具是否明确报告失败：否（工具结果中未出现明确的失败标记；仅报告了退出码 7）\n\n\n\n\n模型\nHy3\n快速回答\n快速作答，处理日常问题\n深度思考\n深入推理，分析复杂问题\n专家模式\n使用工具，处理多步任务\n模型\nHy4\n新升级\n兼顾日常与复杂任务\nHy3\n推荐日常使用\nDeepSeek\n适合深度思考\n专家模式\n技能\nAI 生图\n深度研究\nPPT 生成\n专业写作\n解题\n数据分析\n金融理财\n个人计划\n旅游计划\n饮食助手\nAI 生图\n深度研究\nPPT 生成\n专业写作\n更多\n安装电脑版\n内容由AI生成，仅供参考"
+    },
+    {
+      "timestamp": "2026-11-25T14:16:55.204Z",
+      "source": "visible_product_timeline",
+      "text": "已处理\n已运行1次命令\n已执行用户指定的探测命令\nbash\nbash -c 'printf \"PROBE_STATUS_OK\\n\"; exit 7'\n•\n可见输出：PROBE_STATUS_OK\n•\n可见退出码：7\n•\n工具是否明确报告失败：否（工具结果中未出现明确的失败标记；仅报告了退出码 7）"
+    }
+  ],
+  "finished_at": "2026-11-25T14:16:55.206Z"
+}

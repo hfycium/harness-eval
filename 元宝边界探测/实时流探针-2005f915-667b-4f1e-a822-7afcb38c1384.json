@@ -1,0 +1,12 @@
+{
+  "record_id": "2005f915-667b-4f1e-a822-7afcb38c1384",
+  "started_at": "2026-11-25T14:29:54.229Z",
+  "source_sha256": "4573a79696868148d7958366889a7b85fa72c0f9098ff1e2058188a270b80f54",
+  "prompt": "请使用当前会话的命令工具一次，原样运行以下无害命令；不要重试或使用其他工具。根据工具初始返回说明可见输出和退出码；看不到就写 unknown。\n\nprintf 'STREAM_PROBE_548219\\n'",
+  "prompt_sha256": "e2fb1ebc0e216998063564bfe58699d7983cff18a2d09a1046e6a451a5607ac5",
+  "submission": "not_sent",
+  "responses": [],
+  "observations": [],
+  "error": "expert_mode_ambiguous",
+  "finished_at": "2026-11-25T14:29:55.826Z"
+}

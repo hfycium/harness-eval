@@ -1,0 +1,147 @@
+{
+  "id": "04c680f8-b619-4572-87a7-7aef759ae9a2",
+  "started_at": "2026-11-25T14:45:56.936Z",
+  "source_sha256": "1820567a93ae7490bdba75c69b2a3af986aaff80f62ebc7860cfd4831fb5c740",
+  "prompt_sha256": "65527792ee2c0d132403673b6f19629987cda1991aded648ac8fc86a3d902e00",
+  "input_sha256": "209d1a6de8c8d2cbf31bc4075c9b2c2299817d3fedf748727249c01ac2730495",
+  "submission": "not_sent",
+  "observations": [
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:58.609Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:58.610Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:58.613Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:59.033Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/v1/filelibrary/artifacts/config",
+      "status": 200,
+      "at": "2026-11-25T14:45:59.437Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:59.504Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:59.517Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:59.517Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:45:59.668Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:46:00.589Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:46:01.224Z"
+    },
+    {
+      "source": "filechooser",
+      "at": "2026-11-25T14:46:01.626Z",
+      "event": "set_files_returned"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/resource/genUploadInfo",
+      "status": 200,
+      "at": "2026-11-25T14:46:01.735Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/api/resource/asyncFileParse",
+      "status": 200,
+      "at": "2026-11-25T14:46:02.160Z"
+    },
+    {
+      "source": "parse_response_fields",
+      "keys": [
+        "status"
+      ],
+      "code": null,
+      "status": 1,
+      "data_keys": []
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:46:03.419Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:46:03.432Z"
+    },
+    {
+      "source": "upload_response_metadata",
+      "path": "/analytics/v2_upload",
+      "status": 200,
+      "at": "2026-11-25T14:46:11.152Z"
+    },
+    {
+      "source": "visible_attachment_candidates",
+      "at": "2026-11-25T14:46:16.637Z",
+      "nodes": [
+        {
+          "text": "1_59196_input",
+          "tag": "DIV",
+          "class": "FileList_inputFileListItemPdfInfoName__2_V8V",
+          "parentClass": "FileList_inputFileListItemPdfInfo__pnCZB",
+          "parentText": "1_59196_input\nXLSX\n8.69KB",
+          "grandparentText": "1_59196_input\nXLSX\n8.69KB"
+        }
+      ],
+      "upload_complete": "unknown"
+    },
+    {
+      "source": "visible_page_alerts",
+      "at": "2026-11-25T14:46:16.637Z",
+      "alerts": []
+    },
+    {
+      "source": "screenshot",
+      "path": "upload-area.png",
+      "at": "2026-11-25T14:46:16.756Z"
+    }
+  ],
+  "error": "attachment_uploaded_state_unconfirmed",
+  "finished_at": "2026-11-25T14:46:16.761Z"
+}
